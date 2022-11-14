@@ -157,14 +157,16 @@ const [inputsUser, setInputsUser] = useState({
                         {/* Forground Image */}
                        <Image source={require('../../assets/progressbarTwo.png')}/>
                         {/* Forground Image */}
-                        
+                        <View>
                     <Text style={styles.main} >Complete Profile</Text>
                     {/* Full Name */}
                     {/* Custom Text */}
-                    
-                      <Text style={styles.paragraph}>Welcome John Smith</Text>
+                  
+                       <Text style={styles.paragraph}>Welcome John Smith</Text>
                       <Text style={styles.paragraph}>Please complete your profile to proceed</Text>
                     
+                  
+                     
                     {/* Custom Text */}
 
                     {/* Profile */}
@@ -181,7 +183,7 @@ const [inputsUser, setInputsUser] = useState({
                     
                     {/* Profile */}
 
-                    
+                    </View>
                     {/* Input field user CNIC Number */}
                     <CustomInput label="CNIC Number" width={123} eye="none" placeholder="3745234234325"
                     setValue={(text)=>handleOnChange(text, 'CNIC')}
@@ -192,33 +194,36 @@ const [inputsUser, setInputsUser] = useState({
                     
                     
                       {/* Issue Date */}
-                      <CustomInput label="Issue Date" width={105}  placeholder="12-02-2019"
+                      {/* <CustomInput label="Issue Date" width={105}  placeholder="12-02-2019"
                     setValue={(text)=>handleOnChange(text, 'date')}
                     error={errors.date}
                     onFocus={()=>{
                       handleError(null,'date');
                     }} scure={userScure} source={require("../../assets/calender_icon.png")}/>
-                    
+                     */}
                     
 
                      {/* Expiry Date */}
-                     <CustomInput label="Expiry Date" width={105}  placeholder="12-02-2024"
+                     {/* <CustomInput label="Expiry Date" width={105}  placeholder="12-02-2024"
                     setValue={(text)=>handleOnChange(text, 'exparyDate')}
                     error={errors.exparyDate}
                     onFocus={()=>{
                       handleError(null,'exparyDate');
                     }} scure={userScure}
                     source={require("../../assets/calender_icon.png")}/>
+                      */}
+                      <View>
+
                      
-                    {/* Button Next */}
+                    {/* Button Save */}
                     <CustomButton onPress={valiDate} text="Save" type="secondary"/>
                     
-                    {/* Button Next */}
+                    {/* Button Save */}
                     {/* Button Cancel */}
                     <CustomButton onPress={navigateToLogin} text="Cancel" type="tertiary"/>
                     
                     {/* Button Cancel */}
-
+                    </View>
 
                     
                     
@@ -251,7 +256,7 @@ const styles = StyleSheet.create({
         padding:20,
         
         borderRadius:11,
-        
+        justifyContent:"space-evenly",
         backgroundColor:"white",
         position:"relative",
         alignItems:"center",

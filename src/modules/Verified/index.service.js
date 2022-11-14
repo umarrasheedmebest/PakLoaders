@@ -6,7 +6,7 @@ const VerifiedServiceComponent = ({
 }) => {
     console.log('Pakistan Zindabad')
     const navigateProfileOne=()=>{
-        navigation.navigate('Login');
+        navigation.navigate('ProfileOne');
     }
 
     return children({

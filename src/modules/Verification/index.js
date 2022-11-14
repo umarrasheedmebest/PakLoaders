@@ -3,7 +3,8 @@ import {
     StyleSheet,
     SafeAreaView,
     Text,
-    View
+    View,
+    TextInput
 
 } from 'react-native';
 import CustomBackground from '../../Components/CustomBackground';

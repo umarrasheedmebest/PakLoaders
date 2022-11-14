@@ -152,14 +152,14 @@ Please fill the following form to add a new post.</Text>
                   <CustomInput label="Time of pickup" width={'40%'} eye="none" placeholder="12-02-2024"
                    />
                     {/* Input field user Vehicle Required */}
-                  <CustomInput label="No of Vehicle Required" width={'50%'} eye="none" placeholder="02:55 pm"
-                   />
+                  {/* <CustomInput label="No of Vehicle Required" width={'50%'} eye="none" placeholder="02:55 pm"
+                   /> */}
                     {/* Button Next */}
                     <CustomButton onPress={()=>navigation.navigate('Vehicle')}  text="Next" type="secondary"/>
                     
                     {/* Button Next */}
                     {/* Button Cancel */}
-                    <CustomButton text="Cancel" type="tertiary"/>
+                    <CustomButton onPress={()=>navigation.navigate('CreatePost')} text="Cancel" type="tertiary"/>
                     
                     {/* Button Cancel */}
                     </View>
