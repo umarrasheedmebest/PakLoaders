@@ -15,7 +15,10 @@ import RideList from '../../Components/RideList';
 const RidesComponent = ({
     sideBar
 }) => { 
- 
+ const [ongoing, setOngoing] = useState(false)
+ const [upcoming, setUpcoming] = useState(false)
+ const [complete, setComplete] = useState(false)
+ const [cancell, setCancell] = useState(false)
     return (
         
            <CustomHeader
@@ -25,21 +28,48 @@ const RidesComponent = ({
             <>
             <View style={{alignItems:"center"}}>
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    setOngoing(true)
+                    setUpcoming(false)
+                    setComplete(false)
+                    setCancell(false)
+                }}>
                     <Text style={styles.buttonText}>Ongoing</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    setOngoing(false)
+                    setUpcoming(true)
+                    setComplete(false)
+                    setCancell(false)
+                }}>
                     <Text style={styles.buttonText}>Upcoming</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    setOngoing(false)
+                    setUpcoming(false)
+                    setComplete(true)
+                    setCancell(false)
+                }}
+                >
                     <Text style={styles.buttonText}>Completed</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{
+                    setOngoing(false)
+                    setUpcoming(false)
+                    setComplete(false)
+                    setCancell(true)
+                }}
+                >
                     <Text style={styles.buttonText}>Cancelled</Text>
                 </TouchableOpacity>
             </View>
             <RideList
-           
+           ongoning={ongoing}
+           upcoming={upcoming}
+           completed={complete}
+           cancelled={cancell}
 
             />
             </View>

@@ -1,3 +1,5 @@
+import React,{useState} from "react";
+import allData from "../../Components/Api/Home";
 const HomeServiceComponent = ({
     children,
     navigation,
@@ -18,13 +20,15 @@ const HomeServiceComponent = ({
         
     
     }
-
+    const [data, setData] = useState(allData)
     return children({
         navigation,
         navigateCompleteProfileOne,
         navigateVerification,
         sideBar,
-        navigateBids
+        navigateBids,
+        data,
+        setData
     });
 };
 
