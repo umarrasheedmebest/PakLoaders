@@ -8,6 +8,16 @@ import CustomForground from '../../Components/CustomForground';
 import CustomMenu from '../../Components/CustomMenu';
 import Home from "../../Components/Api/Home";
 import { useNavigation } from '@react-navigation/native';
+import Raksha from '../../assets/SVG_Icons/Icon_2.svg';
+import Pickup from '../../assets/SVG_Icons/Icon_1.svg';
+import Truk from '../../assets/SVG_Icons/Icon_3.svg';
+import TrukSmall from '../../assets/SVG_Icons/Icon_4.svg';
+import LargeTruk from '../../assets/SVG_Icons/Icon_5.svg';
+import MediumTruk from '../../assets/SVG_Icons/Icon_6.svg';
+import TrukOne from '../../assets/SVG_Icons/Icon_7.svg';
+import HavyTruk from '../../assets/SVG_Icons/Icon_8.svg';
+import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
+
 
 import {
     StyleSheet,
@@ -65,7 +75,7 @@ const PostComponent = ({
                     <Text style={{fontSize:12,fontFamily:"Poppins-Regular",color:"#5A5A5A",lineHeight:18}}>Welcome Jhon Smith!{'\n'}
 Please fill the following form to add a new post.</Text>
                     </View>
-                                      {/* CNIC Image */}
+                                      {/* CNIC Image
                       <View style={styles.MainCnic}>
                       <View style={styles.boxCnic}>
                       <CustomCNIC defaultImage={defaultImage}  text="Add Luggage Image"/>
@@ -73,18 +83,20 @@ Please fill the following form to add a new post.</Text>
                         <View style={styles.boxCnic}>
                         <CustomCNIC defaultImage={defaultImage} text="Add Luggage Image"/>
                         </View>
-                       </View>
-                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginVertical:10}}>
+                       </View> */}
+                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginVertical:10,}}>
                     {/* Low-Capacity */}
-                    <View>
+                    <View style={{marginHorizontal:5}}>
                       <TouchableOpacity>
                         <View style={styles.MenuContainer}>
                           <View style={{width:"100%",alignItems:"flex-end",paddingRight:5,paddingTop:2}}>
+                           
                             <Image source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/Low.png')}/>
-                          <Text style={{fontSize:9,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
+                          {/* <Image source={require('../../assets/Low.png')}/> */}
+                          <Raksha width={100} height={100}/>
+                          <Text style={{fontSize:15,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -97,8 +109,9 @@ Please fill the following form to add a new post.</Text>
                             <Image source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/Medium.png')}/>
-                          <Text style={{fontSize:9,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Medium-Capacity</Text>
+                          {/* <Image source={require('../../assets/Medium.png')}/> */}
+                          <Pickup width={100} height={100}/>
+                          <Text style={{fontSize:15,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Medium-Capacity</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -111,8 +124,10 @@ Please fill the following form to add a new post.</Text>
                             <Image source={require('../../assets/check.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/High.png')}/>
-                          <Text style={{fontSize:9,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
+                          {/* <Image source={require('../../assets/High.png')}/> */}
+                          <Truk width={100} height={100}/>
+
+                          <Text style={{fontSize:15,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -125,8 +140,10 @@ Please fill the following form to add a new post.</Text>
                             <Image source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/Low.png')}/>
-                          <Text style={{fontSize:9,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
+                          {/* <Image source={require('../../assets/Low.png')}/> */}
+                          <Tractor width={100} height={100}/>
+
+                          <Text style={{fontSize:15,fontFamily:"Poppins-Regular",color:"#5A5A5A"}}>Low-Capacity</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -220,12 +237,12 @@ const styles = StyleSheet.create({
      
       MenuContainer:{
         borderRadius:7,
-        
+        marginVertical:10,
        backgroundColor:"#fff",
         shadowColor:"#007BFE",
         alignItems:"center",
-     width:100,
-    height:83,
+     width:150,
+    height:140,
     elevation:10,
     justifyContent:"center"
    
