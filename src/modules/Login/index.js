@@ -28,7 +28,8 @@ const LoginComponent = ({
     navigateSignUp,
     navgatoHowItWork, 
     navigateForgotPassword,
-    navigation
+    navigation,
+    signIn
     
 }) => {
   const {login} =useContext(AuthContext);
@@ -142,7 +143,7 @@ const LoginComponent = ({
                     
                     {/* Forgot button */}
                     {/* Button Sign In */}
-                    <CustomButton onPress={()=>valiDate()} text="Sign In" type="primary"/>
+                    <CustomButton onPress={()=>signIn()} text="Sign In" type="primary"/>
                     {/* Button Sign In */}
 
 

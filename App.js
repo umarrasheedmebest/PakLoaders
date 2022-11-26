@@ -4,7 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import AppNavigator from './src/navigation/AppNavigator';
 import { AuthProvider } from './AuthProvider';
-import { persistor, store } from './store';
+import {store } from './src/setup/store';
 
 const App = () => {
   if (!__DEV__) {
@@ -16,11 +16,9 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AuthProvider>
-          <AppNavigator />
-        </AuthProvider>
-      </PersistGate>
+      <AuthProvider>
+        <AppNavigator />
+      </AuthProvider>
     </Provider>
   );
 };
