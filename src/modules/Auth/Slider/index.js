@@ -95,7 +95,13 @@ const HowItWorksComponent = ({
                     alignItems: 'center',
                     marginTop: 15
                 }}
-                    onPress={() => carousel.snapToNext()}>
+                    onPress={() => {
+                        if (activeIndex==2) {
+                          navigateToHome()
+                        }else{
+                            carousel.snapToNext()
+                        }
+                       }}>
                     <CustomText
                         title={'Next'}
                         fontSize={24}

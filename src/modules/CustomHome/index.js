@@ -29,9 +29,16 @@ const HomeComponent = (props,{
     navigateVerification,
     text,
     sideBar,
-    navigateBids
+    navigateBids,
+   
 }) => { 
   const navigation= useNavigation();
+  const [data, setData] = useState(allData);
+  const onDelete=(id)=>{
+    const newData=[...data];
+    const updateData=newData?.filter((todo)=>todo.id!==id)
+    setData(updateData);
+  }
   const dataCards=({item})=>{
     return(
       <View style={styles.dataContainer}>
@@ -64,7 +71,7 @@ const HomeComponent = (props,{
       {/* 3rd Row user */}
       <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
         
-        <TouchableOpacity style={styles.container_secondary}>
+        <TouchableOpacity onPress={()=>onDelete(item.id)} style={styles.container_secondary}>
         <Text style={styles.text_secondary}>Ignore</Text>
        </TouchableOpacity>
       
@@ -105,7 +112,7 @@ const HomeComponent = (props,{
                   
                  
                   <View style={styles.listStyle}>
-                    <FlatList style={{zIndex:1,}}  data={allData}
+                    <FlatList style={{zIndex:1,}}  data={data}
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}

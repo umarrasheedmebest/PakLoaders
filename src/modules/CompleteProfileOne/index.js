@@ -150,14 +150,14 @@ const [inputsUser, setInputsUser] = useState({
 
                     
                     {/* Input field user Email/scondMobile Number */}
-                    <CustomInput label="Secondary Mobile Number" placeholder="92444886423" width={198} eye="none"
+                    {/* <CustomInput label="Secondary Mobile Number" placeholder="92444886423" width={198} eye="none"
                     setValue={(text)=>handleOnChange(text, 'scondMobile')}
                     error={errors.scondMobile}
                     onFocus={()=>{
                       handleError(null,'scondMobile');
                     }}
                     
-                     />
+                     /> */}
                     
                     
                       {/* User City */}

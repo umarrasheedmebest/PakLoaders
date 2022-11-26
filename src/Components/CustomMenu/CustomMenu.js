@@ -20,7 +20,7 @@ const CustomMenu = () => {
 
     <TouchableOpacity
     style={styles.buttonStyle}
-    onPress={()=>navigation.navigate("Packages")}>
+    onPress={()=>navigation.navigate("Rides")}>
       <View style={{alignItems:"center"}}>
        <Image source={require("../../assets/Glyph.png")}/>
        <Text style={{fontSize:8,color:"#DFDEDE",fontWeight:"500"}}>My Request</Text>

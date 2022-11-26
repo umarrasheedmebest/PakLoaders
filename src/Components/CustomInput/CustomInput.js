@@ -50,6 +50,7 @@ const CustomInput = ({
      placeholder={placeholder}
     secureTextEntry={show}
      autoCorrect={false}
+     maxLength={15}
      onFocus={()=>{
       onFocus();
       setIsFocused(true);

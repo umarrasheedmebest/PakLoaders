@@ -83,7 +83,7 @@ const CreatePostComponent = ({ }) => {
       }
     return (
       <>
-      {deletebtn?<><Sure  deleteBlack={true}/>
+      {deletebtn?<><Sure deleteBlack={true}/>
       <CustomHeader
        text={'My Posts'}
        postFlat={true}

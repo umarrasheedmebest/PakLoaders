@@ -60,7 +60,13 @@ const ContactComponent = (props) => {
                         
                         <View>
                             <TextInput style={styles.inputStyle} placeholder='Email'
-                             placeholderTextColor={"#5A5A5A"}/>
+                             placeholderTextColor={"#5A5A5A"}
+                             maxLength={20}
+                             testID="LoginEmailAddress"
+                             textContentType="emailAddress"
+                             keyboardType="email-address"
+  
+                             />
                         </View>
                         
                     </View>
@@ -91,7 +97,7 @@ const ContactComponent = (props) => {
                     {/* Description */}
                     {/* Submit Button */}
                     <View style={styles.buttonContainer}>
-                      <CustomButton  text="Submit" type="primary"/>
+                      <CustomButton  text="Submit" type="primary" onPress={()=>navigation.navigate("Home")}/>
                     </View>
                     
                     {/* Submit Button */}
