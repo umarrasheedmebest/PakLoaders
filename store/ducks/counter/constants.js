@@ -1,2 +1,0 @@
-export const ADD_TO_COUNTER = 'ADD_TO_COUNTER';
-export const REMOVE_FROM_COUNTER = 'REMOVE_FROM_COUNTER';
