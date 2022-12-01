@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 import AppNavigator from './src/navigation/AppNavigator';
 import { AuthProvider } from './AuthProvider';
 import {store } from './src/setup/store';
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 const App = () => {
   if (!__DEV__) {
     console.log = () => { };

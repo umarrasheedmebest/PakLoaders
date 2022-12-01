@@ -18,10 +18,10 @@ export function* sigunUpUser(action) {
             data,
         });
         const responseData = res.data;
-        console.warn('came in sign up response', responseData)
+        console.log('came in sign up response', responseData)
         yield put(signUpUserResponse({ signUpResponse: responseData }));
     } catch (e) {
-        console.warn('create account error', e);
+        console.log('create account error', e);
     }
 }
 

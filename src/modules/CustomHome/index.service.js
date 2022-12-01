@@ -13,7 +13,9 @@ const HomeServiceComponent = ({
         navigation.navigate('Verification')
     }
     const sideBar=()=>{
-        navigation.openDrawer()
+      
+        navigation.navigate('Profile')
+          console.log('Profile')
     }
     const navigateBids= ()=> {
         navigation.navigate('Detail');

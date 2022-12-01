@@ -97,10 +97,10 @@ const HomeComponent = (props,{
                 
                   <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular"}}>Home</Text>
                   <View style={styles.defaultStyle}>
-                    <TouchableOpacity style={{marginRight:10,}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Notification')} style={{marginRight:10,}}>
                       <Image source={require('../../assets/Bell.png')}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={sideBar}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                       <Image source={require('../../assets/profile.png')}/>
                     </TouchableOpacity>
                   </View>

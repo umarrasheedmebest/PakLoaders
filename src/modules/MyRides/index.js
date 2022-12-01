@@ -34,7 +34,10 @@ const RidesComponent = ({
                     setComplete(false)
                     setCancell(false)
                 }}>
-                    <Text style={styles.buttonText}>Ongoing</Text>
+                    <Text style={[styles.buttonText,ongoing&&{borderColor:"blue",
+        paddingBottom:4,
+        borderBottomWidth:3,
+        color:"blue"}]}>Ongoing</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
                     setOngoing(false)
@@ -42,7 +45,10 @@ const RidesComponent = ({
                     setComplete(false)
                     setCancell(false)
                 }}>
-                    <Text style={styles.buttonText}>Upcoming</Text>
+                    <Text style={[styles.buttonText,upcoming&&{borderColor:"blue",
+        paddingBottom:4,
+        borderBottomWidth:3,
+        color:"blue"}]}>Upcoming</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 onPress={()=>{
@@ -52,7 +58,10 @@ const RidesComponent = ({
                     setCancell(false)
                 }}
                 >
-                    <Text style={styles.buttonText}>Completed</Text>
+                    <Text style={[styles.buttonText,complete&&{borderColor:"blue",
+        paddingBottom:4,
+        borderBottomWidth:3,
+        color:"blue"}]}>Completed</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 onPress={()=>{
@@ -62,7 +71,10 @@ const RidesComponent = ({
                     setCancell(true)
                 }}
                 >
-                    <Text style={styles.buttonText}>Cancelled</Text>
+                    <Text style={[styles.buttonText,cancell&&{borderColor:"blue",
+        paddingBottom:4,
+        borderBottomWidth:3,
+        color:"blue"}]}>Cancelled</Text>
                 </TouchableOpacity>
             </View>
             <RideList
@@ -97,6 +109,7 @@ const styles = StyleSheet.create({
         fontSize:12,
         fontWeight:"700",
         color:colors.text,
+        
     }
    
      

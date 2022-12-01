@@ -65,16 +65,17 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
             navigation.navigate('Home')}}
           />
           <DrawerButtondemo 
+          text={'Edit Post'}
+          source={require('../../assets/mypost_icon_drawer.png')}
+          onPress={()=>navigation.navigate('Post')}
+          />
+          <DrawerButtondemo 
           text={'Packages'}
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
           />
         </View>
-        <DrawerButtondemo 
-          text={'My Post'}
-          source={require('../../assets/mypost_icon_drawer.png')}
-          onPress={()=>navigation.navigate("CreatePost")}
-          />
+       
           <DrawerButtondemo 
           text={'Insured Luggage'}
           source={require('../../assets/insured_lugage_icon_drawer.png')}
@@ -84,6 +85,11 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           text={'My Rides'}
           source={require('../../assets/ride_icon_drawer.png')}
           onPress={()=>navigation.navigate("Rides")}
+          />
+           <DrawerButtondemo 
+          text={'My Post'}
+          source={require('../../assets/mypost_icon_drawer.png')}
+          onPress={()=>navigation.navigate("CreatePost")}
           />
           <DrawerButtondemo 
           text={'Chat'}
