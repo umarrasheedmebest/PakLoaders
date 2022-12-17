@@ -6,11 +6,19 @@ import { AuthContext } from '../../../AuthProvider';
 import DrawerButtondemo from '../DrawerButtondemo';
 import { color } from 'react-native-reanimated';
 
+import { useDispatch,useSelector } from 'react-redux';
+import { changeLanguage } from '../../services/storage/Actions';
+import { eng, Urdu } from '../Api/Language';
+import { languageReducer } from '../../Redux/slices/LanguageSlice';
+import { english,urdu } from '../../Redux/slices/LanguageSlice';
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
-  
+  const counter=useSelector((state)=>state.language)
+  const dispatch=useDispatch();
+  const [first, setFirst] = useState(false)
+  console.log(counter);
   return (
     <View style={{flex:1}}>
     
@@ -25,19 +33,27 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
         </View>
         <View style={{flexDirection:"row"}}>
           {/* English */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{
+            dispatch(english())
+          }}>
           <View style={{flexDirection:'row',width:46,height:23,backgroundColor:"#fff",justifyContent:"space-evenly",alignItems:"center",borderTopLeftRadius:5,borderBottomLeftRadius:5}}><Image source={require('../../assets/british.png')}/>
           <Text style={{fontSize:10,fontFamily:"Montserrat_Medium"}}>ENG</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
         {/* Urdu  */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>{
+          
+            dispatch(urdu())
+          
+          
+        }}>
           <View style={{flexDirection:'row',width:46,height:23,backgroundColor:"#CCCCCC",justifyContent:"space-evenly",alignItems:"center",borderTopRightRadius:5,borderBottomRightRadius:5}}><Image source={require('../../assets/pak.png')}/>
           <Text style={{fontSize:10,fontFamily:"Montserrat_Medium"}}>UR</Text>
           </View>
         </TouchableOpacity>
         </View>
       </View>
+      
       {/* Profile button */}
       <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
         <View style={{width:68,height:68,borderWidth:2,borderColor:"#fff",borderRadius:100, justifyContent:"center", alignItems:"center",position:"relative" }}>

@@ -7,6 +7,15 @@ import CustomCNIC from '../../Components/CustomCNIC';
 import CustomForground from '../../Components/CustomForground';
 import CustomMenu from '../../Components/CustomMenu';
 import Home from "../../Components/Api/Home";
+import Raksha from '../../assets/SVG_Icons/Icon_2.svg';
+import Pickup from '../../assets/SVG_Icons/Icon_1.svg';
+import Truk from '../../assets/SVG_Icons/Icon_3.svg';
+import TrukSmall from '../../assets/SVG_Icons/Icon_4.svg';
+import LargeTruk from '../../assets/SVG_Icons/Icon_5.svg';
+import MediumTruk from '../../assets/SVG_Icons/Icon_6.svg';
+import TrukOne from '../../assets/SVG_Icons/Icon_7.svg';
+import HavyTruk from '../../assets/SVG_Icons/Icon_8.svg';
+import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
 import { useNavigation } from '@react-navigation/native';
 import {
     StyleSheet,
@@ -70,7 +79,9 @@ const VehicleComponent = ({
                             <Image style={{width:20,height:20}} source={require('../../assets/check.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/MediumCapacity.png')}/>
+                          {/* <Image source={require('../../assets/MediumCapacity.png')}/> */}
+                          
+                          <TrukSmall width={100} height={100}/>
                           <Text style={{fontSize:16,fontFamily:"Poppins-Regular",color:"#5A5A5A",lineHeight:32,marginTop:10,}}>Medium-Capacity</Text>
                         </View>
                       </TouchableOpacity>
@@ -85,7 +96,8 @@ const VehicleComponent = ({
                             <Image style={{width:20,height:20}} source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/HighCapacity.png')}/>
+                          {/* <Image source={require('../../assets/HighCapacity.png')}/> */}
+                          <Truk width={100} height={100}/>
                           <Text style={{fontSize:16,fontFamily:"Poppins-Regular",color:"#5A5A5A",lineHeight:32,marginTop:10,}}>High-Capacity</Text>
                           <Text style={{fontSize:16,fontWeight:"400",color:"#5A5A5A",lineHeight:32,}}>e.g Shahzor Truck</Text>
                         </View>
@@ -98,7 +110,9 @@ const VehicleComponent = ({
                             <Image style={{width:20,height:20}} source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/SuperCapacity.png')}/>
+                          {/* <Image source={require('../../assets/SuperCapacity.png')}/> */}
+                         
+                          <HavyTruk width={100} height={100}/>
                           <Text style={{fontSize:16,fontWeight:"500",color:"#5A5A5A",lineHeight:32,marginTop:10,}}>Super-Capacity</Text>
                           <Text style={{fontSize:16,fontWeight:"400",color:"#5A5A5A",lineHeight:32,}}>e.g Reefer Truck</Text>
                         </View>
@@ -114,7 +128,8 @@ const VehicleComponent = ({
                             <Image style={{width:20,height:20}} source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/XL20.png')}/>
+                          {/* <Image source={require('../../assets/XL20.png')}/> */}
+                          <TrukOne width={100} height={100}/>
                           <Text style={{fontSize:16,fontFamily:"Poppins-Regular",color:"#5A5A5A",lineHeight:32,marginTop:10,}}>XL20</Text>
                           <Text style={{fontSize:16,fontWeight:"400",color:"#5A5A5A",lineHeight:32,}}>e.g 20 feet Truck</Text>
                         </View>
@@ -127,7 +142,8 @@ const VehicleComponent = ({
                             <Image style={{width:20,height:20}} source={require('../../assets/uncheck.png')}/>
                           </View>
                           
-                          <Image source={require('../../assets/XL40.png')}/>
+                          {/* <Image source={require('../../assets/XL40.png')}/> */}
+                          <LargeTruk width={100} height={100}/>
                           <Text style={{fontSize:16,fontWeight:"500",color:"#5A5A5A",lineHeight:32,marginTop:10,}}>XL40</Text>
                           <Text style={{fontSize:16,fontWeight:"400",color:"#5A5A5A",lineHeight:32,}}>e.g 40 feet Truck</Text>
                         </View>

@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import Chat from '../../Components/Api/Chat';
-import CustomHeader from '../../Components/CustomHeader'
+import CustomHeader from '../../Components/CustomHeader';
+
+
 import {
     StyleSheet,
     SafeAreaView,
@@ -13,19 +15,21 @@ import {
     TouchableOpacity
     
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
  
 const ChatComponent = ({
     sideBar
 }) => { 
+  const navigation=useNavigation();
  
   const dataCards=({item})=>{
         
     return(
         <>
         
-      <TouchableOpacity >
+      <TouchableOpacity onPress={()=>navigation.navigate('LiveChat')}>
       <View style={styles.dataContainer}>
         {/* First Row user Name */}
         <View style={{display:"flex", flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>

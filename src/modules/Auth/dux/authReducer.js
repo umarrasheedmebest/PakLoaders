@@ -17,6 +17,7 @@ import {
 import { handleActions } from 'redux-actions';
 import update from 'immutability-helper';
 
+
 const initialState = {
     //sign up
     signUpResponse: null,
@@ -90,6 +91,7 @@ const signUpUserResponse = (state, action) => update(state, {
     signUpResponse: {$set: action.signUpResponse},
 });
 
+
 export default handleActions({
     [SIGN_UP_USER_RESPONSE]: signUpUserResponse,
     [SHOW_AUTH_SPINNER]: showAuthSpinner,
@@ -103,4 +105,5 @@ export default handleActions({
     [GET_ACCOUNT_INFO_RESPONSE]: updateAccountDetails,
     [CREATE_ACCOUNT_RESPONSE]: createAccount,
     [CLEAR_ACCOUNT_INFO_REQUEST]: clearAccountInfo,
+
 }, initialState);

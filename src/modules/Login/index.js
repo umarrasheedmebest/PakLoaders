@@ -143,7 +143,7 @@ const LoginComponent = ({
                     
                     {/* Forgot button */}
                     {/* Button Sign In */}
-                    <CustomButton onPress={()=>signIn()} text="Sign In" type="primary"/>
+                    <CustomButton onPress={()=>login()} text="Sign In" type="primary"/>
                     {/* Button Sign In */}
 
 
