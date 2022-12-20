@@ -7,6 +7,7 @@ import CustomMenu from '../../Components/CustomMenu';
 import Home from "../../Components/Api/Home";
 import { colors } from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
+
 import {
     StyleSheet,
     SafeAreaView,
@@ -21,7 +22,10 @@ import {
     ScrollView,
     FlatList
 } from 'react-native';
+import Truk from '../../assets/SVG_Icons/Icon_3.svg';
 import allData from '../../Components/Api/Home';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 
  
 const HomeComponent = (props,{
@@ -33,6 +37,7 @@ const HomeComponent = (props,{
    
 }) => { 
   const navigation= useNavigation();
+  const mark=useSelector((state)=>state.language)
   const [data, setData] = useState(allData);
   const onDelete=(id)=>{
     const newData=[...data];
@@ -63,7 +68,7 @@ const HomeComponent = (props,{
           <Text style={{marginLeft:15,}}>Rawalpindi,punjab</Text>
         </View>
         <View style={styles.defaultStyle}>
-          <Image source={require('../../assets/Bus.jpg')}/>
+          <Truk width={25} height={25}/>
           <Text style={{marginLeft:15,}}>Suzuki pickup</Text>
         </View>
       </View>
@@ -106,8 +111,8 @@ const HomeComponent = (props,{
                   </View>
                  </View>
                  <View style={styles.mainContainer}>
-                  <View style={{width:"80%",alignItems:"flex-start",marginVertical:5,}}>
-                    <Text style={{color:colors.primary,fontSize:16, fontWeight:"600",fontFamily:"Montserrat-Medium"}}>New Bids</Text>
+                  <View style={{width:"80%",marginVertical:5,}}>
+                    <Text style={{color:colors.primary,fontSize:16, fontWeight:"600",fontFamily:"Montserrat-Medium"}}>{mark?eng.newBids:Urdu.newBids}</Text>
                     </View>
                   
                  

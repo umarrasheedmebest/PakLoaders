@@ -74,46 +74,46 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           {/* <DrawerItemList {...props} /> */}
           <DrawerButtondemo 
           active={colorspk?'#D9EBFF':'#fff'}
-          text={'Home'}
+          text={counter?eng.home:Urdu.home}
           source={require('../../assets/home_icon_drawer.png')}
           onPress={()=>{
             setColorspk(true)
             navigation.navigate('Home')}}
           />
           <DrawerButtondemo 
-          text={'Edit Post'}
+          text={counter?eng.editPost:Urdu.editPost}
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>navigation.navigate('Post')}
           />
           <DrawerButtondemo 
-          text={'Packages'}
+          text={counter?eng.packages:Urdu.packages}
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
           />
         </View>
        
           <DrawerButtondemo 
-          text={'Insured Luggage'}
+          text={counter?eng.insuredLuggage:Urdu.insuredLuggage}
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
           />
           <DrawerButtondemo 
-          text={'My Rides'}
+          text={counter?eng.myRides:Urdu.myRides}
           source={require('../../assets/ride_icon_drawer.png')}
           onPress={()=>navigation.navigate("Rides")}
           />
            <DrawerButtondemo 
-          text={'My Post'}
+          text={counter?eng.myPost:Urdu.myPost}
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>navigation.navigate("CreatePost")}
           />
           <DrawerButtondemo 
-          text={'Chat'}
+          text={counter?eng.chat:Urdu.chat}
           source={require('../../assets/chat_icon_drawer.png')}
           onPress={()=>navigation.navigate('Chat')}
           />
           <DrawerButtondemo 
-          text={'Payment'}
+          text={counter?eng.payment:Urdu.payment}
           PaymentImage={
             <View style={{justifyContent:"center",alignContent:"center",position:"relative",
             paddingLeft:10,marginRight:30,
@@ -128,17 +128,17 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           onPress={()=>navigation.navigate('Payment')}
           />
           <DrawerButtondemo 
-          text={'Share'}
+          text={counter?eng.share:Urdu.share}
           source={require('../../assets/share_icon_drawer.png')}
           onPress={()=>navigation.navigate('Share')}
           />
           <DrawerButtondemo 
-          text={'Contact Us'}
+          text={counter?eng.contactUs:Urdu.contactUs}
           source={require('../../assets/contact_icon_drawer.png')}
           onPress={()=>navigation.navigate("Contact")}
           />
           <DrawerButtondemo 
-          text={'Rate'}
+          text={counter?eng.rate:Urdu.rate}
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
           />
@@ -151,7 +151,7 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           
         <View style={{borderRadius:100,width:"100%",marginLeft:-1,paddingLeft:10,backgroundColor:"#fff",flexDirection:"row",marginVertical:20,alignItems:"center",}}>
         <Image style={{marginLeft:10,marginRight:35}} source={require('../../assets/logout_icon_drawer.png')}/>
-        <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>Log Out</Text> 
+        <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>{counter?eng.logOut:Urdu.logOut}</Text> 
         </View>
         </TouchableOpacity>
         {/* Logout */}

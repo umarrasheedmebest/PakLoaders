@@ -17,8 +17,8 @@ import MediumTruk from '../../assets/SVG_Icons/Icon_6.svg';
 import TrukOne from '../../assets/SVG_Icons/Icon_7.svg';
 import HavyTruk from '../../assets/SVG_Icons/Icon_8.svg';
 import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
-
-
+import DateTime from '../../Components/DateTimePicker/DateTime';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     StyleSheet,
     SafeAreaView,
@@ -30,25 +30,55 @@ import {
     Button,
     ScrollView,
     FlatList,
-    useWindowDimensions
+    useWindowDimensions,
+    Platform
     
 } from 'react-native';
-
+import { useSelector } from 'react-redux';
+import {eng,Urdu} from '../../Components/Api/Language';
  
 const PostComponent = ({
     navigateCompleteProfileOne,
     navigateVerification,
-    text,
+    
     sideBar,
    
 }) => { 
+  const mark=useSelector((state)=>state.language)
+  const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    const [textOne, setTextOne] = useState('Empty');
+    const onChange=(event,selectedDate)=>{
+        const currentDate=selectedDate||date;
+        setShow(Platform.OS==='ios');
+        setDate(currentDate);
+        let tempDate= new Date(currentDate);
+        let fDate=tempDate.getDate()+'/'+(tempDate.getMonth()+1)+'/'+tempDate.getFullYear();
+        setTextOne(fDate);
+        console.log(fDate);
+    }
+    const showModeOne=(currentDate)=>{
+        setShow(true);
+        setMode(currentDate);
+    }
   const navigation= useNavigation();
  const {height,width}=useWindowDimensions();
 
+
+ const [showMode, setshowMode] = useState('date')
  const defaultImage=require('../../assets/icon_image.png');
     return (
         
             <SafeAreaView style={styles.container}>
+              {show &&(<DateTimePicker
+   testID='dateTimePicker'
+   value={date}
+   mode={mode}
+   is24Hour={true}
+   display='default'
+   onChange={onChange}
+   />)}
               {/* Background Image */}
                  <CustomBackground/>
                  {/* Background Image */}
@@ -57,7 +87,7 @@ const PostComponent = ({
                       <Image source={require('../../assets/Button.png')}/>
                   </TouchableOpacity>
                 
-                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular"}}>Add Post</Text>
+                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular"}}>{mark?eng.addPost:Urdu.addPost}</Text>
                   <View style={styles.defaultStyle}>
                     <TouchableOpacity style={{marginRight:10,}}>
                       <Image source={require('../../assets/Bell.png')}/>
@@ -69,11 +99,12 @@ const PostComponent = ({
                  </View>
                  
                  <ScrollView showsVerticalScrollIndicator={false} style={styles.mainContainer}>
-                  <View style={{width:"100%",alignItems:"flex-start",marginVertical:5,}}>
+                  <View style={{width:"100%",marginVertical:5,paddingHorizontal:20}}>
                     <Text style={{color:colors.primary,fontSize:24, fontWeight:"500",
-                  fontFamily:"Poppins-Medium"}}>Create Post</Text>
+                  fontFamily:"Poppins-Medium"}}>{mark?eng.createPost:Urdu.createPost}</Text>
                     <Text style={{fontSize:12,fontFamily:"Poppins-Regular",color:"#5A5A5A",lineHeight:18}}>Welcome Jhon Smith!{'\n'}
 Please fill the following form to add a new post.</Text>
+
                     </View>
                                       {/* CNIC Image
                       <View style={styles.MainCnic}>
@@ -84,7 +115,7 @@ Please fill the following form to add a new post.</Text>
                         <CustomCNIC defaultImage={defaultImage} text="Add Luggage Image"/>
                         </View>
                        </View> */}
-                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginVertical:10,}}>
+                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginVertical:10,marginLeft:20}}>
                     {/* Low-Capacity */}
                     <View style={{marginHorizontal:5}}>
                       <TouchableOpacity>
@@ -151,7 +182,7 @@ Please fill the following form to add a new post.</Text>
                    </ScrollView>
                     
                     {/* Profile */}
-                    <View style={{width:"100%",alignItems:"center",justifyContent:"center",}}>
+                    <View style={{width:"100%",alignItems:"center",justifyContent:"center",marginHorizontal:10}}>
                     
                     {/* Input field user Pickup Location */}
                     <CustomInput label="Pickup Location" width={"40%"} eye="none" placeholder="Clarck pharmacy, 442 Rawalpindi"
@@ -163,7 +194,7 @@ Please fill the following form to add a new post.</Text>
                     <CustomInput label="Luggage weight" width={'40%'} eye="none" placeholder="580 kg"
                    />
                   {/* Input field user date pickup */}
-                  <CustomInput label="Date of pickup" width={'40%'} eye="flex" calenderr={true} placeholder="12-02-2024"
+                  <CustomInput value={textOne} showModeOne={showModeOne} label="Date of pickup" width={'40%'} eye="flex" calenderr={true} placeholder="12-02-2024"
                    />
                     {/* Input field user Time Pickup */}
                   <CustomInput label="Time of pickup" width={'40%'} eye="none" placeholder="12-02-2024"
@@ -207,7 +238,7 @@ const styles = StyleSheet.create({
       mainContainer:{
         width:"100%",
         height:"80%",
-       paddingLeft:30,
+       
         borderTopLeftRadius:11,
         borderTopRightRadius:11,
         backgroundColor:"white",
