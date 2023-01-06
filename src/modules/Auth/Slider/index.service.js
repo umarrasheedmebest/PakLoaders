@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const HowItWorksServiceComponent = ({
     children,
@@ -6,7 +7,7 @@ const HowItWorksServiceComponent = ({
 }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [carouselItems, setCarouselItems] = useState([]);
-
+    const isLoading = useSelector(state => state.auth.isLoading);
 
 
     useEffect(() => {
