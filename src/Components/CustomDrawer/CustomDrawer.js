@@ -19,6 +19,7 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const dispatch=useDispatch();
   const [first, setFirst] = useState(false)
   console.log(counter);
+  
   return (
     <View style={{flex:1}}>
     

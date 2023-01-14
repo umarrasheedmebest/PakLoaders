@@ -4,14 +4,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const language =createSlice({
     name:"Language",
     initialState:true,
+    
     reducers:{
         english:(state,action)=>{
-            const change=true
-         return console.log(change) 
+            
+            state=true
+         console.log(state) 
+         return state
         },
         urdu:(state,action)=>{
-            const change=false
-            return change
+            state=false
+            console.log(state) 
+            return state
         }
     }
 })

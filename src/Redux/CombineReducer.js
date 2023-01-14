@@ -3,7 +3,7 @@ import { authReducer } from "./slices/AuthSlice";
 import { languageReducer } from "./slices/LanguageSlice";
 
 const appReducer=combineReducers({
-    languageReducer,
+    language:languageReducer,
     authReducer
 });
 export default appReducer;
