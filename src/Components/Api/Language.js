@@ -100,6 +100,7 @@
    endRide:"End ride",
    rideDetail:"Ride Detail",
    reciverNum:"Receiver name",
+
    amountPayed:"Amount payed",
    experience:"Please share your experience with us",
    feedback:"Wrie your feedback",
@@ -119,6 +120,18 @@
     Mpin:"Mpin",
     tripsCompleted:"Trips completed",
     tripsInprogress:"Trips inprogress ",
+    tripCanceled:"Trips canceled",
+    subscriptionDtail:"Trips canceled",
+    dateOfSub:"Date of subscription",
+    annualSub:"Your subscription for prefered annual plan has expired. Please resubscribed to get access.",
+    vehicleAdd:"Vehicle added",
+    changePass:"Change Password",
+    customerReview:"Customer reviews",
+    secondMobNo:"Secondary Mobile no",
+    oldPass:"Old Password",
+    bankAccountDetail:"Pay with your Bank account. Enter the Account details",
+    easypaisaDetail:"Pay with your Easypaisa Direct account. Enter the Easypaisa registered mobile number",
+    
    //  Custom Drawer
    home:"Home",
     editPost:"Edit Post",
@@ -134,10 +147,63 @@
     logOut:"Log Out",
    //  Custom Drawer
     addPost:"Add Post",
-    createPost:"Create Post"
+    createPost:"Create Post",
+   //  Custom Drawer
+   vehicleDetail:"Vehicle Details",
+   vehicleModel:"vehicle model",
+   // Earning Screen
+   tripId:"Trip Id",
+   troubleContact:"having trouble contact us",
+   email:"Email",
+   description:"Description",
+   customers:"Customers",
+   bidTime:"Bid Time",
+   bidRank:"Bid Rank",
+   pickupLocation:"pickup location",
+   insurnacePack:"Luggage insurance package",
+   purchasePlan:"Please purchase any plan to get your luggage insured",
+   unlockFeature:"Unlock 4 Powerful Features",
+   fourFeacture:"4 Features",
+   essential:"Essential",
+   bankNote:"Note: Ensure your Bank account is active and has sufficient balance.",
+   postDetail:"Post Detail",
+   accept:"Accept",
+   profileProcess:"Please complete your profile to proceed",
+   Prefrered:"Prefrered",
+   sevenFeatures:"7 Features",
+   ultimate:"Ultimate",
+   feature:"Feature",
+   daystoPay:"Days to Pay & Credit Score",
+   easypaisaNote:"Note: Ensure your Easypaisa Direct account is active and has sufficient balance.",
  }
    
 const Urdu={
+  easypaisaNote:"نوٹ: یقینی بنائیں کہ آپ کا Easypaisa ڈائریکٹ اکاؤنٹ ہے۔ فعال اور کافی توازن ہے.",
+
+  easypaisaDetail:"اپنے Easypaisa ڈائریکٹ اکاؤنٹ سے ادائیگی کریں۔ ایزی پیسہ رجسٹرڈ موبائل نمبر درج کریں۔",
+
+  daystoPay:"ادائیگی اور کریڈٹ سکور کے دن",
+
+  feature:"خصوصیت",
+
+  ultimate:"حتمی",
+
+  sevenFeatures:" خصوصیات"+"7",
+
+  Prefrered:"ترجیحی",
+  profileProcess:"آگے بڑھنے کے لیے براہ کرم اپنا پروفائل مکمل کریں۔",
+
+  accept:"قبول کریں",
+
+  postDetail:"پوسٹ تفصیل",
+
+  bankNote:"نوٹ: یقینی بنائیں کہ آپ کا بینک اکاؤنٹ فعال ہے اور کافی بیلنس ہے۔",
+  bankAccountDetail:"اپنے بینک اکاؤنٹ سے ادائیگی کریں۔ اکاؤنٹ کی تفصیلات درج کریں۔",
+  essential:"ضروری",
+  fourFeacture:" خصوصیات"+"4",
+  unlockFeature:"4 طاقتور خصوصیات کو غیر مقفل کریں",
+   purchasePlan:"براہ کرم اپنے سامان کی بیمہ کروانے کے لیے کوئی بھی منصوبہ خریدیں۔",
+   insurnacePack:"سامان کا انشورنس پیکج",
     appname:"پاک لوڈرز",
     getLuggage:"اپنے سامان کی بیمہ کروائیں۔",
     luggageInsurance:"سامان کے نقصان یا کسی نقصان کی صورت میں سامان کی انشورنس فراہم کی جاتی ہے",
@@ -239,6 +305,34 @@ const Urdu={
    endRide:"سواری ختم",
    rideDetail:"سواری کی تفصیلات",
    reciverNum:"وصول کنندہ کا نام",
+   amountPayed:"رقم ادا کر دی",
+   experience:"براہ کرم اپنا تجربہ ہمارے ساتھ شیئر کریں",
+   feedback:"پنی رائے لکھیں",
+   essentialFeatures:"ضروری 4 خصوصیات ",
+   unlimitedLoad:"لامحدود لوڈ ویوز",
+   annualPlan:"سالانہ منصوبہ",
+   creditCard:"]کریڈٹ/ڈیبٹ کارڈ",
+   easypaisa:"Easypaisa",
+   jazzcash:"Jazzcash",
+   bankAccount:"بینک اکاؤنٹ",
+   payNow:"ادائیگی",
+   cardHolder:"کارڈ ہولڈر کا نام",
+   cardNumber:"کارڈ نمبر ",
+   monthYearCv:"مہینہ، سال، سی وی وی",
+   jazzcashNumber:"رجسٹرڈ موبائل نمبر درج کریں۔  Jazzcashاکاؤنٹ سے ادائیگی کریں۔  jazzcashاپنے",
+    jazzcshMobileNumber:"موبائل نمبر Jazzcash",
+    Mpin:"Mpin",
+    tripsCompleted:"سفر مکمل",
+    tripsInprogress:"سفر جاری ہے",
+    tripCanceled:"سفر منسوخ",
+    subscriptionDtail:"سبسکرپشن کی تفصیلات",
+    dateOfSub:"سبسکرپشن کی تاریخ",
+    annualSub:"دوبارہ سبسکرائب کریںn ترجیحی سالانہ پلان کے لیے آپ کی رکنیت ختم ہو گئی ہے۔ رسائی حاصل کرنے کے لیے براہ کرم",
+    vehicleAdd:"گاڑی شامل کی گئی",
+    changePass:"پاس ورڈ تبدیل کریں",
+    customerReview:"کسٹمر کے جائزے",
+    secondMobNo:"سیکنڈری موبائل نمبر",
+    oldPass:"پرانا پاسورڈ",
     //  Custom Drawer
     home:"ہوم",
     editPost:"پوسٹ میں ترمیم کریں",
@@ -254,7 +348,22 @@ const Urdu={
     logOut:"لاگ آوٹ",
    //  Custom Drawer
     addPost:"پوسٹ شامل کریں",
-    createPost:"پوسٹ بنائیں"
+    createPost:"پوسٹ بنائیں",
+
+   //  Custom Drawer
+   vehicleDetail:"گاڑی کی تفصیلات",
+   vehicleModel:"گاڑی کا رجسٹریشن نمبر",
+   // Earning Screen
+   tripId:"ٹرپ آئی ڈی",
+   troubleContact:"پریشانی ہو ہم سے رابطہ کریں",
+   email:"ای میل",
+   description:"تفصیل",
+   customers:"گاہکوں",
+   bidTime:"بولی کا وقت",
+   bidRank:"بولی کا درجہ",
+   pickupLocation:"اٹھانے کا مقام",
+   
+
  }
 
 export {eng,Urdu};

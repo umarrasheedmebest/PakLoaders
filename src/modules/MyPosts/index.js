@@ -185,7 +185,7 @@ Please fill the following form to add a new post.</Text>
                     <View style={{width:"100%",alignItems:"center",justifyContent:"center",marginHorizontal:10}}>
                     
                     {/* Input field user Pickup Location */}
-                    <CustomInput label="Pickup Location" width={"40%"} eye="none" placeholder="Clarck pharmacy, 442 Rawalpindi"
+                    <CustomInput label={mark?eng.pickupLocation:eng.pickupLocation} width={"40%"} eye="none" placeholder="Clarck pharmacy, 442 Rawalpindi"
                    />
                    {/* Input field user Drop Location */}
                    <CustomInput label="Drop off Location" width={'40%'} eye="none" placeholder="Clarck pharmacy, 442 Islamabad"

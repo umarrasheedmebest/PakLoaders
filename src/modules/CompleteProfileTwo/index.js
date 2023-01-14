@@ -24,6 +24,8 @@ import {
     Alert,
     Keyboard
 } from 'react-native';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 
 
  
@@ -97,7 +99,7 @@ const [inputsUser, setInputsUser] = useState({
   
 
  });
- 
+ const data=useSelector.language;
  const [errors, setErrors] = useState({});
  const [loading, setLoading] = useState(false);
  const valiDate=()=>{
@@ -158,12 +160,12 @@ const [inputsUser, setInputsUser] = useState({
                        <Image source={require('../../assets/progressbarTwo.png')}/>
                         {/* Forground Image */}
                         <View>
-                    <Text style={styles.main} >Complete Profile</Text>
+                    <Text style={styles.main} >{data?eng.completProfile:Urdu.completProfile}</Text>
                     {/* Full Name */}
                     {/* Custom Text */}
                   
                        <Text style={styles.paragraph}>Welcome John Smith</Text>
-                      <Text style={styles.paragraph}>Please complete your profile to proceed</Text>
+                      <Text style={styles.paragraph}>{data?eng.profileProcess:Urdu.profileProcess}</Text>
                     
                   
                      

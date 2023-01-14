@@ -15,9 +15,12 @@ import CustomButton from '../../Components/CustomButton';
 
 import Sure from '../../Components/sure';
 import CustomCards from '../../Components/CustomCards';
+import { useSelector } from 'react-redux';
+import {eng,Urdu} from '../../Components/Api/Language'
 const DebitCardComponent = ({ }) => {
     const navigation=useNavigation()
 const [card, setCard] = useState(false)
+const data=useSelector.language
     return (
         <>
         {card?
@@ -28,7 +31,7 @@ const [card, setCard] = useState(false)
         confirmPress={()=>navigation.navigate('EasyPaisa')}
         />
          <CustomHeader
-        text={'Credit/Debit Card'}
+        text={data?eng.creditCard:Urdu.creditCard}
         ContentView={
             <>
           <CustomContainer
@@ -39,7 +42,7 @@ const [card, setCard] = useState(false)
           <View style={{width:"100%",alignItems:"center",marginTop:30,marginBottom:15}}>
             <TouchableOpacity>
                 <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Pay Now</Text>
+                <Text style={styles.buttonText}>{data?eng.payNow:Urdu.payNow}</Text>
                 </View>
             </TouchableOpacity>
           </View>
@@ -73,7 +76,7 @@ const [card, setCard] = useState(false)
           <View style={{width:"100%",alignItems:"center",marginTop:30,marginBottom:15}}>
             <TouchableOpacity>
                 <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Pay Now</Text>
+                <Text style={styles.buttonText}>{data?eng.payNow:Urdu.payNow}</Text>
                 </View>
             </TouchableOpacity>
           </View>

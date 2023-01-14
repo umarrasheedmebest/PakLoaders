@@ -4,6 +4,7 @@ import CustomInput from '../../Components/CustomInput';
 import CustomBackground from '../../Components/CustomBackground';
 import CustomForground from '../../Components/CustomForground';
 import Loader from '../../Components/Loader';
+
 import {
     StyleSheet,
     SafeAreaView,
@@ -20,14 +21,17 @@ import {
     Alert
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
+import { signup, SignupAuth } from '../../Redux/slices/AuthSlice';
 
  
 const SignUpComponent = ({
     navigateToLogin,
     navigateVerification,
-    navigation
-    
+    navigation,
+        
 }) => { 
+  const dispatch=useDispatch();
  const [inputs, setInputs] = useState({
   fullName:'',
   mobile:'',
@@ -35,7 +39,11 @@ const SignUpComponent = ({
   confirmPassword:'',
 
  });
- 
+ const mainValue={
+  number:inputs.mobile,
+
+  full_name:inputs.fullName,
+ }
  const [errors, setErrors] = useState({});
  const [loading, setLoading] = useState(false);
  const valiDate=()=>{
@@ -76,6 +84,7 @@ const SignUpComponent = ({
     setLoading(false);
     try {
       AsyncStorage.setItem('user',JSON.stringify(inputs));
+      dispatch(SignupAuth(mainValue));
       navigation.navigate('Verification')
     } catch (error) {
       Alert.alert('error','Something went wrong');
@@ -88,7 +97,9 @@ const SignUpComponent = ({
  const handleError=(errorMessage, input)=>{
   setErrors(prevState=>({...prevState,[input]:errorMessage}));
  }
- 
+ const signup=(mainValue)=>{
+  dispatch(SignupAuth(mainValue));
+}
 
 
   
@@ -148,7 +159,7 @@ const SignUpComponent = ({
                     password={false}/>
                      
                     {/* Button Sign UP */}
-                    <TouchableOpacity onPress={valiDate} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
+                    <TouchableOpacity onPress={()=>signup(mainValue)} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
                       <Text style={{fontSize:20,color:"#fff",fontWeight:"400"}}>Sign Up</Text>
                     </TouchableOpacity>
                     {/* Button Sign UP */}

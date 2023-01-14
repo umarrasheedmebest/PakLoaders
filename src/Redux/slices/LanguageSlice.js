@@ -6,10 +6,12 @@ const language =createSlice({
     initialState:true,
     reducers:{
         english:(state,action)=>{
-         return state=true
+            const change=true
+         return console.log(change) 
         },
         urdu:(state,action)=>{
-            return state=false
+            const change=false
+            return change
         }
     }
 })

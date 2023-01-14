@@ -21,8 +21,9 @@ import {
 import Heading from '../../Components/Heading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthContext} from '../../../AuthProvider';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
+import { SigninAuth } from '../../Redux/slices/AuthSlice';
 
 const LoginComponent = ({
   navigateSignUp,
@@ -33,7 +34,7 @@ const LoginComponent = ({
 }) => {
   const {login} = useContext(AuthContext);
   const data = useSelector(state => state.language);
-
+const dispatch=useDispatch();
   const [inputs, setInputs] = useState({
     fullName: '',
     mobile: '',
@@ -53,7 +54,7 @@ const LoginComponent = ({
       handleError('Please input password', 'password');
     }
     if (valid) {
-      login();
+      logined()
     }
   };
   const logined = () => {
@@ -73,7 +74,7 @@ const LoginComponent = ({
             'user',
             JSON.stringify({...userData, login: true}),
           );
-
+            console.log(inputs);
           login();
         } else {
           Alert.alert('error', 'Invalid Details');

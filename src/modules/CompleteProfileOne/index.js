@@ -24,6 +24,7 @@ import {
     Keyboard,
     Alert
 } from 'react-native';
+import { eng, Urdu } from '../../Components/Api/Language';
 
  
 const ProfileOneComponent = ({
@@ -179,11 +180,11 @@ const [inputsUser, setInputsUser] = useState({
                      />
                      
                     {/* Button Next */}
-                    <CustomButton onPress={valiDate} text="Next" type="secondary"/>
+                    <CustomButton onPress={valiDate} text={data?eng.next:Urdu.next} type="secondary"/>
                     
                     {/* Button Next */}
                     {/* Button Cancel */}
-                    <CustomButton onPress={navigateToLogin} text="Cancel" type="tertiary"/>
+                    <CustomButton onPress={navigateToLogin} text={data?eng.cancel:Urdu.cancel} type="tertiary"/>
                     
                     {/* Button Cancel */}
 

@@ -14,12 +14,14 @@ import {
     
 } from 'react-native';
 import CustomHeader from '../../Components/CustomHeader';
-
+import { useSelector } from 'react-redux';
+import {eng,Urdu} from '../../Components/Api/Language';
  
 const EasyPaisaComponent = ({
     sideBar
 }) => { 
  const navigation=useNavigation();
+ const data=useSelector.language;
     return (
         
            <CustomHeader
@@ -34,13 +36,13 @@ const EasyPaisaComponent = ({
 
                 
                 <View style={{flexDirection:"row"}}>
-                    <Text style={{fontSize:12,fontWeight:"500",color:colors.primary,marginRight:10}}>Essential</Text>
-                    <Text style={{fontSize:12,fontWeight:"500",color:colors.primary}}>4 Features</Text>
+                    <Text style={{fontSize:12,fontWeight:"500",color:colors.primary,marginRight:10}}>{data?eng.essential:Urdu.essential}</Text>
+                    <Text style={{fontSize:12,fontWeight:"500",color:colors.primary}}>{data?eng.fourFeacture:Urdu.fourFeacture}</Text>
                 </View>
                 <View>
                     <Text style={{fontSize:8,fontWeight:"400",color:colors.primary,
                 textDecorationLine:'underline',
-                }}>View Details</Text>
+                }}>{data?eng.viewDetail:Urdu.viewDetail}</Text>
                 </View>
                 </View>
                 {/* Fist Line */}

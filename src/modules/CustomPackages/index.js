@@ -13,6 +13,8 @@ import {
    
 } from 'react-native';
 import { set } from 'react-native-reanimated';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 
 
  
@@ -21,7 +23,7 @@ const PackageComponent = (props) => {
    const [pref, setPref] = useState(false);
    const [ultimate, setUltimate] = useState(false);
 
-
+const data=useSelector.language
     const navigation = useNavigation();
     const essential=()=>{
       if(backColor===false){
@@ -59,7 +61,7 @@ const PackageComponent = (props) => {
              <Image source={require('../../assets/arrow-back.png')}/>
           </TouchableOpacity>
                 
-                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular",textAlign:"center"}}>Packages</Text>
+                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular",textAlign:"center"}}>{data?eng.packages:Urdu.packages}</Text>
                   <View style={{width:20,}}></View>
                   
                  </View>
@@ -69,22 +71,22 @@ const PackageComponent = (props) => {
 
                     <TouchableOpacity onPress={()=>essential()}>
                          <View style={[styles.headerContainer,{backgroundColor:backColor?"#4448FF":"#fff"}]}>
-                        <Text style={{color:backColor?"#fff":"#5A5A5A"}}>Essential</Text>
-                        <Text style={{color:backColor?"#fff":"#5A5A5A"}} >4 Features</Text>
+                        <Text style={{color:backColor?"#fff":"#5A5A5A"}}>{data?eng.essential:Urdu.essential}</Text>
+                        <Text style={{color:backColor?"#fff":"#5A5A5A"}} >{data?eng.fourFeacture:Urdu.fourFeacture}</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>Prefrered()}>
                          <View style={[styles.headerContainer,{backgroundColor:pref?"#4448FF":"#fff"}]}>
-                        <Text style={{color:pref?"#fff":"#5A5A5A"}}>Prefrered</Text>
-                        <Text style={{color:pref?"#fff":"#5A5A5A"}} >7 Features</Text>
+                        <Text style={{color:pref?"#fff":"#5A5A5A"}}>{data?eng.Prefrered:Urdu.Prefrered}</Text>
+                        <Text style={{color:pref?"#fff":"#5A5A5A"}} >{data?eng.sevenFeatures:Urdu.sevenFeatures}</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>Ulti()}>
                          <View style={[styles.headerContainer,{backgroundColor:ultimate?"#4448FF":"#fff"}]}>
-                        <Text style={{color:ultimate?"#fff":"#5A5A5A"}}>Ultimate</Text>
-                        <Text style={{color:ultimate?"#fff":"#5A5A5A"}} >13 Features</Text>
+                        <Text style={{color:ultimate?"#fff":"#5A5A5A"}}>{data?eng.ultimate:Urdu.ultimate}</Text>
+                        <Text style={{color:ultimate?"#fff":"#5A5A5A"}} >13 {data?eng.feature:Urdu.feature}</Text>
                     </View>
                     </TouchableOpacity>
                     
@@ -95,7 +97,7 @@ const PackageComponent = (props) => {
                   {/* Button Feature */}
                   {/* Heading */}
                   <View>
-                    <Text style={styles.headingStyle}>Unlock 4 Powerful Features</Text>
+                    <Text style={styles.headingStyle}>{data?eng.unlockFeature:Urdu.unlockFeature}</Text>
                   </View>
                   {/* Heading */}
                   
@@ -105,7 +107,7 @@ const PackageComponent = (props) => {
                       <View style={[styles.defaultStyle,{justifyContent:"flex-start",alignItems:"flex-start",}]}>
                         <Image source={require('../../assets/Award.png')}/>
                         <View style={{marginLeft:15,}}>
-                        <Text>Unlimited Load Views</Text>
+                        <Text>{data?eng.unlimitedLoad:Urdu.unlimitedLoad}</Text>
                       <Text style={styles.paragraphStyle}>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem Lorem ipsum lorem ipsum lorem ipsum ....</Text>
                     </View>
                     </View>
@@ -113,7 +115,7 @@ const PackageComponent = (props) => {
                     <View style={[styles.defaultStyle,{justifyContent:"flex-start",alignItems:"flex-start",marginVertical:15,}]}>
                         <Image source={require('../../assets/Award.png')}/>
                         <View style={{marginLeft:15,}}>
-                        <Text>Days to Pay & Credit Score</Text>
+                        <Text>{data?eng.daystoPay:Urdu.daystoPay}</Text>
                       <Text style={styles.paragraphStyle}>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem Lorem ipsum lorem ipsum lorem ipsum ....</Text>
                     </View>
                     </View>
