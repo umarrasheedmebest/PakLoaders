@@ -7,11 +7,13 @@ import {
     Image
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 import CustomHeader from '../../Components/CustomHeader';
 import CustomInput from '../../Components/CustomInput';
 import { colors } from '../../globalStyle';
 
 const ChangePasswordComponent = ({ }) => {
+    const data=useSelector.language
     return (
         <CustomHeader text={'Change Password'}
         ContentView={

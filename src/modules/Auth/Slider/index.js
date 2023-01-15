@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Pagination } from 'react-native-snap-carousel';
+import { useSelector } from 'react-redux';
 import MapSliderImage from '../../../assets/svg/MapSliderImage';
 import PersonsSliderImage from '../../../assets/svg/PersonsSliderImage';
 import VehicleSliderImage from '../../../assets/svg/VehicleSliderImage';
+import { eng, Urdu } from '../../../Components/Api/Language';
 import { colors } from '../../../globalStyle';
 import CustomText from '../../Common/CustomText';
 const { width, height } = Dimensions.get('window');
@@ -25,7 +27,7 @@ const HowItWorksComponent = ({
     carousel,
     setActiveIndex
 }) => {
-
+const data=useSelector((state)=>state.language)
     const _renderItem = ({ item, index }) => {
         return (
             <View style={{
@@ -95,9 +97,15 @@ const HowItWorksComponent = ({
                     alignItems: 'center',
                     marginTop: 15
                 }}
-                    onPress={() => navigateToHome()}>
+                    onPress={() => {
+                        if (activeIndex==2) {
+                          navigateToHome()
+                        }else{
+                            carousel.snapToNext()
+                        }
+                       }}>
                     <CustomText
-                        title={'Next'}
+                        title={data?eng.next:Urdu.next}
                         fontSize={24}
                         color={colors.white}
                     />
@@ -105,7 +113,7 @@ const HowItWorksComponent = ({
 
                 {activeIndex !== 2 && <CustomText
                     onPress={() => navigateToHome()}
-                    title={'Skip'}
+                    title={data?eng.cancel:Urdu.cancel}
                     fontSize={20}
                     color={colors.primary}
                     marginTop={15}

@@ -24,6 +24,7 @@ const CustomInput = ({
     calenderr,
     error,
     password,
+    showModeOne,
     onFocus=()=>{},
     ...props
 }) => {
@@ -50,6 +51,7 @@ const CustomInput = ({
      placeholder={placeholder}
     secureTextEntry={show}
      autoCorrect={false}
+     maxLength={15}
      onFocus={()=>{
       onFocus();
       setIsFocused(true);
@@ -58,9 +60,10 @@ const CustomInput = ({
       setIsFocused(false);
      }}/>
          <View style={{display:eye, zIndex:index, flexDirection:"row",alignItems:'center', }}>
-                       
-                         <TouchableOpacity onPress={()=>setShow(!show)} >
+                       <TouchableOpacity onPress={()=>showModeOne()}>
+                         
                           <Image source={calenderr?calender:show?showPassword:hidePassword} width="100%" height="100%"/>
+                          
                           </TouchableOpacity>
                         <Text > {text}  </Text>
               </View>          

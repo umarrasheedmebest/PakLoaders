@@ -18,6 +18,7 @@ import {
 import { handleActions } from 'redux-actions';
 import update from 'immutability-helper';
 
+
 const initialState = {
     //sign up
     signUpResponse: null,
@@ -92,6 +93,7 @@ const createAccount = (state, action) => update(state, {
 const signUpUserResponse = (state, action) => update(state, {
     signUpResponse: {$set: action.signUpResponse},
 });
+
 
 const userOtpVerifyResponse = (state, action) => update(state, {
     signUpOtpVerifyResponse: {$set: action.signUpOtpVerifyResponse},

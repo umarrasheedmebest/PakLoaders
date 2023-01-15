@@ -7,6 +7,7 @@ import CustomMenu from '../../Components/CustomMenu';
 import Home from "../../Components/Api/Home";
 import { colors } from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
+
 import {
     StyleSheet,
     SafeAreaView,
@@ -21,7 +22,10 @@ import {
     ScrollView,
     FlatList
 } from 'react-native';
+import Truk from '../../assets/SVG_Icons/Icon_3.svg';
 import allData from '../../Components/Api/Home';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 
  
 const HomeComponent = (props,{
@@ -29,9 +33,17 @@ const HomeComponent = (props,{
     navigateVerification,
     text,
     sideBar,
-    navigateBids
+    navigateBids,
+   
 }) => { 
   const navigation= useNavigation();
+  const mark=useSelector((state)=>state.language)
+  const [data, setData] = useState(allData);
+  const onDelete=(id)=>{
+    const newData=[...data];
+    const updateData=newData?.filter((todo)=>todo.id!==id)
+    setData(updateData);
+  }
   const dataCards=({item})=>{
     return(
       <View style={styles.dataContainer}>
@@ -56,7 +68,7 @@ const HomeComponent = (props,{
           <Text style={{marginLeft:15,}}>Rawalpindi,punjab</Text>
         </View>
         <View style={styles.defaultStyle}>
-          <Image source={require('../../assets/Bus.jpg')}/>
+          <Truk width={25} height={25}/>
           <Text style={{marginLeft:15,}}>Suzuki pickup</Text>
         </View>
       </View>
@@ -64,7 +76,7 @@ const HomeComponent = (props,{
       {/* 3rd Row user */}
       <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
         
-        <TouchableOpacity style={styles.container_secondary}>
+        <TouchableOpacity onPress={()=>onDelete(item.id)} style={styles.container_secondary}>
         <Text style={styles.text_secondary}>Ignore</Text>
        </TouchableOpacity>
       
@@ -90,22 +102,22 @@ const HomeComponent = (props,{
                 
                   <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular"}}>Home</Text>
                   <View style={styles.defaultStyle}>
-                    <TouchableOpacity style={{marginRight:10,}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Notification')} style={{marginRight:10,}}>
                       <Image source={require('../../assets/Bell.png')}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={sideBar}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                       <Image source={require('../../assets/profile.png')}/>
                     </TouchableOpacity>
                   </View>
                  </View>
                  <View style={styles.mainContainer}>
-                  <View style={{width:"80%",alignItems:"flex-start",marginVertical:5,}}>
-                    <Text style={{color:colors.primary,fontSize:16, fontWeight:"600",fontFamily:"Montserrat-Medium"}}>New Bids</Text>
+                  <View style={{width:"80%",marginVertical:5,}}>
+                    <Text style={{color:colors.primary,fontSize:16, fontWeight:"600",fontFamily:"Montserrat-Medium"}}>{mark?eng.newBids:Urdu.newBids}</Text>
                     </View>
                   
                  
                   <View style={styles.listStyle}>
-                    <FlatList style={{zIndex:1,}}  data={allData}
+                    <FlatList style={{zIndex:1,}}  data={data}
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}

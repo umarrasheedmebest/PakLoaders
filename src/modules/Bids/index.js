@@ -32,6 +32,8 @@ const WIDTH =Dimensions.get('window').width;
 const HEIGHT=Dimensions.get('window').height;
 import CustomBackground from '../../Components/CustomBackground';
 import { color } from 'react-native-reanimated';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 const BidsComponent = ({
     navigatebids
  }) => {
@@ -46,7 +48,7 @@ const BidsComponent = ({
         }
     }
     }
-   
+   const data=useSelector.language;
     return (
         <SafeAreaView style={styles.container}>
          
@@ -107,7 +109,7 @@ const BidsComponent = ({
               <View style={styles.listStyle}
               showsVerticalScrollIndicator={false}
               >
-                <Text style={{fontSize:13,fontFamily:'Montserrat-Medium',color:"#4448FF"}}>Post Details</Text>
+                <Text style={{fontSize:13,fontFamily:'Montserrat-Medium',color:"#4448FF"}}>{data?eng.postDetail:Urdu.postDetail}</Text>
                 <View style={[styles.dataContainer,{height:211,padding:10,shadowColor:"#007BFE"}]}>
                 <View style={{flexDirection:"row"}}>
                   <Image source={require('../../assets/Waseem.png')}/>
@@ -256,12 +258,12 @@ const BidsComponent = ({
         <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
           
           <TouchableOpacity style={styles.container_secondary}>
-          <Text style={styles.text_secondary}>Ignore</Text>
+          <Text style={styles.text_secondary}>{data?eng.ignoreBtn:Urdu.ignoreBtn}</Text>
          </TouchableOpacity>
         
         
          <TouchableOpacity style={styles.container_primary} >
-          <Text style={styles.text_primary}>Accept</Text>
+          <Text style={styles.text_primary}>{data?eng.accept:Urdu.accept}</Text>
          </TouchableOpacity>
         </View>
         {/* 3rd Row user */}
@@ -302,12 +304,12 @@ const BidsComponent = ({
         <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
           
           <TouchableOpacity style={styles.container_secondary}>
-          <Text style={styles.text_secondary}>Ignore</Text>
+          <Text style={styles.text_secondary}>{data?eng.ignoreBtn:Urdu.ignoreBtn}</Text>
          </TouchableOpacity>
         
         
          <TouchableOpacity style={styles.container_primary} >
-          <Text style={styles.text_primary}>Accept</Text>
+          <Text style={styles.text_primary}>{data?eng.accept:Urdu.accept}</Text>
          </TouchableOpacity>
         </View>
         {/* 3rd Row user */}

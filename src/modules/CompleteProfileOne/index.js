@@ -24,6 +24,7 @@ import {
     Keyboard,
     Alert
 } from 'react-native';
+import { eng, Urdu } from '../../Components/Api/Language';
 
  
 const ProfileOneComponent = ({
@@ -150,14 +151,14 @@ const [inputsUser, setInputsUser] = useState({
 
                     
                     {/* Input field user Email/scondMobile Number */}
-                    <CustomInput label="Secondary Mobile Number" placeholder="92444886423" width={198} eye="none"
+                    {/* <CustomInput label="Secondary Mobile Number" placeholder="92444886423" width={198} eye="none"
                     setValue={(text)=>handleOnChange(text, 'scondMobile')}
                     error={errors.scondMobile}
                     onFocus={()=>{
                       handleError(null,'scondMobile');
                     }}
                     
-                     />
+                     /> */}
                     
                     
                       {/* User City */}
@@ -179,11 +180,11 @@ const [inputsUser, setInputsUser] = useState({
                      />
                      
                     {/* Button Next */}
-                    <CustomButton onPress={valiDate} text="Next" type="secondary"/>
+                    <CustomButton onPress={valiDate} text={data?eng.next:Urdu.next} type="secondary"/>
                     
                     {/* Button Next */}
                     {/* Button Cancel */}
-                    <CustomButton onPress={navigateToLogin} text="Cancel" type="tertiary"/>
+                    <CustomButton onPress={navigateToLogin} text={data?eng.cancel:Urdu.cancel} type="tertiary"/>
                     
                     {/* Button Cancel */}
 

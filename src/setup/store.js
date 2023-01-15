@@ -1,5 +1,6 @@
 // Imports: Dependencies
 import {createStore, applyMiddleware, compose} from 'redux';
+
 import {createLogger} from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 // Imports: Redux Root Reducer

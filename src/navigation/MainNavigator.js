@@ -9,7 +9,7 @@ import Rides from '../modules/MyRides/Rides';
 import Chat from '../modules/Chat/Chat';
 import Payment from '../modules/Payment/Payment';
 import Share from '../modules/Share/Share';
-
+import LiveChat from '../modules/ChatScreen/Screen/LiveChat';
 import Contact from '../modules/ContactUs/ContactUs'
 import Rate from '../modules/RateUS/Rate';
 import LogOut from '../modules/LogOut/LogOut';
@@ -32,6 +32,7 @@ import Bank from '../modules/Bank/Bank';
 import BankAccount from '../modules/BankAccount/BankAccount';
 import Maps from '../modules/Maps/Maps';
 import RiderProfile from '../modules/RiderProfile/RiderProfile';
+
 const Drawer = createDrawerNavigator();
 
 export const MainNavigator = () => {
@@ -109,6 +110,8 @@ export const MainNavigator = () => {
             <Drawer.Screen name='BankAccount' component={BankAccount}/>
             <Drawer.Screen name='Maps' component={Maps}/>
             <Drawer.Screen name='RiderProfile' component={RiderProfile}/>
+            <Drawer.Screen name='LiveChat' component={LiveChat}/>
+
 
             <Drawer.Screen name="LogOut" component={LogOut}options={{
                 drawerIcon:()=>(

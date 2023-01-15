@@ -6,10 +6,19 @@ import { AuthContext } from '../../../AuthProvider';
 import DrawerButtondemo from '../DrawerButtondemo';
 import { color } from 'react-native-reanimated';
 
+import { useDispatch,useSelector } from 'react-redux';
+import { changeLanguage } from '../../services/storage/Actions';
+import { eng, Urdu } from '../Api/Language';
+import { languageReducer } from '../../Redux/slices/LanguageSlice';
+import { english,urdu } from '../../Redux/slices/LanguageSlice';
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
+  const counter=useSelector((state)=>state.language)
+  const dispatch=useDispatch();
+  const [first, setFirst] = useState(false)
+  console.log(counter);
   
   return (
     <View style={{flex:1}}>
@@ -25,19 +34,27 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
         </View>
         <View style={{flexDirection:"row"}}>
           {/* English */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{
+            dispatch(english())
+          }}>
           <View style={{flexDirection:'row',width:46,height:23,backgroundColor:"#fff",justifyContent:"space-evenly",alignItems:"center",borderTopLeftRadius:5,borderBottomLeftRadius:5}}><Image source={require('../../assets/british.png')}/>
           <Text style={{fontSize:10,fontFamily:"Montserrat_Medium"}}>ENG</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
         {/* Urdu  */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>{
+          
+            dispatch(urdu())
+          
+          
+        }}>
           <View style={{flexDirection:'row',width:46,height:23,backgroundColor:"#CCCCCC",justifyContent:"space-evenly",alignItems:"center",borderTopRightRadius:5,borderBottomRightRadius:5}}><Image source={require('../../assets/pak.png')}/>
           <Text style={{fontSize:10,fontFamily:"Montserrat_Medium"}}>UR</Text>
           </View>
         </TouchableOpacity>
         </View>
       </View>
+      
       {/* Profile button */}
       <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
         <View style={{width:68,height:68,borderWidth:2,borderColor:"#fff",borderRadius:100, justifyContent:"center", alignItems:"center",position:"relative" }}>
@@ -58,40 +75,46 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           {/* <DrawerItemList {...props} /> */}
           <DrawerButtondemo 
           active={colorspk?'#D9EBFF':'#fff'}
-          text={'Home'}
+          text={counter?eng.home:Urdu.home}
           source={require('../../assets/home_icon_drawer.png')}
           onPress={()=>{
             setColorspk(true)
             navigation.navigate('Home')}}
           />
           <DrawerButtondemo 
-          text={'Packages'}
+          text={counter?eng.editPost:Urdu.editPost}
+          source={require('../../assets/mypost_icon_drawer.png')}
+          onPress={()=>navigation.navigate('Post')}
+          />
+          <DrawerButtondemo 
+          text={counter?eng.packages:Urdu.packages}
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
           />
         </View>
-        <DrawerButtondemo 
-          text={'My Post'}
-          source={require('../../assets/mypost_icon_drawer.png')}
-          onPress={()=>navigation.navigate("CreatePost")}
-          />
+       
           <DrawerButtondemo 
-          text={'Insured Luggage'}
+          text={counter?eng.insuredLuggage:Urdu.insuredLuggage}
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
           />
           <DrawerButtondemo 
-          text={'My Rides'}
+          text={counter?eng.myRides:Urdu.myRides}
           source={require('../../assets/ride_icon_drawer.png')}
           onPress={()=>navigation.navigate("Rides")}
           />
+           <DrawerButtondemo 
+          text={counter?eng.myPost:Urdu.myPost}
+          source={require('../../assets/mypost_icon_drawer.png')}
+          onPress={()=>navigation.navigate("CreatePost")}
+          />
           <DrawerButtondemo 
-          text={'Chat'}
+          text={counter?eng.chat:Urdu.chat}
           source={require('../../assets/chat_icon_drawer.png')}
           onPress={()=>navigation.navigate('Chat')}
           />
           <DrawerButtondemo 
-          text={'Payment'}
+          text={counter?eng.payment:Urdu.payment}
           PaymentImage={
             <View style={{justifyContent:"center",alignContent:"center",position:"relative",
             paddingLeft:10,marginRight:30,
@@ -106,17 +129,17 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           onPress={()=>navigation.navigate('Payment')}
           />
           <DrawerButtondemo 
-          text={'Share'}
+          text={counter?eng.share:Urdu.share}
           source={require('../../assets/share_icon_drawer.png')}
           onPress={()=>navigation.navigate('Share')}
           />
           <DrawerButtondemo 
-          text={'Contact Us'}
+          text={counter?eng.contactUs:Urdu.contactUs}
           source={require('../../assets/contact_icon_drawer.png')}
           onPress={()=>navigation.navigate("Contact")}
           />
           <DrawerButtondemo 
-          text={'Rate'}
+          text={counter?eng.rate:Urdu.rate}
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
           />
@@ -129,7 +152,7 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           
         <View style={{borderRadius:100,width:"100%",marginLeft:-1,paddingLeft:10,backgroundColor:"#fff",flexDirection:"row",marginVertical:20,alignItems:"center",}}>
         <Image style={{marginLeft:10,marginRight:35}} source={require('../../assets/logout_icon_drawer.png')}/>
-        <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>Log Out</Text> 
+        <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>{counter?eng.logOut:Urdu.logOut}</Text> 
         </View>
         </TouchableOpacity>
         {/* Logout */}

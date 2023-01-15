@@ -14,12 +14,14 @@ import {
     TextInput
     
 } from 'react-native';
+import { useSelector } from 'react-redux';
+import { eng, Urdu } from '../../Components/Api/Language';
 
 
  
 const ContactComponent = (props) => { 
     const navigation = useNavigation();
- 
+ const data=useSelector.language;
     return (
         
             <SafeAreaView style={styles.container}>
@@ -31,7 +33,7 @@ const ContactComponent = (props) => {
              <Image source={require('../../assets/arrow-back.png')}/>
           </TouchableOpacity>
                 
-                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular",textAlign:"center",}}> Contact Us</Text>
+                  <Text style={{fontSize:18,color:"#fff",fontFamily:"Poppins-Regular",textAlign:"center",}}> {data?eng.contactUs:Urdu.contactUs}</Text>
                   <View style={{width:20,}}></View>
                   
                  </View>
@@ -60,7 +62,13 @@ const ContactComponent = (props) => {
                         
                         <View>
                             <TextInput style={styles.inputStyle} placeholder='Email'
-                             placeholderTextColor={"#5A5A5A"}/>
+                             placeholderTextColor={"#5A5A5A"}
+                             maxLength={20}
+                             testID="LoginEmailAddress"
+                             textContentType="emailAddress"
+                             keyboardType="email-address"
+  
+                             />
                         </View>
                         
                     </View>
@@ -91,7 +99,7 @@ const ContactComponent = (props) => {
                     {/* Description */}
                     {/* Submit Button */}
                     <View style={styles.buttonContainer}>
-                      <CustomButton  text="Submit" type="primary"/>
+                      <CustomButton  text="Submit" type="primary" onPress={()=>navigation.navigate("Home")}/>
                     </View>
                     
                     {/* Submit Button */}

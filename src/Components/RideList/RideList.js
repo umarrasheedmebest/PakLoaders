@@ -587,7 +587,8 @@ container:{
 dayStyle:{
     fontSize:13,
     fontWeight:"700",
-    color:colors.text
+    color:colors.text,
+    marginLeft:10
 },
 pickContainer:{
     width:329,
