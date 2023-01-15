@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'https://pakloaders.herokuapp.com/';
+const API_BASE = 'https://pakloaders-customer-backend.onrender.com/';
 
 const client = axios.create({
   baseURL: API_BASE,

@@ -7,6 +7,7 @@ import {
     QUEUE_APP_TOKEN_REQUEST_OBJECT,
     SIGN_UP_USER_RESPONSE,
     UPDATE_APP_AUTH_BROKERING,
+    USER_OTP_VERIFY_RESPONSE,
 } from './authActions';
 import {
     UPDATE_USER_AUTH_REFRESHING,
@@ -36,6 +37,8 @@ const initialState = {
     // account details
     accountDetails: [],
     createAccountResponse: [],
+    signUpOtpVerifyResponse: [],
+    signInUserResponse: []
 };
 
 const showAuthSpinner = (state, action) => update(state, {
@@ -92,6 +95,14 @@ const signUpUserResponse = (state, action) => update(state, {
 });
 
 
+const userOtpVerifyResponse = (state, action) => update(state, {
+    signUpOtpVerifyResponse: {$set: action.signUpOtpVerifyResponse},
+});
+
+const signInUserResponse = (state, action) => update(state, {
+    signInUserResponse: {$set: action.signInUserResponse},
+});
+
 export default handleActions({
     [SIGN_UP_USER_RESPONSE]: signUpUserResponse,
     [SHOW_AUTH_SPINNER]: showAuthSpinner,
@@ -105,5 +116,6 @@ export default handleActions({
     [GET_ACCOUNT_INFO_RESPONSE]: updateAccountDetails,
     [CREATE_ACCOUNT_RESPONSE]: createAccount,
     [CLEAR_ACCOUNT_INFO_REQUEST]: clearAccountInfo,
-
+    [USER_OTP_VERIFY_RESPONSE]: userOtpVerifyResponse,
+    [SIGN_UP_USER_RESPONSE]: signInUserResponse,
 }, initialState);

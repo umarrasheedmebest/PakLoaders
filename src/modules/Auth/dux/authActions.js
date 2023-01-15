@@ -12,6 +12,26 @@ import {createAction} from 'redux-actions';
  export const signUpUserResponse = createAction(SIGN_UP_USER_RESPONSE);
 
 /**
+ * Sign In
+ */
+
+ export const USER_OTP_VERIFY_REQUEST = 'GRANNY/USER_OTP_VERIFY_REQUEST';
+ export const userOtpVerfiyRequest = createAction(USER_OTP_VERIFY_REQUEST);
+
+ export const USER_OTP_VERIFY_RESPONSE = 'GRANNY/USER_OTP_VERIFY_RESPONSE';
+ export const userOtpVerifyResponse = createAction(USER_OTP_VERIFY_RESPONSE);
+
+ /**
+ * Sign In
+ */
+
+  export const SIGN_IN_USER_REQUEST = 'GRANNY/SIGN_IN_USER_REQUEST';
+  export const signInUserRequest = createAction(SIGN_IN_USER_REQUEST);
+ 
+  export const SIGN_IN_USER_RESPONSE = 'GRANNY/SIGN_IN_USER_RESPONSE';
+  export const signInUserResponse = createAction(SIGN_IN_USER_RESPONSE);
+
+/**
  * App Auth
  */
 export const AUTH_APP_REQUEST = 'GRANNY/AUTH_APP_REQUEST';
