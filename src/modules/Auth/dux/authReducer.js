@@ -8,6 +8,9 @@ import {
     SIGN_UP_USER_RESPONSE,
     UPDATE_APP_AUTH_BROKERING,
     USER_OTP_VERIFY_RESPONSE,
+    GET_ALL_POST_REQUEST,
+    GET_ALL_POST_RESPONSE,
+    
 } from './authActions';
 import {
     UPDATE_USER_AUTH_REFRESHING,
@@ -38,7 +41,9 @@ const initialState = {
     accountDetails: [],
     createAccountResponse: [],
     signUpOtpVerifyResponse: [],
-    signInUserResponse: []
+    signInUserResponse: [],
+    // getAllPostRequest
+    getAllPostResponse:[]
 };
 
 const showAuthSpinner = (state, action) => update(state, {
@@ -102,6 +107,9 @@ const userOtpVerifyResponse = (state, action) => update(state, {
 const signInUserResponse = (state, action) => update(state, {
     signInUserResponse: {$set: action.signInUserResponse},
 });
+const getAllPostResponse=(state,action)=>update(state,{
+    getAllPostResponse:{$set:action.getAllPostResponse}
+})
 
 export default handleActions({
     [SIGN_UP_USER_RESPONSE]: signUpUserResponse,
@@ -118,4 +126,8 @@ export default handleActions({
     [CLEAR_ACCOUNT_INFO_REQUEST]: clearAccountInfo,
     [USER_OTP_VERIFY_RESPONSE]: userOtpVerifyResponse,
     [SIGN_UP_USER_RESPONSE]: signInUserResponse,
+    [GET_ALL_POST_RESPONSE]: getAllPostResponse,
+
+
+
 }, initialState);

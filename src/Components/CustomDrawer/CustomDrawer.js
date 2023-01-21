@@ -1,4 +1,4 @@
-import React,{useContext,useState} from 'react';
+import React,{useContext,useState,useEffect} from 'react';
 import { ImageBackground, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native';
 import {DrawerContentScrollView,DrawerItemList,DrawerItem} from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
@@ -11,14 +11,22 @@ import { changeLanguage } from '../../services/storage/Actions';
 import { eng, Urdu } from '../Api/Language';
 import { languageReducer } from '../../Redux/slices/LanguageSlice';
 import { english,urdu } from '../../Redux/slices/LanguageSlice';
+import { getAllPost } from '../../Redux/slices/PostSlice';
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
-  const counter=useSelector((state)=>state.language)
+  const counter=useSelector((state)=>state.language);
   const dispatch=useDispatch();
+  useEffect(() => {
+    dispatch(getAllPost())
+  
+    
+  }, [dispatch])
+  
+  
   const [first, setFirst] = useState(false)
-  console.log(counter);
+  
   
   return (
     <View style={{flex:1}}>
@@ -84,7 +92,7 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
           <DrawerButtondemo 
           text={counter?eng.editPost:Urdu.editPost}
           source={require('../../assets/mypost_icon_drawer.png')}
-          onPress={()=>navigation.navigate('Post')}
+          onPress={()=>{navigation.navigate('Post')}}
           />
           <DrawerButtondemo 
           text={counter?eng.packages:Urdu.packages}
@@ -106,7 +114,9 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
            <DrawerButtondemo 
           text={counter?eng.myPost:Urdu.myPost}
           source={require('../../assets/mypost_icon_drawer.png')}
-          onPress={()=>navigation.navigate("CreatePost")}
+          onPress={()=>{
+           
+            navigation.navigate("CreatePost")}}
           />
           <DrawerButtondemo 
           text={counter?eng.chat:Urdu.chat}

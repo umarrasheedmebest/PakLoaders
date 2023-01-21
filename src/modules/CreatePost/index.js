@@ -13,11 +13,21 @@ import CustomHeader from '../../Components/CustomHeader';
 import { colors } from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
 import Sure from '../../Components/sure';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../../Components/Loader';
+import { cancelSinglePost, getSingalPost } from '../../Redux/slices/PostSlice';
 
 const CreatePostComponent = ({ }) => {
     const navigation =useNavigation();
     const [deletebtn, setDeletebtn] = useState(false);
-    const dataCards=({item})=>{        
+    const postData=useSelector((state)=>state.post.postAllData)
+    console.log(postData)
+    const dispatch=useDispatch();
+    const dataCards=({item})=>{ 
+      if (postData==null) {
+        <Loader visible={true}/>
+      }
+      console.log(item)       
         return(
             <>
             <View style={{width:"100%",}}>
@@ -42,7 +52,7 @@ const CreatePostComponent = ({ }) => {
               <TouchableOpacity onPress={()=>navigation.navigate('Post')}>
                 <Image source={require('../../assets/edit_btn.png')}/>
               </TouchableOpacity>
-                <TouchableOpacity onPress={()=>setDeletebtn(!deletebtn)}>
+                <TouchableOpacity onPress={()=>dispatch(cancelSinglePost(item.id))}>
                   <Image style={{marginLeft:2}} source={require('../../assets/delete.png')}/>
                 </TouchableOpacity>
                 
@@ -53,15 +63,16 @@ const CreatePostComponent = ({ }) => {
           <View style={[{marginVertical:12,}]}>
             <View style={[styles.defaultStyle,{marginRight:40,marginBottom:4}]}>
               <Image style={{width:13.43,height:13.52}} source={require('../../assets/bulid.png')}/>
-              <Text style={{marginLeft:4,}}>Pick up: Clarck pharmacy, 442 Rawalpindi</Text>
+              <Text style={{marginLeft:4,}}>Pick up: {item.pickup_address}</Text>
             </View>
             <View style={[styles.defaultStyle,{marginRight:40,marginBottom:4}]}>
               <Image style={{width:8.86,height:11.37}} source={require('../../assets/location.jpg')}/>
-              <Text style={{marginLeft:4,}}>Drop off: Clarck pharmacy, 442 Islamabad</Text>
+              <Text style={{marginLeft:4,}}>Drop off: {item.dropoff_address
+}</Text>
             </View>
             <View style={[styles.defaultStyle,{marginRight:40,marginBottom:4}]}>
               <Image style={{width:9.73,height:11.3}} source={require('../../assets/calender_icon.png')}/>
-              <Text style={{marginLeft:4,}}>Date of pick up:  12-02-2022, Monday</Text>
+              <Text style={{marginLeft:4,}}>Date of pick up:  {item.pickup_date}</Text>
             </View>
             
           </View>
@@ -72,7 +83,9 @@ const CreatePostComponent = ({ }) => {
             
           
           
-           <TouchableOpacity style={styles.container_primary} onPress={()=> navigation.navigate('Detail')}>
+           <TouchableOpacity style={styles.container_primary} onPress={()=> {
+            dispatch(getSingalPost(item.id))
+            navigation.navigate('Detail')}}>
             <Text style={styles.text_primary}>View Details</Text>
            </TouchableOpacity>
           </View>
@@ -83,7 +96,7 @@ const CreatePostComponent = ({ }) => {
       }
     return (
       <>
-      {deletebtn?<><Sure deleteBlack={true}/>
+      {false?<><Sure deleteBlack={true}/>
       <CustomHeader
        text={'My Posts'}
        postFlat={true}
@@ -91,7 +104,7 @@ const CreatePostComponent = ({ }) => {
         <>
        
         <View style={{alignItems:"center"}}>            
-            <FlatList style={{zIndex:1,}}  data={PostAPI}
+            <FlatList style={{zIndex:1,}}  data={postData}
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}
@@ -107,8 +120,9 @@ const CreatePostComponent = ({ }) => {
        ContentView={
         <>
        
+       
         <View style={{alignItems:"center"}}>            
-            <FlatList style={{zIndex:1,}}  data={PostAPI}
+            <FlatList style={{zIndex:1,}}  data={postData}
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}

@@ -17,6 +17,7 @@ import TrukOne from '../../assets/SVG_Icons/Icon_7.svg';
 import HavyTruk from '../../assets/SVG_Icons/Icon_8.svg';
 import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
 import { useNavigation } from '@react-navigation/native';
+import DocumentPicker from 'react-native-document-picker';
 import {
     StyleSheet,
     SafeAreaView,
@@ -30,6 +31,10 @@ import {
     FlatList
     
 } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { useDispatch } from 'react-redux';
+import { addPost } from '../../Redux/slices/PostSlice';
+
 
  
 const VehicleComponent = ({
@@ -39,9 +44,74 @@ const VehicleComponent = ({
     sideBar,
    ...props
 }) => { 
+  const [singleFile, setSingleFile] = useState(null);
+  // const options={
+  //   title:'Select Image',
+  //   type:'library',
+  //   options:{
+  //     maxHeight:200,
+  //     maxWidth:200,
+  //     selectionLimit:0,
+  //     mediaType:'photo',
+  //     includeBase64:false,
+  //   },
+  // }
+ const dispatch= useDispatch();
   const navigation= useNavigation();
-  
+  // const [image, setImage] = useState({
+  //   singleFile:""
+  // })
  const defaultImage=require('../../assets/icon_image.png');
+ const selectedTruk=async()=>{
+   // Opening Document Picker to select one file
+   try {
+    const res = await DocumentPicker.pick({
+      // Provide which type of file you want user to pick
+      type: [DocumentPicker.types.images],
+      // There can me more options as well
+      // DocumentPicker.types.allFiles
+      // DocumentPicker.types.images
+      // DocumentPicker.types.plainText
+      // DocumentPicker.types.audio
+      // DocumentPicker.types.pdf
+    });
+    // Printing the log realted to the file
+    // const file=JSON.stringify(res)
+    setSingleFile(res);
+  }catch(err){
+    console.log("image not upload")
+  }
+  const formData=new FormData;
+// const result=await launchImageLibrary(options);
+// console.log(result.assets[0]);
+// const formData=new FormData();
+// formData.append('images',{
+//   uri:result.assets[0].uri,
+//   type:result.assets[0].type,
+//   filename:result.assets[0].fileName,
+
+// });
+// formData.append('images',{
+//   uri:result.assets[0].uri,
+//   type:result.assets[0].type,
+//   filename:result.assets[0].fileName,
+
+// });
+formData.append('images', singleFile);
+formData.append('images', singleFile);
+
+formData.append('pickup_address',"Bhaseen");
+formData.append('dropoff_address',"JaloPark");
+formData.append('pickup_date',"00-00-12");
+formData.append('pickup_time',"sdf");
+formData.append('details',"sdf");
+formData.append('loaders',"3");
+const mainData=formData._parts
+dispatch(addPost(mainData));
+
+console.log(mainData)
+
+ }
     return (
         
             <SafeAreaView style={styles.container}>
@@ -73,7 +143,7 @@ const VehicleComponent = ({
                       </TouchableOpacity>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={()=>selectedTruk()}>
                         <View style={styles.MenuContainer}>
                           <View style={{width:"100%",alignItems:"flex-end",paddingRight:5,paddingTop:2}}>
                             <Image style={{width:20,height:20}} source={require('../../assets/check.png')}/>
@@ -90,7 +160,7 @@ const VehicleComponent = ({
             {/* 2nd Row */}
             <View style={{flexDirection:"row",justifyContent:"space-between",padding:10,}}>
             <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity >
                         <View style={styles.MenuContainer}>
                           <View style={{width:"100%",alignItems:"flex-end",paddingRight:5,paddingTop:2}}>
                             <Image style={{width:20,height:20}} source={require('../../assets/uncheck.png')}/>

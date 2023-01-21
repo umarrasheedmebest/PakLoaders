@@ -1,11 +1,13 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { signinApi,signupApi,signupVerifyApi } from "../../Components/Api/AuthApi";
+import { BASE_URL } from "../constent/constent";
+
 export const SignupAuth=createAsyncThunk("signupAuth",async(mainValue)=>{
  
   console.log(mainValue)
   try {
-     const response=await axios.post(`https://pakloaders-customer-backend.onrender.com/auth/sign-up`,mainValue);
+     const response=await axios.post(`${BASE_URL}auth/sign-up`,mainValue);
     return response;
   } catch (error) {
     console.log("Something went wrong")
@@ -16,7 +18,7 @@ export const SigninAuth=createAsyncThunk("signinAuth",async(mainValue)=>{
  
   console.log(mainValue)
   try {
-     const response=await axios.post(`https://pakloaders-customer-backend.onrender.com/auth/sign-in`,mainValue);
+     const response=await axios.post(`${BASE_URL}auth/sign-in`,mainValue);
     return response;
   } catch (error) {
     console.log("Something went wrong")

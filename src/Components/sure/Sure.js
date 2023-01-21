@@ -4,12 +4,17 @@ import {colors} from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../../AuthProvider';
 import CustomInput from '../../Components/CustomInput';
+import { useSelector } from 'react-redux';
+import { FlatList } from 'react-native-gesture-handler';
 const Sure = ({profile,logoutBack,deleteBlack,addCard,onPress,confirmPress}) => {
     const {height,width}=useWindowDimensions();
     const [insure, setInsure] = useState(true);
     const [ignore, setIgnore] = useState(true);
     const {logout} = useContext(AuthContext);
     const navigation=useNavigation();
+    const data =useSelector((state)=>state.post.singlePostData);
+    console.log(data)
+   
   return (
     addCard? <View style={[styles.container,{height,width}]}>
     <View style={[styles.loader,{height:460,}]}>
@@ -251,47 +256,54 @@ lorem ipsum lorem....</Text>
 </View>:
     insure?
 
-        <View style={[styles.container,{height,width}]}>
-            <View style={styles.loader}>
-                <View>
-               <View style={styles.image_container}>
-                <Image style={styles.image_style} source={require('../../assets/img_!_17.png')}/>
-                <Image style={styles.image_style} source={require('../../assets/img_2_17.png')}/>
-               </View>
-               <View style={[styles.defaultStyle,{justifyContent:"space-between"}]}>
-               <View style={styles.defaultStyle}>
-                <Image source={require('../../assets/Usama.png')}/>
-                <View style={{marginLeft:8}}>
-                    <Text style={styles.text}>Usama Ali</Text>
-                    <View style={styles.defaultStyle}>
-                        <Image source={require("../../assets/Stars.png")}/> 
-                        <Text style={[styles.text,{fontSize:9}]}>(25 reviews)</Text>
-                    </View>
-                   
-                </View>
-               </View>
-               <View style={styles.defaultStyle}>
-                <Image source={require('../../assets/chat_icon_popup.png')}/>
-                <Image style={{marginLeft:5}} source={require('../../assets/call_icon_popup.png')}/>
-               </View>
-               </View>
-               <View style={{marginVertical:10,}}>
-                <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Name: </Text><Text style={[styles.text,{fontSize:17}]}>Usama Ali</Text></View>
-                <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Mobile Number: </Text><Text style={[styles.text,{fontSize:17}]}>92 304762673</Text></View>
-                <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Secondary Number: </Text><Text style={[styles.text,{fontSize:17}]}> 92 305827181</Text></View>
-                <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>City: </Text><Text style={[styles.text,{fontSize:17}]}>Rawalpindi</Text></View>
-                <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Province: </Text><Text style={[styles.text,{fontSize:17}]}>Punjab</Text></View>
-                
-               </View>
-               <View style={[styles.defaultStyle,{justifyContent:"center",width:"100%",zIndex:11}]}>
-                <TouchableOpacity onPress={()=>setInsure(false)}>
-                    <View style={{width:109,height:38,backgroundColor:"#4448FF",borderRadius:7,alignItems:"center",justifyContent:"center"}}><Text style={{fontSize:13,fontFamily:"Poppins-Medium",color:"#fff"}}>Ok</Text></View>
-                </TouchableOpacity>
-               </View>
+     data.map((res)=>{
+        {console.log(res.id)}
 
+       return <View key={res.id} style={[styles.container,{height,width}]}>
+        <View style={styles.loader}>
+            <View>
+           <View style={styles.image_container}>
+            <Image style={styles.image_style} source={require('../../assets/img_!_17.png')}/>
+            <Image style={styles.image_style} source={require('../../assets/img_2_17.png')}/>
+           </View>
+           <View style={[styles.defaultStyle,{justifyContent:"space-between"}]}>
+           <View style={styles.defaultStyle}>
+            <Image source={require('../../assets/Usama.png')}/>
+            <View style={{marginLeft:8}}>
+                <Text style={styles.text}>Usama Ali</Text>
+                <View style={styles.defaultStyle}>
+                    <Image source={require("../../assets/Stars.png")}/> 
+                    <Text style={[styles.text,{fontSize:9}]}>(25 reviews)</Text>
+                </View>
+               
             </View>
+           </View>
+           <View style={styles.defaultStyle}>
+            <Image source={require('../../assets/chat_icon_popup.png')}/>
+            <Image style={{marginLeft:5}} source={require('../../assets/call_icon_popup.png')}/>
+           </View>
+           </View>
+           <View style={{marginVertical:10,}}>
+            <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Name: </Text><Text style={[styles.text,{fontSize:17}]}>Usama Ali</Text></View>
+            <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Mobile Number: </Text><Text style={[styles.text,{fontSize:17}]}>92 304762673</Text></View>
+            <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Secondary Number: </Text><Text style={[styles.text,{fontSize:17}]}> 92 305827181</Text></View>
+            <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>details: </Text><Text style={[styles.text,{fontSize:17}]}>{res.details}</Text></View>
+            <View style={[styles.defaultStyle,{marginBottom:8}]}><Text style={[{fontSize:17,fontWeight:"600"}]}>Pickup_time: </Text><Text style={[styles.text,{fontSize:17}]}>{res.pickup_time}</Text></View>
+            
+           </View>
+           <View style={[styles.defaultStyle,{justifyContent:"center",width:"100%",zIndex:11}]}>
+            <TouchableOpacity onPress={()=>navigation.navigate('CreatePost')}>
+                <View style={{width:109,height:38,backgroundColor:"#4448FF",borderRadius:7,alignItems:"center",justifyContent:"center"}}><Text style={{fontSize:13,fontFamily:"Poppins-Medium",color:"#fff"}}>Ok</Text></View>
+            </TouchableOpacity>
+           </View>
+
         </View>
-        </View>
+    </View>
+    </View>
+     }) 
+    
+      
+    
    : ignore?
    <View style={[styles.container,{height,width}]}>
             <View style={[styles.loader,{height:172}]}>

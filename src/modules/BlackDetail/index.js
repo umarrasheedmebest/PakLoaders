@@ -50,7 +50,7 @@ const BlackDtailComponent = ({
     
     return (
         <SafeAreaView style={styles.container}>
-         <Sure />
+         <Sure profile={false}/>
         {/* Background Image */}
            <CustomBackground/>
            {/* Background Image */}
