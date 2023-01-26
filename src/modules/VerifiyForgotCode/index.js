@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
     StyleSheet,
     SafeAreaView,
@@ -12,12 +12,16 @@ import CustomText from '../../Components/CustomText';
 import Heading from '../../Components/Heading';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import { TextInput } from 'react-native-gesture-handler';
+import OTPInputView from '@twotalltotems/react-native-otp-input'
+import { colors } from '../../globalStyle';
 
 
 const VerifyForgotCodeComponent = ({
     navigateVerified,
     navigateResetPassword
  }) => {
+    const [otp, setOtp] = useState('');
+    
     return (
         <SafeAreaView style={styles.container}>
             {/* Background Image */}
@@ -33,9 +37,23 @@ const VerifyForgotCodeComponent = ({
                 <Heading text="Verification Code"/>
                  {/* Heading */}
                  <View style={{flexDirection:"row",width:"100%",alignItems:"center",justifyContent:"space-evenly"}}>
-
+                 <OTPInputView
+    style={{width: '100%', height: 80,backgroundColor:"#ffffff",shadowColor:"#fff",marginTop:10
+}}
+    pinCount={6}
+    code={otp} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+    onCodeChanged = {code => { setOtp(code)}}
+    autoFocusOnLoad
+    
+    codeInputFieldStyle={styles.underlineStyleBase}
+    codeInputHighlightStyle={styles.underlineStyleHighLighted}
+    onCodeFilled = {(code => {
+        console.log(`Code is ${code}, you are good to go!`)
+    })}
+/>
+{/* <OTPInputView pinCount={6} /> */}
                  
-                 <View style={{height:56,width:36,borderBottomWidth:1.5,borderColor:"#CCCCCC",alignItems:"center",justifyContent:"center",}}>
+                 {/* <View style={{height:56,width:36,borderBottomWidth:1.5,borderColor:"#CCCCCC",alignItems:"center",justifyContent:"center",}}>
                     <TextInput
                     style={{fontSize:40,fontWeight:"300",color:"#5A5A5A",height:56,}}
                    allowFontScaling={false}
@@ -76,7 +94,7 @@ const VerifyForgotCodeComponent = ({
                    allowFontScaling={false}
                    maxLength={1}
                     />
-                 </View>
+                 </View> */}
                  </View>
                  {/* Verification Code */}
                 <View style={{marginVertical:40}}>
@@ -117,6 +135,27 @@ const styles = StyleSheet.create({
        
         elevation:10,
         
+      },
+      borderStyleBase: {
+        width: 30,
+        height: 45,
+       
+      },
+    
+      borderStyleHighLighted: {
+        borderColor: colors.text,
+      },
+    
+      underlineStyleBase: {
+        width: 40,
+        height: 35,
+        borderWidth: 0,
+        borderBottomWidth: 1,
+       color:colors.text
+      },
+    
+      underlineStyleHighLighted: {
+        borderColor: "#03DAC6",
       },
 });
 

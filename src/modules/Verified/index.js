@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
     StyleSheet,
     SafeAreaView,
@@ -12,9 +12,15 @@ import CustomForground from '../../Components/CustomForground';
 import CustomText from '../../Components/CustomText';
 import Heading from '../../Components/Heading';
 import CustomButton from '../../Components/CustomButton/CustomButton';
+import OTPInputView from '@twotalltotems/react-native-otp-input'
+import { colors } from '../../globalStyle';
+import { useSelector } from 'react-redux';
 const VerifiedComponent = ({
     navigateProfileOne
  }) => {
+    const [otp, setOtp] = useState('')
+    const otpMessage=useSelector((state)=>state.auth.signInOtpVarifyResponse.message)
+   
     return (
         <SafeAreaView style={styles.container}>
             {/* Background Image */}
@@ -31,8 +37,21 @@ const VerifiedComponent = ({
                  {/* Heading */}
                  <View style={{flexDirection:"row",width:"100%",alignItems:"center",justifyContent:"space-evenly"}}>
 
-                 
-                 <View style={{height:56,width:36,borderBottomWidth:1.5,borderColor:"#CCCCCC",alignItems:"center",justifyContent:"center",}}>
+                 {/* <OTPInputView
+    style={{width: '100%', height: 80,backgroundColor:"#ffffff",shadowColor:"#fff",marginTop:10
+}}
+    pinCount={6}
+    code={otp} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+    onCodeChanged = {code => { setOtp(code)}}
+    autoFocusOnLoad
+    
+    codeInputFieldStyle={styles.underlineStyleBase}
+    codeInputHighlightStyle={styles.underlineStyleHighLighted}
+    onCodeFilled = {(code => {
+        console.log(`Code is ${code}, you are good to go!`)
+    })}
+/> */}
+                 {/* <View style={{height:56,width:36,borderBottomWidth:1.5,borderColor:"#CCCCCC",alignItems:"center",justifyContent:"center",}}>
                     <TextInput
                     style={{fontSize:40,fontWeight:"300",color:"#5A5A5A",height:56,}}
                    allowFontScaling={false}
@@ -73,10 +92,10 @@ const VerifiedComponent = ({
                    allowFontScaling={false}
                    maxLength={1}
                     />
-                 </View>
+                 </View> */}
                  </View>
                 {/* Text */}
-                <CustomText text="You have successfully verified the account." type="primary"/>
+                <CustomText text={otpMessage} type="primary"/>
                 {/* Text */}
                 
                 {/* Verification Button */}
@@ -112,6 +131,27 @@ const styles = StyleSheet.create({
        
         elevation:10,
         
+      },
+      borderStyleBase: {
+        width: 30,
+        height: 45,
+       
+      },
+    
+      borderStyleHighLighted: {
+        borderColor: colors.text,
+      },
+    
+      underlineStyleBase: {
+        width: 40,
+        height: 35,
+        borderWidth: 0,
+        borderBottomWidth: 1,
+       color:colors.text
+      },
+    
+      underlineStyleHighLighted: {
+        borderColor: "#03DAC6",
       },
 });
 

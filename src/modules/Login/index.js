@@ -23,7 +23,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthContext} from '../../../AuthProvider';
 import {useSelector,useDispatch} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
-import { SigninAuth } from '../../Redux/slices/AuthSlice';
+import {signinOtpVerifyRequest, signinRequest, signupRequest, signupVarifyRequest } from '../../Redux/slices/AuthSlice';
 
 const LoginComponent = ({
   navigateSignUp,
@@ -33,7 +33,9 @@ const LoginComponent = ({
   signIn,
 }) => {
   const {login} = useContext(AuthContext);
-  const data = useSelector(state => state.language);
+  const data=useSelector(state=>state.language)
+  const authData = useSelector(state => state.auth.signUpResponse);
+  
 const dispatch=useDispatch();
   const [inputs, setInputs] = useState({
     fullName: '',
@@ -50,16 +52,19 @@ const dispatch=useDispatch();
       handleError('Please input Mobile Number/Email', 'mobile');
       valid = false;
     }
-    if (!inputs.password) {
-      handleError('Please input password', 'password');
-    }
+    // if (!inputs.password) {
+    //   handleError('Please input password', 'password');
+    // }
     if (valid) {
-      logined()
+      signIn({
+        "number":inputs.mobile
+      })
     }
   };
   const logined = () => {
     console.log('Pakistan Zindabad');
     setLoading(true);
+
     setTimeout(async () => {
       setLoading(false);
       let userData = await AsyncStorage.getItem('user');
@@ -104,8 +109,8 @@ const dispatch=useDispatch();
         {/*Forground image  */}
         <Heading text={data ? 'Sign In' : 'Sign In'} type="primary" />
         {/* Input field user Email/Mobile Number */}
-
-        <CustomInput
+      <View style={{margin:5}}>
+         <CustomInput
           label={data ? eng.mobileNum : Urdu.mobileNum}
           width={166}
           eye="none"
@@ -116,9 +121,11 @@ const dispatch=useDispatch();
             handleError(null, 'mobile');
           }}
         />
+      </View>
+       
 
         {/* User Password */}
-        <CustomInput
+        {/* <CustomInput
           label={data ? eng.password : Urdu.password}
           eye="flex"
           width={85}
@@ -130,7 +137,7 @@ const dispatch=useDispatch();
           onFocus={() => {
             handleError(null, 'password');
           }}
-        />
+        /> */}
 
         {/* Forgot button */}
         <TouchableOpacity
@@ -149,7 +156,7 @@ const dispatch=useDispatch();
 
         {/* Forgot button */}
         {/* Button Sign In */}
-        <CustomButton onPress={() => login()} text={"Sign In"} type="primary" />
+        <CustomButton onPress={() => valiDate()} text={"Sign In"} type="primary" />
         {/* Button Sign In */}
 
         {/* Move Sign Up */}
@@ -177,7 +184,7 @@ const styles = StyleSheet.create({
 
     Height: 586,
 
-    padding: 30,
+    padding: 27,
 
     borderRadius: 11,
 

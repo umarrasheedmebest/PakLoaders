@@ -62,7 +62,7 @@ const post = createSlice({
       return state.isLoading=true
     },
     getPostSuccess: (state, action) => {
-       console.log(action.payload) ;
+     return  console.log("suc"+action.payload) ;
     },
     getPostFailure: (state) => {
       return state.isLoading=false;

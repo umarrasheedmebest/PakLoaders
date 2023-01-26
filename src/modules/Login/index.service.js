@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { signinRequest } from '../../Redux/slices/AuthSlice';
 import { signInUserRequest, signUpUserRequest, userOtpVerfiyRequest } from '../Auth/dux/authActions';
 
 const LoginServiceComponent = ({
@@ -20,24 +21,14 @@ const LoginServiceComponent = ({
         navigation.navigate('HowItWorks')
     }
 
-    const signIn = () => {
+    const signIn = (item) => {
+        console.log(item)
         dispatch(
-            signUpUserRequest({
-                number: '+923094162466',
-                full_name: 'Umar Rasheed'
-            })
+            signinRequest(item)
         );
-        dispatch(
-            userOtpVerfiyRequest({
-                number: '+923094162466',
-                otp: '669497'
-            })
-        );
-        dispatch(
-            signInUserRequest({
-                number: '+923094162466',
-            })
-        );
+        navigation.navigate('Verification')
+       
+       
     }
 
     return children({

@@ -159,7 +159,7 @@ const SignUpComponent = ({
                     password={false}/>
                      
                     {/* Button Sign UP */}
-                    <TouchableOpacity onPress={()=>signup(mainValue)} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Verification')} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
                       <Text style={{fontSize:20,color:"#fff",fontWeight:"400"}}>Sign Up</Text>
                     </TouchableOpacity>
                     {/* Button Sign UP */}

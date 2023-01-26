@@ -18,11 +18,11 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
  const [colorspk, setColorspk] = useState(false)
   const counter=useSelector((state)=>state.language);
   const dispatch=useDispatch();
-  useEffect(() => {
-    dispatch(getAllPost())
+  // useEffect(() => {
+  //   dispatch(getAllPost())
   
     
-  }, [dispatch])
+  // }, [dispatch])
   
   
   const [first, setFirst] = useState(false)

@@ -4,37 +4,24 @@ import { Auth } from './AuthNavigator';
 import { MainNavigator } from './MainNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../../AuthProvider';
-import { ActivityIndicator, SafeAreaView } from 'react-native';
+import { ActivityIndicator, SafeAreaView, View,ImageBackground } from 'react-native';
 
 const AppNavigator = () => {
-    const { user, login } = useContext(AuthContext);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = async () => {
-        try {
-            const retrievedItem = await AsyncStorage.getItem('@user');
-            const user = JSON.parse(retrievedItem);
-            if (user !== null) {
-                login(user);
-            }
-            setLoading(false);
-            // SplashScreen.hide();
-        } catch (e) {
-            console.log('error getting stored data');
-        }
-    };
-
-    if (loading) {
-        return <ActivityIndicator />;
+    const { userToken, login,isLoading,setisLoading } = useContext(AuthContext);
+   
+    if (isLoading) {
+        return <View style={{flex:1, justifyContent:"center",alignItems:"center",}}>
+            <ImageBackground resizeMode='contain' style={{width:"100%",height:"100%",}} source={require('../assets/slide3.png')}>
+            <ActivityIndicator size={'large'} />
+            </ImageBackground>
+              </View>
+        
+      
     }
 
     return (
         <NavigationContainer>
-            {user ? <MainNavigator /> : <Auth />}
+            {userToken!==null ? <MainNavigator /> : <Auth />}
         </NavigationContainer>
     );
 };
