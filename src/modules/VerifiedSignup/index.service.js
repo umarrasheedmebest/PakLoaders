@@ -2,13 +2,13 @@ import React,{useContext} from "react";
 import { useSelector } from "react-redux";
 import { AuthContext } from "../../../AuthProvider";
 
-const VerifiedServiceComponent = ({
+const VerifiedSignupServiceComponent = ({
     children,
     navigation,
     route,
 }) => {
-    const userInfo=useSelector((state)=>state.auth.signInOtpVarifyResponse)
-  const userTokenSuc=useSelector((state)=>state.auth.signInOtpVarifyResponse.accessToken)
+    const userInfo=useSelector((state)=>state.auth.signUpOtpVarifyResponse)
+  const userTokenSuc=useSelector((state)=>state.auth.signUpOtpVarifyResponse.accessToken)
 
   console.log("Otp Data")
   console.log(userInfo)
@@ -28,4 +28,4 @@ const VerifiedServiceComponent = ({
     });
 };
 
-export default VerifiedServiceComponent;
+export default VerifiedSignupServiceComponent;

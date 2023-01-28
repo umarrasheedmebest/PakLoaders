@@ -1,102 +1,67 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {BASE_URL} from '../constent/constent';
-
-export const getAllPost = createAsyncThunk('getAllPost', async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}post/get-all/1`);
-    return response.data;
-  } catch (error) {
-    console.log('Something went wrong');
-  }
-});
-export const cancelSinglePost = createAsyncThunk('cancelSinglePost', async (id) => {
-  console.log(id)
- 
-    const response = await axios.get(`${BASE_URL}post/cancel/${id}`);
-    return response.data;
-  
-});
-export const getSingalPost = createAsyncThunk('getSingalPost', async (id) => {
-  console.log(id)
-  try {
-    const response = await axios.get(`${BASE_URL}post/get/single-post/${id}`);
-    return response.data;
-  } catch (error) {
-    console.log('Something went wrong');
-  }
-});
-export const addPost = createAsyncThunk('addPost', async (formData) => {
-  console.log(formData);
- 
-  //  const response= await axios.post(`${BASE_URL}post/add/2`,formData);
-  //  return response;
-    let res = await fetch(
-      `https://pakloaders-customer-backend.onrender.com/post/add/1`,
-      {
-        method: 'POST',
-        timeout: 61000,
-        body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data; ',
-        },
-      }
-    );
-    return console.log(res);
-  
-});
-
+import {createSlice,} from '@reduxjs/toolkit';
+import update from 'immutability-helper';
 const post = createSlice({
-  name: 'Post',
+  name: 'post',
   initialState: {
-    postAllData:[],
-    singlePostData:[],
-    isLoading:false
-  },
-    
-      
-    
-  
-  reducers: {
-    getPostFetch: async (state) => {
-      return state.isLoading=true
-    },
-    getPostSuccess: (state, action) => {
-     return  console.log("suc"+action.payload) ;
-    },
-    getPostFailure: (state) => {
-      return state.isLoading=false;
-    },
-    
+    //Create Post
+    createPostRequest: false,
+    createPostResponse: [],
+    //  Single Post 
+    singlePostRequest: false,
+    singlePostResponse: [],
+    // Cancel Post
+    cancelPostRequest: false,
+    cancelPostResponse: [],
+    // Get All Post
+    getAllPostRequest:false,
+    getAllPostResponse: [],
   },
 
-  extraReducers: {
-    [getAllPost.pending]: (state, action) => {
-      return console.log(false);
-    },
-    [getAllPost.fulfilled]: (state, action) => {
-         state.postAllData=action.payload
-         const all=state.postAllData
-         return console.log(action.payload)
-    },
-    [getSingalPost.fulfilled]: (state, action) => {
-      state.singlePostData=action.payload
-      const data=state.singlePostData
-      return console.log(data)
- },
- [addPost.fulfilled]: (state, action) => {
-  return console.log(action.payload);
-},
- [addPost.rejected]: (state, action) => {
-  return console.log("Post not create");
-},
-[cancelSinglePost.fulfilled]: (state, action) => {
-  return console.log(action.payload);
-},
-[cancelSinglePost.rejected]: (state, action) => {
-  return console.log("Post not delete");
-},
+  reducers: {
+    createPostRequest: (state, action) =>
+      update(state, {
+        createPostRequest: {$set: true},
+      }),
+    createPostResponse: (state, action) =>
+      update(state, {
+        createPostResponse: {$set: action.payload},
+        // createPostRequest: {$set: false},
+      }),
+    cancelPostRequest: (state, action) =>
+      update(state, {
+        cancelPostRequest: {$set: true},
+      }),
+    cancelPostResponse: (state, action) =>
+      update(state, {
+        cancelPostResponse: {$set: action.payload},
+        // signUpOtpVarifyRequest: {$set: false},
+      }),
+    singlePostRequest: (state, action) =>
+      update(state, {
+        singlePostRequest: {$set: true},
+      }),
+    singlePostResponse: (state, action) =>
+      update(state, {
+        singlePostResponse: {$set: action.payload},
+      }),
+    getAllPostRequest: (state, action) =>
+      update(state, {
+        getAllPostRequest: {$set: true},
+      }),
+    getAllPostResponse: (state, action) =>
+      update(state, {
+        getAllPostResponse: {$set: action.payload},
+      }),
   },
 });
-export const {getPostFetch,getPostSuccess,getPostFailure} = post.actions;
+export const {
+  createPostRequest,
+  createPostResponse,
+  cancelPostRequest,
+  getAllPostRequest,
+  getAllPostResponse,
+  singlePostRequest,
+  singlePostResponse,
+  cancelPostResponse,
+} = post.actions;
 export const postReducer = post.reducer;

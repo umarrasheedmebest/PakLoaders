@@ -12,7 +12,7 @@ const Sure = ({profile,logoutBack,deleteBlack,addCard,onPress,confirmPress}) => 
     const [ignore, setIgnore] = useState(true);
     const {logout} = useContext(AuthContext);
     const navigation=useNavigation();
-    const data =useSelector((state)=>state.post.singlePostData);
+    const data =useSelector((state)=>state.post.singlePostResponse);
     console.log(data)
    
   return (

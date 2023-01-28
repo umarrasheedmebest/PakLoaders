@@ -29,7 +29,7 @@ const SignUpComponent = ({
     navigateToLogin,
     navigateVerification,
     navigation,
-        
+    signUpRequest   
 }) => { 
   const dispatch=useDispatch();
  const [inputs, setInputs] = useState({
@@ -51,31 +51,35 @@ const SignUpComponent = ({
   let valid=true;
   if (!inputs.fullName) {
     handleError('Please Enter Name','fullName');
-    
+    valid=false
   }
   if (!inputs.mobile) {
     handleError('Please input Mobile Number/Password','mobile');
-    
-  }else if (inputs.mobile.length<11) {
+    valid=false
+  }
+   if (inputs.mobile.length<11) {
     handleError('Your number is incorrect','mobile');
     valid=false;
   }
-  if (!inputs.password) {
-    handleError('Please enter password','password');
-    valid=false;
-  }else if (inputs.password.length<5) {
-    handleError('Minimum password length of 5','password');
-    valid=false;
-  }
-  if (!inputs.confirmPassword) {
-    handleError('Please enter confirm Password','confirmPassword');
-    valid=false;
-  }else if (inputs.confirmPassword.length<5) {
-    handleError('Minimum password length is 5','confirmPassword');
+  // if (!inputs.password) {
+  //   handleError('Please enter password','password');
+  //   valid=false;
+  // }else if (inputs.password.length<5) {
+  //   handleError('Minimum password length of 5','password');
+  //   valid=false;
+  // }
+  // if (!inputs.confirmPassword) {
+  //   handleError('Please enter confirm Password','confirmPassword');
+  //   valid=false;
+  // }else if (inputs.confirmPassword.length<5) {
+  //   handleError('Minimum password length is 5','confirmPassword');
 
-  }
+  // }
   if (valid) {
-    register();
+    signUpRequest({
+      "number":inputs.mobile,
+      "full_name":inputs.fullName
+    })
   }
  };
  const register=()=>{
@@ -118,7 +122,7 @@ const SignUpComponent = ({
                         {/* Forground Image */}
                         <CustomForground source={require("../../assets/SignUp-icon.png")}/>
                         {/* Forground Image */}
-                        
+                     <View style={{margin:4}}> 
                     <Text style={{fontSize:24, alignSelf:"flex-start", color:"#4448FF",fontWeight:"700",fontFamily:"Poppins-SemiBold.ttf" }} >Sign Up</Text>
                     {/* Full Name */}
                     
@@ -127,8 +131,9 @@ const SignUpComponent = ({
                     error={errors.fullName}
                     onFocus={()=>{
                       handleError(null,'fullName');}}
-                     />
+                     /></View>
                     {/* Input field user Email/Mobile Number */}
+                    <View style={{margin:4}}>
                     <CustomInput label="Mobile Number/Email" placeholder="92444886423" width={173} eye="none"
                     setValue={(text)=>handleOnChange(text, 'mobile')}
                     error={errors.mobile}
@@ -137,29 +142,29 @@ const SignUpComponent = ({
                     }}
                     
                      />
-                    
+                    </View>
                       {/* User Password */}
-                      <CustomInput text="Show" label="Password" width={95} eye="flex" placeholder="User Password"
+                      {/* <CustomInput text="Show" label="Password" width={95} eye="flex" placeholder="User Password"
                     setValue={(text)=>handleOnChange(text, 'password')}
                     error={errors.password}
                     onFocus={()=>{
                       handleError(null,'password');}}
                     index={1}
-                    password/>
+                    password/> */}
                     
                     
 
                      {/* Hide Password */}
-                     <CustomInput text="Hide" label="Confirm Password" width={170} eye="flex"
+                     {/* <CustomInput text="Hide" label="Confirm Password" width={170} eye="flex"
                     setValue={(text)=>handleOnChange(text, 'confirmPassword')}
                     error={errors.confirmPassword}
                     onFocus={()=>{
                       handleError(null,'confirmPassword');}}
                      index={1}
-                    password={false}/>
+                    password={false}/> */}
                      
                     {/* Button Sign UP */}
-                    <TouchableOpacity onPress={()=>navigation.navigate('Verification')} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
+                    <TouchableOpacity onPress={()=>valiDate()} style={{backgroundColor:"#4448FF",width:166,height:48,alignItems:"center",justifyContent:"center",marginTop:20,marginBottom:10, borderRadius:7}}>
                       <Text style={{fontSize:20,color:"#fff",fontWeight:"400"}}>Sign Up</Text>
                     </TouchableOpacity>
                     {/* Button Sign UP */}
@@ -192,8 +197,9 @@ const styles = StyleSheet.create({
         left:-40,
       },
       mainContainer:{
-        width:329,
-        height:737,
+        width:"90%",
+        height:"80%",
+        minHeight:550,
         padding:20,
        
         borderRadius:11,

@@ -16,6 +16,8 @@ import VerifyForgotCode from '../modules/VerifiyForgotCode/VerifyForgotCode';
 import ResetPassword from '../modules/ResetPassword/ResetPassword';
 import Bids from '../modules/Bids/Bids';
 import BlackDtail from '../modules/BlackDetail/BlackDtail';
+import VerificationSignup from '../modules/VerificationSignup/VerificationSignup';
+import VerifiedSignup from '../modules/VerifiedSignup/VerifiedSignup';
 
 
 
@@ -43,6 +45,11 @@ export const Auth = () => {
             <Stack.Screen name='ResetPassword' component={ResetPassword}/>
             <Stack.Screen name='Bids' component={Bids}/>
             <Stack.Screen name='BlackDtail' component={BlackDtail}/>
+            <Stack.Screen name='VerificationSignup' component={VerificationSignup}/>
+            <Stack.Screen name='VerifiedSignup' component={VerifiedSignup}/>
+
+            
+
 
 
             

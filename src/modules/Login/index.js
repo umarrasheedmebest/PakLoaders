@@ -106,10 +106,11 @@ const dispatch=useDispatch();
       <View style={styles.mainContainer}>
         {/* Forground Image */}
         <CustomForground source={require('../../assets/Login-icon.png')} />
+        <View style={{margin:4}}>
         {/*Forground image  */}
         <Heading text={data ? 'Sign In' : 'Sign In'} type="primary" />
         {/* Input field user Email/Mobile Number */}
-      <View style={{margin:5}}>
+      
          <CustomInput
           label={data ? eng.mobileNum : Urdu.mobileNum}
           width={166}
@@ -140,7 +141,7 @@ const dispatch=useDispatch();
         /> */}
 
         {/* Forgot button */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={navigateForgotPassword}
           style={{alignSelf: 'flex-end'}}>
           <Text
@@ -152,7 +153,7 @@ const dispatch=useDispatch();
             }}>
             {data?eng.fpassword:Urdu.fpassword}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Forgot button */}
         {/* Button Sign In */}
@@ -180,10 +181,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mainContainer: {
-    Width: 329,
-
-    Height: 586,
-
+    width:"90%",
+        height:"70%",
+minHeight:500,
     padding: 27,
 
     borderRadius: 11,

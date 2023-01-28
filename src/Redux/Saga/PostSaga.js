@@ -1,66 +1,67 @@
 import {call,put} from 'redux-saga/effects';
-import { signUpResponse,signinOtpVerifyResponse,signinResponse,signupOtpResponse } from '../slices/AuthSlice';
-import { requestSignUpUser,requestSignInUser,requestSigninOtpVerify,requestSignupOtpVerify } from '../slices/RequestAPI/AuthApi';
+import { createPostResponse,singlePostResponse,cancelPostResponse,getAllPostResponse } from '../slices/PostSlice';
+import { requestGetPost,requestSinglePost,requestCreatePost,requestCancelPost } from '../slices/RequestAPI/PostApi';
 
 // Singup funtion
-export function* handleGetUser(action){
+export function* getAllPostRequestSaga(action){
     
     
 const data=action.payload;
 console.log(data)
 try {
-    const response=yield call(requestSignUpUser,data);
+    const response=yield call(requestGetPost,data);
     const mainvalue=response.data;
    console.log(mainvalue);
-    yield put(signUpResponse(mainvalue));
+    yield put(getAllPostResponse(mainvalue));
 } catch (error) {
     console.log("Not call api request")
 }
 
 };
 // SignupVarifyOtp user
-export function* handleGetUserVarifyOtp(action){
+export function* createPostRequestSaga(action){
     
     
     const data=action.payload;
     console.log(data)
     try {
-        const response=yield call(requestSignupOtpVerify,data);
+        const response=yield call(requestCreatePost,data);
         const mainvalue=response.data;
        console.log(mainvalue);
-        yield put(signupOtpResponse(mainvalue));
+        yield put(createPostResponse(mainvalue));
     } catch (error) {
         console.log("Not call api request")
     }
     
     };
     // Signin Request user
-   export function* handleGetUserLogin(action){
+   export function* singlePostRequestSaga(action){
     
     
         const data=action.payload;
+        console.log("Post Id")
         console.log(data)
         try {
-            const response=yield call(requestSignInUser,data);
+            const response=yield call(requestSinglePost,data);
             const mainvalue=response.data;
            console.log(mainvalue);
-            yield put(signinResponse(mainvalue));
+            yield put(singlePostResponse(mainvalue));
         } catch (error) {
-            console.log("Not call api request")
+            console.log(" call api request")
         }
         
         };
         // Signin Otp varify user
-    export function* handleGetUserLoginOtp(action){
+    export function* cancelPostRequestSaga(action){
     
     
             const data=action.payload;
             console.log(data)
             try {
-                const response=yield call(requestSigninOtpVerify,data);
+                const response=yield call(requestCancelPost,data);
                 const mainvalue=response.data;
                console.log(mainvalue);
-                yield put(signinOtpVerifyResponse(mainvalue));
+                yield put(cancelPostResponse(mainvalue));
             } catch (error) {
                 console.log("Not call api request")
             }

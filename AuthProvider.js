@@ -7,13 +7,8 @@ export const AuthContext = React.createContext({});
 export const AuthProvider = ({children}) => {
   const [isLoading, setisLoading] = useState(false)
   const [userToken, setUserToken] = useState(null);
-  const userInfo=useSelector((state)=>state.auth.signInOtpVarifyResponse)
-  const userTokenSuc=useSelector((state)=>state.auth.signInOtpVarifyResponse.accessToken)
-
-  console.log("Otp Data")
-  console.log(userInfo)
-  console.log(userTokenSuc)
 const login= async(item)=>{
+  const {userInfo,userTokenSuc}=item
   setisLoading(true)
   try {
     if (userInfo) {

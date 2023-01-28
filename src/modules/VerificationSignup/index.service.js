@@ -1,8 +1,8 @@
 import { useSelector,useDispatch } from "react-redux";
-import { signinOtpVerifyRequest } from "../../Redux/slices/AuthSlice";
+import { signinOtpVerifyRequest,signupVarifyRequest } from "../../Redux/slices/AuthSlice";
 
 
-const VerificationServiceComponent = ({
+const VerificationSignupServiceComponent = ({
     children,
     navigation,
     route,
@@ -22,32 +22,22 @@ const dispatch=useDispatch();
     
     const navigateVerified=(item)=>{
         console.log(item)
-    //    if(signupUserNumber==UserNumber){
-    //     if (signuptoken==item) {
-    //         dispatch(signinOtpVerifyRequest({
-    //            "number":signupUserNumber,
+   
+        if (signuptoken==item) {
+            dispatch(signupVarifyRequest({
+               "number":signupUserNumber,
                
-    //            "full_name":signupfullName,
-    //            "token":signuptoken,
-    //            "secret":signupsecret ,
+               "full_name":signupfullName,
+               "token":signuptoken,
+               "secret":signupsecret ,
                
-    //         }));
-    //         navigation.navigate("Verified")
-    //        } else {
-    //         console.log("Signup Token does not match")
-    //        }
-    //    }
-    // else{
-        if (token==item) {
-        dispatch(signinOtpVerifyRequest({
-           "number":UserNumber,
-           "secret":secret ,
-           "token":token
-        }));
-        navigation.navigate("Verified")
-       } else {
-        console.log("Login Token does not match")
-       }
+            }));
+            navigation.navigate("VerifiedSignup")
+           } else {
+            console.log("Signup Token does not match")
+           }
+       
+   
       
        
         
@@ -61,4 +51,4 @@ const dispatch=useDispatch();
     });
 };
 
-export default VerificationServiceComponent;
+export default VerificationSignupServiceComponent;

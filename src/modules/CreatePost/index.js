@@ -15,12 +15,13 @@ import { useNavigation } from '@react-navigation/native';
 import Sure from '../../Components/sure';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../Components/Loader';
-import { cancelSinglePost, getSingalPost } from '../../Redux/slices/PostSlice';
+import { cancelPostRequest, singlePostRequest } from '../../Redux/slices/PostSlice';
 
 const CreatePostComponent = ({ }) => {
     const navigation =useNavigation();
     const [deletebtn, setDeletebtn] = useState(false);
-    const postData=useSelector((state)=>state.post.postAllData)
+    const postData=useSelector((state)=>state.post.getAllPostResponse)
+    console.log("Post Data")
     console.log(postData)
     const dispatch=useDispatch();
     const dataCards=({item})=>{ 
@@ -52,7 +53,7 @@ const CreatePostComponent = ({ }) => {
               <TouchableOpacity onPress={()=>navigation.navigate('Post')}>
                 <Image source={require('../../assets/edit_btn.png')}/>
               </TouchableOpacity>
-                <TouchableOpacity onPress={()=>dispatch(cancelSinglePost(item.id))}>
+                <TouchableOpacity onPress={()=>dispatch(cancelPostRequest(item.id))}>
                   <Image style={{marginLeft:2}} source={require('../../assets/delete.png')}/>
                 </TouchableOpacity>
                 
@@ -84,7 +85,7 @@ const CreatePostComponent = ({ }) => {
           
           
            <TouchableOpacity style={styles.container_primary} onPress={()=> {
-            dispatch(getSingalPost(item.id))
+            dispatch(singlePostRequest(item.id))
             navigation.navigate('Detail')}}>
             <Text style={styles.text_primary}>View Details</Text>
            </TouchableOpacity>

@@ -1,25 +1,25 @@
 import axios from 'axios';
 import {BASE_URL} from '../../constent/constent';
 // SignUp Api Request
-export function requestSignUpUser(options) {
+export function requestCreatePost(options,id) {
+    console.log(id)
   console.log(options);
 
   const res = axios.request({
     method: 'post',
-    url: `${BASE_URL}auth/sign-up`,
+    url: `${BASE_URL}post/add/${id}`,
     data: options,
     headers: {
-      'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data;',
     },
   });
   return res;
 }
-export function requestSignupOtpVerify(options) {
-  console.log(options);
+export function requestGetPost(id) {
+  console.log(id);
   const res = axios.request({
-    method: 'post',
-    url: `${BASE_URL}auth/sign-up/verify-otp`,
-    data: options,
+    method: 'get',
+    url: `${BASE_URL}post/get-all/${id}`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -27,13 +27,13 @@ export function requestSignupOtpVerify(options) {
   return res;
 }
 // Sign In API Request
-export function requestSignInUser(options) {
-  console.log(options);
+export function requestSinglePost(post_id) {
+    console.log("Sent id")
+  console.log(post_id);
 
   const res = axios.request({
-    method: 'post',
-    url: `${BASE_URL}auth/sign-in`,
-    data: options,
+    method: 'get',
+    url: `${BASE_URL}post/get/single-post/${post_id}`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -41,12 +41,11 @@ export function requestSignInUser(options) {
 
   return res;
 }
-export function requestSigninOtpVerify(options) {
-  console.log(options);
+export function requestCancelPost(post_id) {
+  console.log(post_id);
   const res = axios.request({
-    method: 'post',
-    url: `${BASE_URL}auth/verify-otp`,
-    data: options,
+    method: 'get',
+    url: `${BASE_URL}post/cancel/${post_id}`,
     headers: {
       'Content-Type': 'application/json',
     },

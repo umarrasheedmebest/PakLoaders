@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { SignupAuth } from "../../Redux/slices/AuthSlice";
+import { useDispatch, } from "react-redux";
+import {  signupRequest } from "../../Redux/slices/AuthSlice";
 
 const SignUpServiceComponent = ({
     children,
@@ -14,15 +14,16 @@ const SignUpServiceComponent = ({
     const navigateVerification= ()=> {
         navigation.navigate('Verification')
     }
-    const signup=(mainValue)=>{
-        dispatch(SignupAuth(mainValue));
+    const signUpRequest=(mainValue)=>{
+        dispatch(signupRequest(mainValue));
+        navigation.navigate('VerificationSignup')
     }
 
     return children({
         navigation,
         navigateToLogin,
         navigateVerification,
-        signup
+        signUpRequest
     });
 };
 
