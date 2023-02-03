@@ -1,16 +1,17 @@
 import axios from 'axios';
 import {BASE_URL} from '../../constent/constent';
 // SignUp Api Request
-export function requestCreatePost(options,id) {
-    console.log(id)
-  console.log(options);
-
+export function requestCreatePost(data,id) {
+    console.log("This is undefine", id)
+  console.log(data);
+console.log(`${BASE_URL}post/add/11`)
   const res = axios.request({
     method: 'post',
-    url: `${BASE_URL}post/add/${id}`,
-    data: options,
+    url: `${BASE_URL}post/add/11`,
+    data: data,
     headers: {
         'Content-Type': 'multipart/form-data;',
+
     },
   });
   return res;

@@ -33,7 +33,7 @@ import {
 } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch } from 'react-redux';
-import { addPost } from '../../Redux/slices/PostSlice';
+import { createPostRequest } from '../../Redux/slices/PostSlice';
 
 
  
@@ -81,24 +81,28 @@ const VehicleComponent = ({
   }catch(err){
     console.log("image not upload")
   }
-  const formData=new FormData;
+  const formData=new FormData();
 // const result=await launchImageLibrary(options);
 // console.log(result.assets[0]);
 // const formData=new FormData();
-// formData.append('images',{
-//   uri:result.assets[0].uri,
-//   type:result.assets[0].type,
-//   filename:result.assets[0].fileName,
+formData.append('images',{
+  uri:singleFile[0].uri,
+  type:singleFile[0].type,
+  name:singleFile[0].name,
+  fileName:'image'
 
-// });
-// formData.append('images',{
-//   uri:result.assets[0].uri,
-//   type:result.assets[0].type,
-//   filename:result.assets[0].fileName,
+});
+formData.append('images',{
+  uri:singleFile[0].uri,
+  type:singleFile[0].type,
+  name:singleFile[0].name,
+  fileName:'image'
 
-// });
-formData.append('images', singleFile);
-formData.append('images', singleFile);
+});
+console.log(singleFile)
+
+// formData.append('images', singleFile[0].uri);
+// formData.append('images', singleFile[0].uri);
 
 formData.append('pickup_address',"Bhaseen");
 formData.append('dropoff_address',"JaloPark");
@@ -107,7 +111,7 @@ formData.append('pickup_time',"sdf");
 formData.append('details',"sdf");
 formData.append('loaders',"3");
 const mainData=formData._parts
-dispatch(addPost(mainData));
+dispatch(createPostRequest(mainData));
 
 console.log(mainData)
 

@@ -24,7 +24,7 @@ const auth = createSlice({
     signUpResponse: (state, action) =>
       update(state, {
         signUpResponse: {$set: action.payload},
-        // signUpRequest: {$set: false},
+        signUpRequest: {$set: false},
       }),
     signupVarifyRequest: (state, action) =>
       update(state, {
@@ -33,7 +33,7 @@ const auth = createSlice({
     signupOtpResponse: (state, action) =>
       update(state, {
         signUpOtpVarifyResponse: {$set: action.payload},
-        // signUpOtpVarifyRequest: {$set: false},
+        signUpOtpVarifyRequest: {$set: false},
       }),
     signinRequest: (state, action) =>
       update(state, {
@@ -42,14 +42,18 @@ const auth = createSlice({
     signinResponse: (state, action) =>
       update(state, {
         signInResponse: {$set: action.payload},
+        signInRequest: {$set: false},
       }),
     signinOtpVerifyRequest: (state, action) =>
       update(state, {
         signInOtpVarifyRequest: {$set: true},
+
       }),
     signinOtpVerifyResponse: (state, action) =>
       update(state, {
         signInOtpVarifyResponse: {$set: action.payload},
+        signInOtpVarifyRequest: {$set: false},
+
       }),
   },
 });

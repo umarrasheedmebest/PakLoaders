@@ -18,12 +18,13 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
   const counter=useSelector((state)=>state.language);
-
+const [userName, setuserName] = useState('')
   const dispatch=useDispatch();
   const getData=async()=>{
 try {
       let userinfoData=await AsyncStorage.getItem('@userInfo')
       userinfoData= JSON.parse(userinfoData)
+      console.log(userinfoData);
       const userId=userinfoData.userId
        dispatch(getAllPostRequest(userId))
     } catch (error) {

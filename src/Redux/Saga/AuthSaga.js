@@ -14,7 +14,7 @@ try {
    console.log(mainvalue);
     yield put(signUpResponse(mainvalue));
 } catch (error) {
-    console.log("Not call api request")
+    console.log("Not call api request"+ error)
 }
 
 };
@@ -30,7 +30,7 @@ export function* handleGetUserVarifyOtp(action){
        console.log(mainvalue);
         yield put(signupOtpResponse(mainvalue));
     } catch (error) {
-        console.log("Not call api request")
+        console.log("Not call api request"+ error)
     }
     
     };
@@ -46,7 +46,7 @@ export function* handleGetUserVarifyOtp(action){
            console.log(mainvalue);
             yield put(signinResponse(mainvalue));
         } catch (error) {
-            console.log("Not call api request")
+            console.log("Not call api request"+ error)
         }
         
         };
@@ -62,7 +62,7 @@ export function* handleGetUserVarifyOtp(action){
                console.log(mainvalue);
                 yield put(signinOtpVerifyResponse(mainvalue));
             } catch (error) {
-                console.log("Not call api request")
+                console.log("Not call api request" +error)
             }
             
             };
