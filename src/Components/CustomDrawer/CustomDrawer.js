@@ -13,11 +13,16 @@ import { languageReducer } from '../../Redux/slices/LanguageSlice';
 import { english,urdu } from '../../Redux/slices/LanguageSlice';
 import { getAllPostRequest } from '../../Redux/slices/PostSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUserRequest } from '../../Redux/slices/UserSlice';
+
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
   const counter=useSelector((state)=>state.language);
+  // const {full_name}=useSelector((state)=>state.user.getUserResponse[0]);
+  // // console.log("add the name",full_name)
+
 const [userName, setuserName] = useState('')
   const dispatch=useDispatch();
   const getData=async()=>{
@@ -26,7 +31,8 @@ try {
       userinfoData= JSON.parse(userinfoData)
       console.log(userinfoData);
       const userId=userinfoData.userId
-       dispatch(getAllPostRequest(userId))
+       dispatch(getAllPostRequest(userId));
+       dispatch(getUserRequest(userId));
     } catch (error) {
       console.log("Not fetch from Asynic storge")
     }

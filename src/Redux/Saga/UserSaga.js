@@ -26,7 +26,7 @@ export function* getUserRequestSaga(action){
     console.log(data)
     try {
         const response=yield call(requestgetUser,data);
-        const mainvalue=response;
+        const mainvalue=response.data;
        console.log(mainvalue);
         yield put(getUserResponse(mainvalue));
     } catch (error) {

@@ -15,18 +15,21 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { colors } from '../../globalStyle';
 import { useSelector } from 'react-redux';
+import Loader from '../../Components/Loader';
+
 const VerifiedComponent = ({
     navigateProfileOne
  }) => {
     const [otp, setOtp] = useState('')
     const otpMessage=useSelector((state)=>state.auth.signInOtpVarifyResponse.message)
+    const signInOtpVarifyRequest=useSelector((state)=>state.auth.signInOtpVarifyRequest)
    
     return (
         <SafeAreaView style={styles.container}>
             {/* Background Image */}
             <CustomBackground/>
             {/* Background Image */}
-
+            <Loader visible={signInOtpVarifyRequest}/>
             <View style={styles.mainContainer}>
                 {/* Front Image  */}
                 <CustomForground source={require("../../assets/verified_icon.png")}/>     

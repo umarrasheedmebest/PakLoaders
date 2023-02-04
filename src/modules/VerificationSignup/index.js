@@ -15,10 +15,13 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { colors } from '../../globalStyle';
 import { useSelector } from 'react-redux';
+import Loader from '../../Components/Loader';
 const VerificationSignupComponent = ({
     navigateVerified
  }) => {
-    const otpMessage=useSelector((state)=>state.auth.signInResponse.message)
+    const otpMessage=useSelector((state)=>state.auth.signUpResponse.message)
+    
+    const signUnRequest=useSelector((state)=>state.auth.signUpRequest)
     const [token, setToken] = useState('')
     const [otp, setOtp] = useState('')
     return (
@@ -26,7 +29,7 @@ const VerificationSignupComponent = ({
             {/* Background Image */}
             <CustomBackground/>
             {/* Background Image */}
-
+            <Loader visible={signUnRequest}/>
             <View style={styles.mainContainer}>
                 {/* Front Image  */}
                 <CustomForground source={require("../../assets/Verification.png")}/>     

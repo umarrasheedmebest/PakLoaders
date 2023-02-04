@@ -28,7 +28,7 @@ const auth = createSlice({
       }),
     signupVarifyRequest: (state, action) =>
       update(state, {
-        signInOtpVarifyRequest: {$set: true},
+        signUpOtpVarifyRequest: {$set: true},
       }),
     signupOtpResponse: (state, action) =>
       update(state, {
