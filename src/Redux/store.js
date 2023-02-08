@@ -23,7 +23,7 @@ const reducer=combineReducers({
 })
 const store=configureStore({
     reducer,
-middleware:[...getDefaultMiddleware({thunk:false}),sagaMiddleware]
+middleware:[...getDefaultMiddleware({thunk:false,serializableCheck: false},),sagaMiddleware]
 })
 sagaMiddleware.run(watcherSaga);
 export default store;

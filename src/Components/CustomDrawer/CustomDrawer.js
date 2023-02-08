@@ -14,16 +14,19 @@ import { english,urdu } from '../../Redux/slices/LanguageSlice';
 import { getAllPostRequest } from '../../Redux/slices/PostSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserRequest } from '../../Redux/slices/UserSlice';
+import { IMAGE_URL } from '../../Redux/constent/constent';
 
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
   const {logout} = useContext(AuthContext);
  const [colorspk, setColorspk] = useState(false)
   const counter=useSelector((state)=>state.language);
-  // const {full_name}=useSelector((state)=>state.user.getUserResponse[0]);
-  // // console.log("add the name",full_name)
 
-const [userName, setuserName] = useState('')
+
+  const userData= useSelector((state)=>state.user.getUserResponse);
+  
+
+
   const dispatch=useDispatch();
   const getData=async()=>{
 try {
@@ -84,15 +87,20 @@ try {
       </View>
       
       {/* Profile button */}
-      <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
+      {userData.map((res)=>{
+        console.log("Console id",res.id)
+        return <View key={res.id}>
+               <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
         <View style={{width:68,height:68,borderWidth:2,borderColor:"#fff",borderRadius:100, justifyContent:"center", alignItems:"center",position:"relative" }}>
             <View style={{width:7,height:8,backgroundColor:"#FECB00", borderRadius:100,position:"absolute",zIndex:1,right:8,bottom:1}}></View>
-           <Image source={require('../../assets/Header_Profile.png')} style={{height:57,width:57,}}/> 
+           <Image source={{uri:`${IMAGE_URL}${res.user_image}`}} style={{height:57,width:57,borderRadius:100}}/> 
         </View>
         </TouchableOpacity>
-        <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>Ali khan</Text>
-        <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>+92303 2374827</Text>
-
+        <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
+        <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
+        </View>
+      })}
+     
    
         {/* Scrool navigation button */}
         </ImageBackground>

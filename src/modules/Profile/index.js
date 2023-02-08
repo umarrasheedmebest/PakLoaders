@@ -3,6 +3,7 @@ import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import Profile from '../../Components/Api/Profile';
 import { useNavigation } from '@react-navigation/native';
+
 import {
     StyleSheet,
     SafeAreaView,
@@ -15,12 +16,16 @@ import {
     Button
     
 } from 'react-native';
+import { useSelector } from 'react-redux';
+import { IMAGE_URL } from '../../Redux/constent/constent';
 
  
 const ProfileComponent = ({
     sideBar,
     ...props
 }) => { 
+  const userData= useSelector((state)=>state.user.getUserResponse);
+
   const navigation =useNavigation();
   const dataCards=({item})=>{
     return(
@@ -73,21 +78,26 @@ const ProfileComponent = ({
                 </View>
                 {/* Edit Profile */}
                 <View style={{width:"100%",alignItems:"center"}}>
-                  {/* Profile Picture */}
+                  {/* User Data by Map */}
+                  {userData.map((res)=>{
+                    return <View style={{alignItems:"center",justifyContent:"center"}} key={res.id}> 
+                          {/* Profile Picture */}
+                  <TouchableOpacity>
                 <View style={{width:94,height:94,borderWidth:1,
                 borderColor:"#67A5FF",borderRadius:100,alignItems:"center",justifyContent:"center",
                 position:"relative",
                 }}>
-                <Image source={require('../../assets/ProfileDetail.png')}/>
+                <Image style={{width:83,height:83,borderRadius:100}} source={{uri:`${IMAGE_URL}${res.user_image}`}}/>
                 <View style={{position:"absolute",right:15,bottom:3}}>
                     <Image source={require('../../assets/activeProfile.png')}/>
                 </View>
                 </View>
+                </TouchableOpacity>
                 {/* Edit Profile */}
                 {/* Name */}
                 <View>
                     <Text style={{fontSize:16,fontWeight:"400",
-                color:colors.primary,marginVertical:10}}>Ali Khan</Text>
+                color:colors.primary,marginVertical:10}}>{res.full_name}</Text>
                 </View>
                 {/* Name */}
                 {/* Reviews */}
@@ -104,6 +114,9 @@ const ProfileComponent = ({
                     <View><Text style={{color:colors.primary,fontSize:9, marginLeft:6}}>View all reviews</Text></View>
                 </View>
                 {/* Reviews */}
+                    </View>
+                  })}
+                {/* User Data by Map methed */}
                 {/* Tips */}
                 <View style={{flexDirection:"row",width:"100%",alignItems:"center",marginVertical:30,justifyContent:"space-evenly"}}>
                {/* 1st */}
@@ -188,7 +201,7 @@ expired please re-subscribe to get access. </Text>
                   {/* Subscription Button */}
                 
                   <View >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.navigate('InsuredLuggage')}>
            <View style={{width:329,height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
@@ -208,7 +221,7 @@ expired please re-subscribe to get access. </Text>
         </TouchableOpacity> 
                    </View>
                    <View >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Packages')}}>
            <View style={{width:329,height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
@@ -226,8 +239,9 @@ expired please re-subscribe to get access. </Text>
      </View>
         </TouchableOpacity> 
                    </View>
+                   {/* My Post */}
                    <View >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>{navigation.navigate('CreatePost')}}>
            <View style={{width:329,height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
@@ -245,7 +259,7 @@ expired please re-subscribe to get access. </Text>
      </View>
         </TouchableOpacity> 
                    </View>
-                   <View >
+                   {/* <View >
         <TouchableOpacity>
            <View style={{width:329,height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
@@ -263,7 +277,7 @@ expired please re-subscribe to get access. </Text>
         
      </View>
         </TouchableOpacity> 
-                   </View>
+                   </View> */}
                    <View >
         <TouchableOpacity>
            <View style={{width:329,height:52,

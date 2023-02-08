@@ -39,8 +39,10 @@ export function* getUserRequestSaga(action){
     
     
         const data=action.payload;
-        console.log("Post Id")
+        console.log("Post data")
         console.log(data)
+        
+        
         try {
             const response=yield call(requestupdateUser,data);
             const mainvalue=response.data;
@@ -63,7 +65,7 @@ export function* getUserRequestSaga(action){
                console.log(mainvalue);
                 yield put(updateUserImageResponse(mainvalue));
             } catch (error) {
-                console.log("Not call api request")
+                console.log("Not call api request",error)
             }
             
             };

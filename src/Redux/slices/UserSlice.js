@@ -8,7 +8,7 @@ const user = createSlice({
     deleteUserResponse: [],
     //  Single user 
     updateUserRequest: false,
-    updateUserResponse: [],
+    updateUserResponse: '',
     // Cancel user
     getUserRequest: false,
     getUserResponse: [],
@@ -34,7 +34,8 @@ const user = createSlice({
     getUserResponse: (state, action) =>
       update(state, {
         getUserResponse: {$set: action.payload},
-        // signUpOtpVarifyRequest: {$set: false},
+        getUserRequest: {$set: false},
+        
       }),
     updateUserRequest: (state, action) =>
       update(state, {
@@ -43,6 +44,8 @@ const user = createSlice({
     updateUserResponse: (state, action) =>
       update(state, {
         updateUserResponse: {$set: action.payload},
+        updateUserRequest: {$set: false},
+
       }),
     updateUserImageRequest: (state, action) =>
       update(state, {

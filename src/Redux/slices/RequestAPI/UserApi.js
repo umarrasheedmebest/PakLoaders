@@ -24,14 +24,17 @@ export function requestgetUser(id) {
   return res;
 }
 // update User
-export function requestupdateUser(user_id,data) {
-    console.log("Sent id")
-  console.log(user_id,data);
-
+export function requestupdateUser(data) {
+    console.log("Sent Data")
+  console.log(data);
+const {user_id,full_name}=data;
+const editName={
+  full_name
+}
   const res = axios.request({
     method: 'put',
     url: `${BASE_URL}user/update/${user_id}`,
-    data:data,
+    data:editName,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -40,11 +43,11 @@ export function requestupdateUser(user_id,data) {
   return res;
 }
 // update User Image
-export function requestUpdateUserImage(user_id,userImage) {
-  console.log(post_id);
+export function requestUpdateUserImage(userImage) {
+  console.log(userImage);
   const res = axios.request({
     method: 'put',
-    url: `${BASE_URL}images/upload${user_id}`,
+    url: `${BASE_URL}images/upload/11`,
     data:userImage,
     headers: {
         'Content-Type': 'multipart/form-data;',
