@@ -22,6 +22,8 @@ import { IMAGE_URL } from '../../Redux/constent/constent';
  
 const ProfileComponent = ({
     sideBar,
+    deleteUser,
+    userLogout,
     ...props
 }) => { 
   const userData= useSelector((state)=>state.user.getUserResponse);
@@ -70,10 +72,13 @@ const ProfileComponent = ({
             
             <ScrollView showsVerticalScrollIndicator={false} style={[styles.mainContainer,styles.commonStyle]}>
                 {/* Edit Profile */}
-                <View style={{width:"100%",alignItems:"flex-end"}}>
+                <View style={{width:"100%",flexDirection:"row",justifyContent:"flex-end"}}>
                   <TouchableOpacity onPress={()=>navigation.navigate('EidtProfile')}>
                     <Image source={require('../../assets/pencil.png')}/>
                   </TouchableOpacity>
+                  <TouchableOpacity onPress={()=>deleteUser()}>
+                  <Image style={{marginLeft:5,}} source={require('../../assets/delete.png')}/>
+                </TouchableOpacity>
                     
                 </View>
                 {/* Edit Profile */}
@@ -279,7 +284,7 @@ expired please re-subscribe to get access. </Text>
         </TouchableOpacity> 
                    </View> */}
                    <View >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>userLogout()}>
            <View style={{width:329,height:52,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10,

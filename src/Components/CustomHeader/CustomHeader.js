@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
+import { IMAGE_URL } from '../../Redux/constent/constent';
 
 import {
     StyleSheet,
@@ -17,6 +18,7 @@ import {
     
 } from 'react-native';
 import allData from '../Api/Home';
+import { useSelector } from 'react-redux';
 
 
  
@@ -36,6 +38,8 @@ const windowHeight = Dimensions.get('window').height;
   const navigation=useNavigation();
   const defaultImage=require('../../assets/arrow-back.png');
   const customImage=require('../../assets/whiteButton.png');
+  const userData= useSelector((state)=>state.user.getUserResponse);
+
 const goBaack=()=>{
   const back=props.navigation.goBack();
   return back;
@@ -65,7 +69,9 @@ const toggle=()=>{
                       <Image source={require('../../assets/Bell.png')}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginRight:10,}}>
-                      <Image style={{width:36,height:36}} source={require('../../assets/ProfileDetail.png')}/>
+                      {userData.map((res)=>{
+                         <Image style={{width:36,height:36,borderRadius:100}} source={{uri:`${IMAGE_URL}${res.user_image}`}}/>
+                      })}
                     </TouchableOpacity>
               </View>
               :

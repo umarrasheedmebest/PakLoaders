@@ -110,7 +110,7 @@ formData.append('pickup_date',"00-00-12");
 formData.append('pickup_time',"sdf");
 formData.append('details',"sdf");
 formData.append('loaders',"3");
-const mainData=formData._parts
+const mainData=formData
 dispatch(createPostRequest(mainData));
 
 console.log(mainData)

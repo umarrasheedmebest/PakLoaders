@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import DocumentPicker from 'react-native-document-picker';
 
 import { updateUserRequest,getUserRequest,updateUserImageRequest } from "../../Redux/slices/UserSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const EditProfileServiceComponent = ({
     children,
     navigation,
@@ -15,7 +15,7 @@ const EditProfileServiceComponent = ({
 const updateUserName=(data)=>{
     console.log("Request editName",data)
 dispatch(updateUserRequest(data));
-dispatch(getUserRequest(data.user_id));
+    dispatch(getUserRequest());
 }
 const updateUserImage=async()=>{
     try {
@@ -35,7 +35,16 @@ const updateUserImage=async()=>{
     
     );
     console.log("Converted into form Data",formData)
-    dispatch(updateUserImageRequest(formData))
+    dispatch(updateUserImageRequest(formData));
+        dispatch(getUserRequest());
+  
+      
+    
+      
+    
+    
+    
+
     
     } catch (error) {
         if(DocumentPicker.isCancel(err))

@@ -25,7 +25,6 @@ const [editName, setEditName] = useState('')
             {/* User MapData */}
             {userData.map((res)=>{
                 const data={
-                    "user_id":res.id,
                     "full_name":editName
                 }
                 return <View key={res.id} style={{width:"100%",alignItems:"center"}}>

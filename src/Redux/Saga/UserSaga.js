@@ -3,37 +3,17 @@ import { getUserResponse,updateUserImageResponse,deleteUserResponse,updateUserRe
 import { requestdeleteUser,requestgetUser,requestupdateUser,requestUpdateUserImage } from '../slices/RequestAPI/UserApi';
 
 // Singup funtion
-export function* deleteUserRequestSaga(action){
-    
-    
-const data=action.payload;
-console.log(data)
+export function* deleteUserRequestSaga(){
 try {
-    const response=yield call(requestdeleteUser,data);
+    const response=yield call(requestdeleteUser);
     const mainvalue=response.data;
    console.log(mainvalue);
     yield put(deleteUserResponse(mainvalue));
 } catch (error) {
-    console.log("Not call api request")
+    console.log("Not call api request",error)
 }
 
 };
-// SignupVarifyOtp user
-export function* getUserRequestSaga(action){
-    
-    
-    const data=action.payload;
-    console.log(data)
-    try {
-        const response=yield call(requestgetUser,data);
-        const mainvalue=response.data;
-       console.log(mainvalue);
-        yield put(getUserResponse(mainvalue));
-    } catch (error) {
-        console.log("Not call api request"+error)
-    }
-    
-    };
     // Signin Request user
    export function* updateUserRequestSaga(action){
     
@@ -69,4 +49,16 @@ export function* getUserRequestSaga(action){
             }
             
             };
+            // SignupVarifyOtp user
+export function* getUserRequestSaga(){
+    try {
+        const response=yield call(requestgetUser);
+        const mainvalue=response.data;
+       console.log(mainvalue);
+        yield put(getUserResponse(mainvalue));
+    } catch (error) {
+        console.log("Not call api request"+error)
+    }
+    
+    };
 

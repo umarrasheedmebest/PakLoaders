@@ -30,12 +30,8 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const dispatch=useDispatch();
   const getData=async()=>{
 try {
-      let userinfoData=await AsyncStorage.getItem('@userInfo')
-      userinfoData= JSON.parse(userinfoData)
-      console.log(userinfoData);
-      const userId=userinfoData.userId
-       dispatch(getAllPostRequest(userId));
-       dispatch(getUserRequest(userId));
+       dispatch(getAllPostRequest());
+       dispatch(getUserRequest());
     } catch (error) {
       console.log("Not fetch from Asynic storge")
     }

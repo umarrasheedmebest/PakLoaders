@@ -20,8 +20,7 @@ const VerificationComponent = ({
     navigateVerified
  }) => {
     const otpMessage=useSelector((state)=>state.auth.signInResponse.message)
-    const signinRequest=useSelector((state)=>state.auth.signInRequest)
-    
+    const signinRequest=useSelector((state)=>state.auth.signInRequest) 
     console.log("sign InRequest"+  signinRequest)
     const [token, setToken] = useState('')
     const [otp, setOtp] = useState('')

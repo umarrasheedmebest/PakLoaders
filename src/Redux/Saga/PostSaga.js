@@ -3,13 +3,9 @@ import { createPostResponse,singlePostResponse,cancelPostResponse,getAllPostResp
 import { requestGetPost,requestSinglePost,requestCreatePost,requestCancelPost } from '../slices/RequestAPI/PostApi';
 
 // Singup funtion
-export function* getAllPostRequestSaga(action){
-    
-    
-const data=action.payload;
-console.log(data)
+export function* getAllPostRequestSaga(){
 try {
-    const response=yield call(requestGetPost,data);
+    const response=yield call(requestGetPost);
     const mainvalue=response.data;
    console.log(mainvalue);
     yield put(getAllPostResponse(mainvalue));
@@ -26,7 +22,7 @@ export function* createPostRequestSaga(action){
     console.log(data)
     try {
         const response=yield call(requestCreatePost,data);
-        const mainvalue=response;
+        const mainvalue=response.data;
        console.log(mainvalue);
         yield put(createPostResponse(mainvalue));
     } catch (error) {

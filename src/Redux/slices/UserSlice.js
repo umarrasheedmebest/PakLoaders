@@ -5,7 +5,7 @@ const user = createSlice({
   initialState: {
     //Create user
     deleteUserRequest: false,
-    deleteUserResponse: [],
+    deleteUserResponse: '',
     //  Single user 
     updateUserRequest: false,
     updateUserResponse: '',
