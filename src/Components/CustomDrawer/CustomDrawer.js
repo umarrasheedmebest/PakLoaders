@@ -15,6 +15,7 @@ import { getAllPostRequest } from '../../Redux/slices/PostSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserRequest } from '../../Redux/slices/UserSlice';
 import { IMAGE_URL } from '../../Redux/constent/constent';
+import { getAllBidsRequest } from '../../Redux/slices/BidsSlice';
 
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
 try {
        dispatch(getAllPostRequest());
        dispatch(getUserRequest());
+       dispatch(getAllBidsRequest())
     } catch (error) {
       console.log("Not fetch from Asynic storge")
     }
@@ -139,7 +141,7 @@ try {
           text={counter?eng.myPost:Urdu.myPost}
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>{
-           
+            dispatch(getAllPostRequest());
             navigation.navigate("CreatePost")}}
           />
           <DrawerButtondemo 

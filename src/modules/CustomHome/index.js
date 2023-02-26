@@ -24,8 +24,10 @@ import {
 } from 'react-native';
 import Truk from '../../assets/SVG_Icons/Icon_3.svg';
 import allData from '../../Components/Api/Home';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { eng, Urdu } from '../../Components/Api/Language';
+import { requestGetBids } from '../../Redux/slices/RequestAPI/BidsApi';
+import { getAllBidsRequest } from '../../Redux/slices/BidsSlice';
 
  
 const HomeComponent = (props,{
@@ -36,6 +38,7 @@ const HomeComponent = (props,{
     navigateBids,
    
 }) => { 
+  const dispatch=useDispatch();
   const navigation= useNavigation();
   const mark=useSelector((state)=>state.language)
   const [data, setData] = useState(allData);
@@ -105,7 +108,12 @@ const HomeComponent = (props,{
                     <TouchableOpacity onPress={()=>navigation.navigate('Notification')} style={{marginRight:10,}}>
                       <Image source={require('../../assets/Bell.png')}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+                    <TouchableOpacity onPress={()=>
+                      
+                      {
+                        navigation.navigate('Profile')
+                      // dispatch(getAllBidsRequest())
+                      }}>
                       <Image source={require('../../assets/profile.png')}/>
                     </TouchableOpacity>
                   </View>

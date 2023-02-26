@@ -29,7 +29,7 @@ try {
            console.log(mainvalue);
             yield put(updateUserResponse(mainvalue));
         } catch (error) {
-            console.log(" call api request")
+            console.log("Not call api request",error)
         }
         
         };

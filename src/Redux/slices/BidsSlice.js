@@ -1,4 +1,4 @@
-import {createSlice,} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import update from 'immutability-helper';
 const bids = createSlice({
   name: 'bids',
@@ -17,6 +17,7 @@ const bids = createSlice({
     getAllBidsResponse: (state, action) =>
       update(state, {
         getAllBidsResponse: {$set: action.payload},
+        getAllBidsRequest: {$set: false},
       }),
   
   },

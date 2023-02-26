@@ -4,12 +4,9 @@ import { requestGetBids } from '../slices/RequestAPI/BidsApi';
 
 // Singup funtion
 export function* getAllBidsRequestSaga(action){
-    
-    
-const data=action.payload;
-console.log(data)
+     console.log("I'm bids Saga")
 try {
-    const response=yield call(requestGetBids,data);
+    const response=yield call(requestGetBids);
     const mainvalue=response.data;
    console.log(mainvalue);
     yield put(getAllBidsResponse(mainvalue));
