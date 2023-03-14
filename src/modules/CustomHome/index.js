@@ -38,30 +38,34 @@ const HomeComponent = (props,{
     navigateBids,
    
 }) => { 
+  const alData=useSelector((state)=>state.bids.getAllBidsResponse)
+  console.log("Bids Response");
+  
+  console.log(alData);
   const dispatch=useDispatch();
   const navigation= useNavigation();
   const mark=useSelector((state)=>state.language)
-  const [data, setData] = useState(allData);
-  const onDelete=(id)=>{
-    const newData=[...data];
-    const updateData=newData?.filter((todo)=>todo.id!==id)
-    setData(updateData);
-  }
+  // const [data, setData] = useState(alData);
+  // const onDelete=(id)=>{
+  //   const newData=[...data];
+  //   const updateData=newData?.filter((todo)=>todo.id!==id)
+  //   setData(updateData);
+  // }
   const dataCards=({item})=>{
     return(
       <View style={styles.dataContainer}>
         {/* First Row user Name */}
         <View style={{display:"flex", flexDirection:"row",alignItems:"center",}}>
-        <View><Image source={item.image}/></View>
+        <View><Image source={item.driver_image}/></View>
         <View style={{marginLeft:10,marginRight:45,}}>
-          <Text >{item.name}</Text>
+          <Text >{item.full_name}</Text>
           <View style={{display:"flex",flexDirection:"row",alignItems:"center",}}>
             <Image source={require('../../assets/Stars.png')}/>
             <Text style={{marginLeft:10,}}>(25 reviews)</Text>
           </View>
           
         </View>
-        <View><Text>{item.price}/-</Text></View>
+        <View><Text>{item.bid_amount}/-</Text></View>
       </View>
         {/* First Row user Name */}
         {/* 2nd Row user Name */}
@@ -125,7 +129,7 @@ const HomeComponent = (props,{
                   
                  
                   <View style={styles.listStyle}>
-                    <FlatList style={{zIndex:1,}}  data={data}
+                    <FlatList style={{zIndex:1,}}  data={alData}
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}

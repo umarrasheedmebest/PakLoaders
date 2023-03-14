@@ -8,6 +8,7 @@ const VehicleServiceComponent = ({
 
     return children({
         navigation,
+        route
     });
 };
 

@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector,useDispatch } from "react-redux";
 import { signinOtpVerifyRequest } from "../../Redux/slices/AuthSlice";
 
@@ -7,6 +8,13 @@ const VerificationServiceComponent = ({
     navigation,
     route,
 }) => {
+    // Device Token
+    const deviceToken=async()=>{
+            let fcmToken = await AsyncStorage.getItem('fcmToken');
+            console.log("My device Token is"+fcmToken)
+            return fcmToken;
+        
+    }
     // Sign Data
     const UserNumber=useSelector((state)=>state.auth.signInResponse.data)
     const secret=useSelector((state)=>state.auth.signInResponse.secret)
@@ -20,7 +28,8 @@ console.log(signupfullName)
 const dispatch=useDispatch();
     console.log('Pakistan Zindabad')
     
-    const navigateVerified=(item)=>{
+    const navigateVerified= async(item)=>{
+        console.log("Verify function call");  
         console.log(item)
     //    if(signupUserNumber==UserNumber){
     //     if (signuptoken==item) {
@@ -42,7 +51,8 @@ const dispatch=useDispatch();
         dispatch(signinOtpVerifyRequest({
            "number":UserNumber,
            "secret":secret ,
-           "token":token
+           "token":token,
+           "deviceToken":await deviceToken()
         }));
         navigation.navigate("Verified")
        } else {

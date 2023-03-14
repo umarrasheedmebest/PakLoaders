@@ -13,9 +13,10 @@ const getUserId=async()=>{
 }
 //  Request create post
 export const requestCreatePost=async(data)=> {
-  const {id,userinfoToken}=await getUserId();
+  const proj1= new Promise(async(resolve,reject)=>{
+    const {id,userinfoToken}=await getUserId();
     console.log("This is undefine", id)
-  console.log(data);
+  console.log(userinfoToken);
 console.log(`${BASE_URL}post/add/${id}`)
   const res = axios.request({
     method: 'post',
@@ -27,7 +28,17 @@ console.log(`${BASE_URL}post/add/${id}`)
 
     },
   });
-  return res;
+   resolve(res);
+  //  reject(res);
+  });
+  proj1.then((res)=>{
+    console.log(res)
+    return res
+  }).catch((err)=>{
+    console.log(err.response.data)
+    return err.response.data
+  })
+  
 }
 export const requestGetPost=async()=> {
   const {id,userinfoToken}=await getUserId();

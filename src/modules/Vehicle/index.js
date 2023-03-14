@@ -42,8 +42,12 @@ const VehicleComponent = ({
     navigateVerification,
     text,
     sideBar,
+    route,
    ...props
 }) => { 
+  console.log("Parm Data")
+  const {pickup_address,dropoff_address,pickup_date,pickup_time,details,loaders}=route.params;
+  console.log(route.params)
   const [singleFile, setSingleFile] = useState(null);
   // const options={
   //   title:'Select Image',
@@ -62,7 +66,7 @@ const VehicleComponent = ({
   //   singleFile:""
   // })
  const defaultImage=require('../../assets/icon_image.png');
- const selectedTruk=async()=>{
+ const selectTruk=async()=>{
    // Opening Document Picker to select one file
    try {
     const res = await DocumentPicker.pick({
@@ -81,6 +85,10 @@ const VehicleComponent = ({
   }catch(err){
     console.log("image not upload")
   }
+ }
+ const takePost=async()=>{
+  
+
   const formData=new FormData();
 // const result=await launchImageLibrary(options);
 // console.log(result.assets[0]);
@@ -104,12 +112,12 @@ console.log(singleFile)
 // formData.append('images', singleFile[0].uri);
 // formData.append('images', singleFile[0].uri);
 
-formData.append('pickup_address',"Bhaseen");
-formData.append('dropoff_address',"JaloPark");
-formData.append('pickup_date',"00-00-12");
-formData.append('pickup_time',"sdf");
-formData.append('details',"sdf");
-formData.append('loaders',"3");
+formData.append('pickup_address',pickup_address);
+formData.append('dropoff_address',dropoff_address);
+formData.append('pickup_date',pickup_date);
+formData.append('pickup_time',pickup_time);
+formData.append('details',details);
+formData.append('loaders',loaders);
 const mainData=formData
 dispatch(createPostRequest(mainData));
 
@@ -147,7 +155,7 @@ console.log(mainData)
                       </TouchableOpacity>
                     </View>
                     <View>
-                      <TouchableOpacity onPress={()=>selectedTruk()}>
+                      <TouchableOpacity onPress={()=>selectTruk()}>
                         <View style={styles.MenuContainer}>
                           <View style={{width:"100%",alignItems:"flex-end",paddingRight:5,paddingTop:2}}>
                             <Image style={{width:20,height:20}} source={require('../../assets/check.png')}/>
@@ -226,7 +234,7 @@ console.log(mainData)
                     </View>
                     <View style={{width:"100%",alignItems:"center",paddingVertical:20,paddingBottom:40,}}>
                     {/* Button Next */}
-                    <CustomButton onPress={()=>navigation.navigate('Vehicle')}  text="Post" type="secondary"/>
+                    <CustomButton onPress={()=>takePost()}  text="Post" type="secondary"/>
                     
                     {/* Button Next */}
                     {/* Button Cancel */}

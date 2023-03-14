@@ -22,9 +22,9 @@ export function* createPostRequestSaga(action){
     console.log(data)
     try {
         const response=yield call(requestCreatePost,data);
-        const mainvalue=response.data;
+        const mainvalue=response;
        console.log(mainvalue);
-        yield put(createPostResponse(mainvalue));
+        // yield put(createPostResponse(mainvalue));
     } catch (error) {
         console.log("Not call api request"+error)
     }

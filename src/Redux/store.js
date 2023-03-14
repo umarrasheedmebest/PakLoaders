@@ -11,6 +11,7 @@ import { bidsReducer } from "./slices/BidsSlice";
 
 import {languageReducer} from "./slices/LanguageSlice"
 import { postReducer } from "./slices/PostSlice";
+import { ridesReducer } from "./slices/RidesSlice";
 import { userReducer } from "./slices/UserSlice";
 
 const sagaMiddleware=createSagaMiddleware();
@@ -19,7 +20,8 @@ const reducer=combineReducers({
     language:languageReducer,
     post:postReducer,
     user:userReducer,
-    bids:bidsReducer
+    bids:bidsReducer,
+    rides:ridesReducer
 })
 const store=configureStore({
     reducer,

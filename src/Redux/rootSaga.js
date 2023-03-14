@@ -5,14 +5,20 @@ import {
   handleGetUserLoginOtp,
   handleGetUserVarifyOtp,
 } from './Saga/AuthSaga';
-import { getAllBidsRequestSaga } from './Saga/BidsSaga';
+import {getAllBidsRequestSaga} from './Saga/BidsSaga';
 import {
   getAllPostRequestSaga,
   singlePostRequestSaga,
   createPostRequestSaga,
   cancelPostRequestSaga,
 } from './Saga/PostSaga';
-import { deleteUserRequestSaga,getUserRequestSaga,updateUserImageRequestSaga,updateUserRequestSaga } from './Saga/UserSaga';
+import { acceptBidRequestSaga, upcomingRidesRequestSaga } from './Saga/RidesSaga';
+import {
+  deleteUserRequestSaga,
+  getUserRequestSaga,
+  updateUserImageRequestSaga,
+  updateUserRequestSaga,
+} from './Saga/UserSaga';
 
 import {
   signupRequest,
@@ -20,14 +26,20 @@ import {
   signinOtpVerifyRequest,
   signinRequest,
 } from './slices/AuthSlice';
-import { getAllBidsRequest } from './slices/BidsSlice';
+import {getAllBidsRequest} from './slices/BidsSlice';
 import {
   createPostRequest,
   getAllPostRequest,
   singlePostRequest,
   cancelPostRequest,
 } from './slices/PostSlice';
-import { deleteUserRequest,getUserRequest,updateUserImageRequest,updateUserRequest } from './slices/UserSlice';
+import { acceptBidRequest, upcomingRidesRequest } from './slices/RidesSlice';
+import {
+  deleteUserRequest,
+  getUserRequest,
+  updateUserImageRequest,
+  updateUserRequest,
+} from './slices/UserSlice';
 
 export function* watcherSaga() {
   // Auth
@@ -41,11 +53,13 @@ export function* watcherSaga() {
   yield takeLatest(cancelPostRequest.type, cancelPostRequestSaga);
   yield takeLatest(createPostRequest.type, createPostRequestSaga);
   // User
-  yield takeLatest(deleteUserRequest.type,deleteUserRequestSaga);
+  yield takeLatest(deleteUserRequest.type, deleteUserRequestSaga);
   yield takeLatest(getUserRequest.type, getUserRequestSaga);
   yield takeLatest(updateUserRequest.type, updateUserRequestSaga);
-  yield takeLatest(updateUserImageRequest.type,updateUserImageRequestSaga);
+  yield takeLatest(updateUserImageRequest.type, updateUserImageRequestSaga);
   // Bids
   yield takeLatest(getAllBidsRequest.type, getAllBidsRequestSaga);
-
+  // Rides
+  yield takeLatest(acceptBidRequest.type,acceptBidRequestSaga);
+  yield takeLatest(upcomingRidesRequest.type,upcomingRidesRequestSaga);
 }

@@ -38,6 +38,7 @@ const CreatePostComponent = ({ }) => {
                 <Text style={{fontSize:10,fontWeight:"400",color:"#9D9D9D"}}>{item.time}</Text>
             </View>
           <View style={styles.dataContainer}>
+            
             {/* First Row user Name */}
             <View style={{display:"flex", flexDirection:"row",alignItems:"center"}}>
             <View><Image source={item.image}/></View>
@@ -46,16 +47,16 @@ const CreatePostComponent = ({ }) => {
               <View style={{display:"flex",flexDirection:"row",alignItems:"center",}}>
                 <Image source={require('../../assets/Stars.png')}/>
                 <Text style={{marginLeft:10,}}>(25 reviews)</Text>
+               
               </View>
               
             </View>
-            <View style={{flexDirection:"row"}}>
+            <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
               <TouchableOpacity onPress={()=>navigation.navigate('Post')}>
                 <Image source={require('../../assets/edit_btn.png')}/>
               </TouchableOpacity>
-                <TouchableOpacity onPress={()=>dispatch(cancelPostRequest(item.id))}>
-                  <Image style={{marginLeft:2}} source={require('../../assets/delete.png')}/>
-                </TouchableOpacity>
+                
+                <View style={{width:15,height:15,backgroundColor:item.is_active==1?"green":"red",marginLeft:5,borderRadius:100}}></View>
                 
                 </View>
           </View>
@@ -79,9 +80,11 @@ const CreatePostComponent = ({ }) => {
           </View>
           {/* 2nd Row user Name */}
           {/* 3rd Row user */}
-          <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
+          <View style={[styles.defaultStyle,{justifyContent:"space-evenly"}]}>
             
-            
+          <TouchableOpacity style={styles.container_primary} onPress={()=>dispatch(cancelPostRequest(item.id))}>
+          <Text style={styles.text_primary}>Delete</Text>
+                </TouchableOpacity>
           
           
            <TouchableOpacity style={styles.container_primary} onPress={()=> {
