@@ -1,4 +1,4 @@
-import React,{useContext,useState,useEffect} from 'react';
+import React,{useContext,useState,useEffect,useCallback,memo} from 'react';
 import { ImageBackground, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native';
 import {DrawerContentScrollView,DrawerItemList,DrawerItem} from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
@@ -29,6 +29,8 @@ const CustomDrawer = (props,{Imagebg,bgImage}) => {
 
 
   const dispatch=useDispatch();
+  
+  
   const getData=async()=>{
 try {
        dispatch(getAllPostRequest());
@@ -38,12 +40,18 @@ try {
       console.log("Not fetch from Asynic storge")
     }
   }
+ const myapp= useCallback(
+    () => {
+      getData()
+    },
+    [dispatch],
+  )
   useEffect(() => {
-    getData()
+    myapp()
    
   
     
-  }, [dispatch])
+  }, [])
   
   
   const [first, setFirst] = useState(false)
@@ -85,7 +93,7 @@ try {
       </View>
       
       {/* Profile button */}
-      {userData.map((res)=>{
+      {/* {userData.map((res)=>{
         console.log("Console id",res.id)
         return <View key={res.id}>
                <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
@@ -97,7 +105,7 @@ try {
         <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
         <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
         </View>
-      })}
+      })} */}
      
    
         {/* Scrool navigation button */}
@@ -215,4 +223,4 @@ try {
 
 
 const styles = StyleSheet.create({});
-export default CustomDrawer;
+export default memo(CustomDrawer);
