@@ -311,15 +311,18 @@ const PostComponent = ({
         {/* Profile */}
         <View
           style={{
-            width: '100%',
+            width: '95%',
             alignItems: 'center',
             justifyContent: 'center',
             marginHorizontal: 10,
+            paddingHorizontal:10,
+           
+            
           }}>
           {/* Input field user Pickup Location */}
           <CustomInput
             label={mark ? eng.pickupLocation : eng.pickupLocation}
-            width={'40%'}
+           
             eye="none"
             placeholder="Clarck pharmacy, 442 Rawalpindi"
             error={errors.pickup_address}
@@ -331,7 +334,7 @@ const PostComponent = ({
           {/* Input field user Drop Location */}
           <CustomInput
             label="Drop off Location"
-            width={'40%'}
+           
             eye="none"
             placeholder="Clarck pharmacy, 442 Islamabad"
             error={errors.dropoff_address}
@@ -343,7 +346,7 @@ const PostComponent = ({
           {/* Input field user Luggage weight */}
           <CustomInput
             label="Luggage weight"
-            width={'40%'}
+            
             eye="none"
             placeholder="580 kg"
             error={errors.details}
@@ -357,7 +360,7 @@ const PostComponent = ({
             value={textOne}
             showModeOne={showModeOne}
             label="Date of pickup"
-            width={'40%'}
+            
             eye="flex"
             calenderr={true}
             placeholder="12-02-2024"
@@ -369,7 +372,7 @@ const PostComponent = ({
           {/* Input field user Time Pickup */}
           <CustomInput
             label="Time of pickup"
-            width={'40%'}
+          
             eye="none"
             placeholder="12-02-2024"
             error={errors.pickup_time}
@@ -381,7 +384,7 @@ const PostComponent = ({
           {/* Input field user Vehicle Required */}
           <CustomInput
             label="Loaders"
-            width={'40%'}
+            
             eye="none"
             placeholder="Loaders"
             error={errors.loaders}
@@ -412,11 +415,6 @@ const PostComponent = ({
           {/* Button Cancel */}
         </View>
       </ScrollView>
-      <View style={styles.MenuBar}>
-        <View style={styles.MenuLine}></View>
-        <CustomMenu />
-        <View style={styles.MenuLine}></View>
-      </View>
     </SafeAreaView>
   );
 };
@@ -430,8 +428,8 @@ const styles = StyleSheet.create({
 
   mainContainer: {
     width: '100%',
-    height: '80%',
-
+    height: '100%',
+    
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
     backgroundColor: 'white',

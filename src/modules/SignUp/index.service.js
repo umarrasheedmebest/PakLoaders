@@ -6,7 +6,7 @@ const SignUpServiceComponent = ({
     navigation,
 }) => {
     const dispatch=useDispatch();
-    console.log('Pakistan Zindabad')
+    
 
     const navigateToLogin= ()=> {
         navigation.navigate('Login')

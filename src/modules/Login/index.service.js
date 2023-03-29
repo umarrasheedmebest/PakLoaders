@@ -1,14 +1,16 @@
-import { useState,useContext,memo,useCallback } from 'react';
+import { useState,useContext,memo,useCallback,useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { signinRequest } from '../../Redux/slices/AuthSlice';
 import { signInUserRequest, signUpUserRequest, userOtpVerfiyRequest } from '../Auth/dux/authActions';
 import {AuthContext} from '../../../AuthProvider';
 import { Keyboard } from 'react-native';
+
 const LoginServiceComponent = ({
     children,
     navigation,
 }) => {
+  const signinRequestData = useSelector(state => state.auth.signInResponse);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const data=useSelector(state=>state.language)
@@ -16,17 +18,10 @@ const LoginServiceComponent = ({
         fullName: '',
         mobile: '',
       });
+      
     const dispatch = useDispatch();
     console.log('Pakistan Zindabad')
-   const login= useCallback(
-      () => {
-        const {login} = useContext(AuthContext);
-        return login
-      },
-      [inputs],
-    )
-    
-    
+    const {login} = useContext(AuthContext);
     const navigateSignUp = () => {
         navigation.navigate('SignUp');
 
@@ -38,19 +33,20 @@ const LoginServiceComponent = ({
     const navgatoHowItWork = () => {
         navigation.navigate('HowItWorks')
     }
-   const handleOnChange = useCallback(
+   const handleOnChange = 
        (text, input) => {
         setInputs(prevState => ({...prevState, [input]: text}));
-      },
-      [inputs],
-    );
-      const handleError = useCallback((errorMessage, input) => {
+      };
+     
+    
+      const handleError = (errorMessage, input) => {
         setErrors(prevState => ({...prevState, [input]: errorMessage}));
-      },[errors]);
-      const valiDate = useCallback(() => {
+      };
+      const valiDate =() => {
         Keyboard.dismiss();
         let valid = true;
         if (!inputs.mobile) {
+
           handleError('Please input Mobile Number/Email', 'mobile');
           valid = false;
         }
@@ -62,7 +58,7 @@ const LoginServiceComponent = ({
             "number":inputs.mobile
           })
         }
-      },[inputs])
+      };
       const logined = () => {
         console.log('Pakistan Zindabad');
         setLoading(true);
@@ -96,11 +92,11 @@ const LoginServiceComponent = ({
         console.log(item)
         dispatch(
             signinRequest(item)
-        );
+        ); 
+        
         navigation.navigate('Verification')
-       
-       
     }
+    
 
     return children({
         navigation,

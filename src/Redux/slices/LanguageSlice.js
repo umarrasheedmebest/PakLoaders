@@ -9,12 +9,12 @@ const language =createSlice({
         english:(state,action)=>{
             
             state=true
-         console.log(state) 
+        
          return state
         },
         urdu:(state,action)=>{
             state=false
-            console.log(state) 
+           
             return state
         }
     }

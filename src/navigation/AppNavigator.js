@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../../AuthProvider';
 import { ActivityIndicator, SafeAreaView, View,ImageBackground } from 'react-native';
 import {requestUserPermission,notificationListener} from '../Components/NotificationServices/NotificationService';
-
+import { MyTabs } from './BottomNavigation';
 const AppNavigator = () => {
     const { userToken, login,isLoading,setisLoading } = useContext(AuthContext);
    
@@ -19,17 +19,18 @@ const AppNavigator = () => {
         
       
     }
-    useEffect(() => {
+    // useEffect(() => {
     
-    requestUserPermission()
-    notificationListener()
+    // requestUserPermission()
+    // notificationListener()
       
-    }, [])
+    // }, [])
     
 
     return (
         <NavigationContainer>
             {userToken!==null ? <MainNavigator /> : <Auth />}
+            {/* <MyTabs/> */}
         </NavigationContainer>
     );
 };

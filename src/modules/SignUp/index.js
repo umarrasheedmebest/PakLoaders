@@ -18,7 +18,7 @@ import {
     Button,
     ScrollView,
     Keyboard,
-    Alert
+    Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
@@ -122,19 +122,19 @@ const SignUpComponent = ({
                         {/* Forground Image */}
                         <CustomForground source={require("../../assets/SignUp-icon.png")}/>
                         {/* Forground Image */}
-                     <View style={{margin:4}}> 
+                     <View style={{margin:4,width:"100%"}}> 
                     <Text style={{fontSize:24, alignSelf:"flex-start", color:"#4448FF",fontWeight:"700",fontFamily:"Poppins-SemiBold.ttf" }} >Sign Up</Text>
                     {/* Full Name */}
                     
-                    <CustomInput label="Full Name" placeholder="User Name" width={95} eye="none"
+                    <CustomInput label="Full Name" placeholder="User Name"  eye="none"
                     setValue={(text)=>handleOnChange(text, 'fullName')}
                     error={errors.fullName}
                     onFocus={()=>{
                       handleError(null,'fullName');}}
-                     /></View>
+                     />
                     {/* Input field user Email/Mobile Number */}
-                    <View style={{margin:4}}>
-                    <CustomInput label="Mobile Number/Email" placeholder="92444886423" width={173} eye="none"
+                    
+                    <CustomInput label="Mobile Number/Email" placeholder="92444886423"  eye="none"
                     setValue={(text)=>handleOnChange(text, 'mobile')}
                     error={errors.mobile}
                     onFocus={()=>{

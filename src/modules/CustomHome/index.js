@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,memo} from 'react';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import CustomBackground from '../../Components/CustomBackground';
@@ -41,7 +41,7 @@ const HomeComponent = (props,{
   const alData=useSelector((state)=>state.bids.getAllBidsResponse)
   console.log("Bids Response");
   
-  console.log(alData);
+  console.log(alData.length);
   const dispatch=useDispatch();
   const navigation= useNavigation();
   const mark=useSelector((state)=>state.language)
@@ -83,7 +83,7 @@ const HomeComponent = (props,{
       {/* 3rd Row user */}
       <View style={[styles.defaultStyle,{justifyContent:"center"}]}>
         
-        <TouchableOpacity onPress={()=>onDelete(item.id)} style={styles.container_secondary}>
+        <TouchableOpacity onPress={()=>onDelete(item.bids_id)} style={styles.container_secondary}>
         <Text style={styles.text_secondary}>Ignore</Text>
        </TouchableOpacity>
       
@@ -128,20 +128,27 @@ const HomeComponent = (props,{
                     </View>
                   
                  
-                  <View style={styles.listStyle}>
-                    <FlatList style={{zIndex:1,}}  data={alData}
-                    keyExtractor={(item)=>item.id}
+                 
+                    {
+                      allData.length==0?<View style={{borderWidth:2}}><Text>Not found Record</Text></View>:  
+                      <View style={styles.listStyle}>
+                        <FlatList style={{zIndex:1,}}
+                      
+                      data={alData}
+                    keyExtractor={(item)=>item.bids_id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}
                     /></View>
+                    }
+                   
                     
                  </View>
-                 <View style={styles.MenuContainer}>
+                 {/* <View style={styles.MenuContainer}>
                   <View style={styles.MenuLine}></View>
                 <CustomMenu/>
                 <View style={styles.MenuLine}></View>
                 
-                </View>
+                </View> */}
           
          </SafeAreaView>
         
@@ -213,6 +220,7 @@ const styles = StyleSheet.create({
 shadowOffset: {
 	width: 0,
 	height: 2,
+  
 },
 shadowOpacity: 0.25,
 shadowRadius: 3.84,

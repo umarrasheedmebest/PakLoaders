@@ -32,6 +32,7 @@ import Bank from '../modules/Bank/Bank';
 import BankAccount from '../modules/BankAccount/BankAccount';
 import Maps from '../modules/Maps/Maps';
 import RiderProfile from '../modules/RiderProfile/RiderProfile';
+import { MyTabs } from './BottomNavigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -58,7 +59,7 @@ export const MainNavigator = () => {
       }}>
       <Drawer.Screen
         name="Home"
-        component={Home}
+        component={MyTabs}
         options={{
           drawerIcon: () => (
             <Image source={require('../assets/home_icon_drawer.png')} />

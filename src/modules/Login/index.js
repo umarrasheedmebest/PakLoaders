@@ -5,7 +5,7 @@ import CustomBackground from '../../Components/CustomBackground';
 import CustomForground from '../../Components/CustomForground';
 import Loader from '../../Components/Loader';
 import CustomText from '../../Components/CustomText/CustomText';
-import {StyleSheet, SafeAreaView, View} from 'react-native';
+import {StyleSheet, SafeAreaView, View,ScrollView} from 'react-native';
 import Heading from '../../Components/Heading';
 import {eng, Urdu} from '../../Components/Api/Language';
 const LoginComponent = ({
@@ -26,22 +26,24 @@ const LoginComponent = ({
       <View style={styles.mainContainer}>
         {/* Forground Image */}
         <CustomForground source={require('../../assets/Login-icon.png')} />
-        <View style={{margin: 4}}>
+        <View style={{margin: 4,width:"100%"}}>
           {/*Forground image  */}
           <Heading text={data ? 'Sign In' : 'Sign In'} type="primary" />
           {/* Input field user Email/Mobile Number */}
-          <CustomInput
+         
+            <CustomInput
             label={data ? eng.mobileNum : Urdu.mobileNum}
-            width={166}
+            
             eye="none"
             placeholder="92327482937"
-            
             error={errors.mobile}
             setValue={text => handleOnChange(text, 'mobile')}
             onFocus={() => {
               handleError(null, 'mobile');
             }}
           />
+         
+          
         </View>
 
         {/* Button Sign In */}
