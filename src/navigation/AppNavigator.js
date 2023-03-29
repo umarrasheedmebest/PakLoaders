@@ -4,18 +4,18 @@ import { Auth } from './AuthNavigator';
 import { MainNavigator } from './MainNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../../AuthProvider';
-import { ActivityIndicator, SafeAreaView, View,ImageBackground } from 'react-native';
+import { ActivityIndicator, SafeAreaView, View,ImageBackground,Image,Text} from 'react-native';
 import {requestUserPermission,notificationListener} from '../Components/NotificationServices/NotificationService';
 import { MyTabs } from './BottomNavigation';
 const AppNavigator = () => {
     const { userToken, login,isLoading,setisLoading } = useContext(AuthContext);
    
     if (isLoading) {
-        return <View style={{flex:1, justifyContent:"center",alignItems:"center",}}>
-            <ImageBackground resizeMode='contain' style={{width:"100%",height:"100%",}} source={require('../assets/slide3.png')}>
-            <ActivityIndicator size={'large'} />
-            </ImageBackground>
-              </View>
+        return  <View style = {{flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#444BFF'}}>
+            <ActivityIndicator/>
+        <Image source = {require('../assets/slide3.png')} style = {{height: 200, width: 200}}/>
+        <Text style = {{marginTop: 20, fontSize: 24, color: 'white', fontWeight: "bold"}}>P A K    L O A D E R S</Text>
+    </View>
         
       
     }

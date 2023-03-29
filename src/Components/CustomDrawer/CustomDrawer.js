@@ -16,6 +16,25 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserRequest } from '../../Redux/slices/UserSlice';
 import { IMAGE_URL } from '../../Redux/constent/constent';
 import { getAllBidsRequest } from '../../Redux/slices/BidsSlice';
+import HomeIcon from '../../assets/SVG_Icons/home_icon_drawer.svg';
+import PostIcon from '../../assets/SVG_Icons/mypost_icon_drawer.svg';
+import PakageIcon from '../../assets/SVG_Icons/pkg_icon_drawer.svg';
+import LuggageIcon from '../../assets/SVG_Icons/insured_lugage_icon_drawer.svg';
+import RideIcon from '../../assets/SVG_Icons/ride_icon_drawer.svg';
+import ChatIcon from '../../assets/SVG_Icons/chat_icon_drawer.svg';
+import PaymentIcon from '../../assets/SVG_Icons/payment_icon_drawer.svg';
+import ShareIcon from '../../assets/SVG_Icons/share_icon_drawer.svg';
+import ContactIcon from '../../assets/SVG_Icons/contact_icon_drawer.svg';
+import RateIcon from '../../assets/SVG_Icons/rate_icon_drawer.svg';
+import LogOut from '../../assets/SVG_Icons/logout_icon_drawer.svg';
+import Facebook from '../../assets/SVG_Icons/fb_icon_52.svg';
+import Instagram from '../../assets/SVG_Icons/insta_icon_52.svg';
+import Twitter from '../../assets/SVG_Icons/twitter_icon_52.svg';
+import BackArrow from '../../assets/SVG_Icons/arrow-back.svg';
+import EngFlag from '../../assets/SVG_Icons/Eng_lang.svg';
+import PakFlag from '../../assets/SVG_Icons/Urdu_lang.svg';
+
+
 
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
   const navigation = useNavigation();
@@ -65,7 +84,7 @@ try {
       <View style={{flexDirection:"row",justifyContent:"space-between",marginBottom:30,alignItems:"center"}}>
         <View>
           <TouchableOpacity onPress={()=>props.navigation.closeDrawer()}>
-             <Image source={require('../../assets/arrow-back.png')}/>
+            <BackArrow width={30}/>
           </TouchableOpacity>
          
         </View>
@@ -93,7 +112,7 @@ try {
       </View>
       
       {/* Profile button */}
-      {/* {userData.map((res)=>{
+      {userData.map((res)=>{
         console.log("Console id",res.id)
         return <View key={res.id}>
                <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
@@ -105,7 +124,7 @@ try {
         <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
         <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
         </View>
-      })} */}
+      })}
      
    
         {/* Scrool navigation button */}
@@ -118,6 +137,7 @@ try {
           <DrawerButtondemo 
           active={colorspk?'#D9EBFF':'#fff'}
           text={counter?eng.home:Urdu.home}
+          Icons={<HomeIcon width={30} />}
           source={require('../../assets/home_icon_drawer.png')}
           onPress={()=>{
             setColorspk(true)
@@ -125,11 +145,14 @@ try {
           />
           <DrawerButtondemo 
           text={counter?eng.editPost:Urdu.editPost}
+          Icons={<PostIcon width={30} />}
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>{navigation.navigate('Post')}}
           />
           <DrawerButtondemo 
           text={counter?eng.packages:Urdu.packages}
+          Icons={<PakageIcon width={30} />}
+
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
           />
@@ -137,16 +160,22 @@ try {
        
           <DrawerButtondemo 
           text={counter?eng.insuredLuggage:Urdu.insuredLuggage}
+          Icons={<LuggageIcon width={30} />}
+
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
           />
           <DrawerButtondemo 
           text={counter?eng.myRides:Urdu.myRides}
+          Icons={<RideIcon width={30} />}
+
           source={require('../../assets/ride_icon_drawer.png')}
           onPress={()=>navigation.navigate("Rides")}
           />
            <DrawerButtondemo 
           text={counter?eng.myPost:Urdu.myPost}
+          Icons={<PostIcon width={30} />}
+
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>{
             dispatch(getAllPostRequest());
@@ -154,36 +183,34 @@ try {
           />
           <DrawerButtondemo 
           text={counter?eng.chat:Urdu.chat}
+          Icons={<ChatIcon width={30} />}
+
           source={require('../../assets/chat_icon_drawer.png')}
           onPress={()=>navigation.navigate('Chat')}
           />
           <DrawerButtondemo 
           text={counter?eng.payment:Urdu.payment}
-          PaymentImage={
-            <View style={{justifyContent:"center",alignContent:"center",position:"relative",
-            paddingLeft:10,marginRight:30,
-            }}>
-            <ImageBackground style={{width:34,height:34,resizeMode:"contain"}} source={require('../../assets/payment.png')}>
-                  <Image style={{justifyContent:"center",position:"absolute",right:7,top:9,}} source={require('../../assets/pay.png')}/>
-                  </ImageBackground>
-                  </View>  
-          }
-          viewImage={'none'}
-          
+          Icons={<PaymentIcon width={30} />}
           onPress={()=>navigation.navigate('Payment')}
           />
           <DrawerButtondemo 
           text={counter?eng.share:Urdu.share}
+          Icons={<ShareIcon width={30} />}
+
           source={require('../../assets/share_icon_drawer.png')}
           onPress={()=>navigation.navigate('Share')}
           />
           <DrawerButtondemo 
           text={counter?eng.contactUs:Urdu.contactUs}
+          Icons={<ContactIcon width={30} />}
+
           source={require('../../assets/contact_icon_drawer.png')}
           onPress={()=>navigation.navigate("Contact")}
           />
           <DrawerButtondemo 
           text={counter?eng.rate:Urdu.rate}
+          Icons={<RateIcon width={30} />}
+
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
           />
@@ -195,7 +222,8 @@ try {
 
           
         <View style={{borderRadius:100,width:"100%",marginLeft:-1,paddingLeft:10,backgroundColor:"#fff",flexDirection:"row",marginVertical:20,alignItems:"center",}}>
-        <Image style={{marginLeft:10,marginRight:35}} source={require('../../assets/logout_icon_drawer.png')}/>
+
+        <View style={{marginLeft:10,marginRight:30}}><LogOut width={30}/></View>
         <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>{counter?eng.logOut:Urdu.logOut}</Text> 
         </View>
         </TouchableOpacity>
@@ -204,9 +232,10 @@ try {
         <View style={{width:128,height:65,justifyContent:"space-between",alignItems:"center"}}>
           <Text style={{fontSize:14,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A",textTransform:"uppercase"}}>Connect us at</Text>
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-          <Image source={require('../../assets/fb.png')}/>
-          <Image style={{marginHorizontal:10,}} source={require('../../assets/insta.png')}/>
-          <Image source={require('../../assets/twiter.png')}/>
+          
+          <Facebook width={30}/>
+         <View style={{marginHorizontal:10}}><Instagram width={30}/></View> 
+          <Twitter width={30}/>
 
         </View> 
         </View>
