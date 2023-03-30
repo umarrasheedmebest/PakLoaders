@@ -15,17 +15,20 @@ const VerificationServiceComponent = ({children, navigation, route}) => {
   // Sign Data
   const UserNumber = useSelector(state => state.auth.signInResponse.data);
   const secret = useSelector(state => state.auth.signInResponse.secret);
-  const token = useSelector(state => state.auth.signInResponse.token);
+  const tokens = useSelector(state => state.auth.signInResponse.token);
   // Otp message
   const otpMessage = useSelector(state => state.auth.signInResponse.message);
   const signinRequest = useSelector(state => state.auth.signInRequest);
   // SignupData
   const signupUserNumber = useSelector(state => state.auth.signUpResponse.data);
+  const signinRequestData = useSelector(state => state.auth.signInResponse);
   const signupsecret = useSelector(state => state.auth.signUpResponse.secret);
   const signuptoken = useSelector(state => state.auth.signUpResponse.token);
   const signupfullName = useSelector(
     state => state.auth.signUpResponse.full_name,
   );
+  
+  
 const [invalidOtpLoader, setInvalidOtpLoader] = useState(false)
 const [otpMessagein, setOtpMessagein] = useState(false)
   console.log(signupfullName);
@@ -35,13 +38,13 @@ const [otpMessagein, setOtpMessagein] = useState(false)
   const navigateVerified = async item => {
     console.log('Verify function call');
     console.log(item);
-    if (token == item) {
+    if (tokens == item) {
       setOtpMessagein(false)
       dispatch(
         signinOtpVerifyRequest({
           number: UserNumber,
           secret: secret,
-          token: token,
+          token: tokens,
           deviceToken: await deviceToken(),
         }),
       );
@@ -64,8 +67,8 @@ const [otpMessagein, setOtpMessagein] = useState(false)
     invalidOtpLoader,
     setInvalidOtpLoader,
     otpMessagein,
-    setOtpMessagein
-
+    setOtpMessagein,
+    tokens
   });
 };
 

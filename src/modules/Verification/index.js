@@ -15,7 +15,8 @@ const VerificationComponent = ({
   invalidOtpLoader,
   setInvalidOtpLoader,
   otpMessagein,
-  setOtpMessagein
+  setOtpMessagein,
+  tokens
 }) => {
 
  
@@ -54,15 +55,15 @@ const VerificationComponent = ({
           <OTPInputView
             style={styles.otpInputViewo}
             pinCount={6}
-            code={otp} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+            code={tokens} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
             onCodeChanged={code => {
-              setOtp(code);
+              setOtp(tokens);
             }}
             autoFocusOnLoad
             codeInputFieldStyle={styles.underlineStyleBase}
             codeInputHighlightStyle={styles.underlineStyleHighLighted}
             onCodeFilled={code => {
-              setToken(code);
+              setToken(tokens);
               console.log(`Code is ${code}, you are good to go!`);
             }}
           />
@@ -76,7 +77,7 @@ const VerificationComponent = ({
           <CustomButton
             text="Verify"
             type="primary"
-            onPress={() => navigateVerified(token)}
+            onPress={() => navigateVerified(tokens)}
           />
         </View>
         {/* Verification Button */}

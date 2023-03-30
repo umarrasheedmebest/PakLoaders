@@ -11,6 +11,8 @@ const LoginServiceComponent = ({
     navigation,
 }) => {
   const signinRequestData = useSelector(state => state.auth.signInResponse);
+  const signinRequestDa = useSelector(state => state.auth.signInRequest);
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const data=useSelector(state=>state.language)
@@ -18,7 +20,8 @@ const LoginServiceComponent = ({
         fullName: '',
         mobile: '',
       });
-      
+      const validNumber=typeof signinRequestData =='string'
+      console.log(validNumber)
     const dispatch = useDispatch();
     console.log('Pakistan Zindabad')
     const {login} = useContext(AuthContext);
@@ -34,14 +37,14 @@ const LoginServiceComponent = ({
         navigation.navigate('HowItWorks')
     }
    const handleOnChange = 
-       (text, input) => {
+       useCallback((text, input) => {
         setInputs(prevState => ({...prevState, [input]: text}));
-      };
+      },[inputs]);
      
     
-      const handleError = (errorMessage, input) => {
+      const handleError = useCallback((errorMessage, input) => {
         setErrors(prevState => ({...prevState, [input]: errorMessage}));
-      };
+      },[errors]);
       const valiDate =() => {
         Keyboard.dismiss();
         let valid = true;
@@ -59,34 +62,36 @@ const LoginServiceComponent = ({
           })
         }
       };
-      const logined = () => {
-        console.log('Pakistan Zindabad');
-        setLoading(true);
+      // const logined = () => {
+      //   console.log('Pakistan Zindabad');
+      //   setLoading(true);
     
-        setTimeout(async () => {
-          setLoading(false);
-          let userData = await AsyncStorage.getItem('user');
-          if (userData) {
-            userData = JSON.parse(userData);
+      //   setTimeout(async () => {
+      //     setLoading(false);
+      //     let userData = await AsyncStorage.getItem('user');
+      //     if (userData) {
+      //       userData = JSON.parse(userData);
     
-            if (
-              inputs.mobile == userData.mobile &&
-              inputs.password == userData.password
-            ) {
-              AsyncStorage.setItem(
-                'user',
-                JSON.stringify({...userData, login: true}),
-              );
-                console.log(inputs);
-              login();
-            } else {
-              Alert.alert('error', 'Invalid Details');
-            }
-          } else {
-            Alert.alert('error', 'User does not exist');
-          }
-        }, 3000);
-      };
+      //       if (
+      //         inputs.mobile == userData.mobile &&
+      //         inputs.password == userData.password
+      //       ) {
+      //         AsyncStorage.setItem(
+      //           'user',
+      //           JSON.stringify({...userData, login: true}),
+      //         );
+      //           console.log(inputs);
+      //         login();
+      //       } else {
+      //         Alert.alert('error', 'Invalid Details');
+      //       }
+      //     } else {
+      //       Alert.alert('error', 'User does not exist');
+      //     }
+      //   }, 3000);
+      // };
+
+
 
     const signIn = (item) => {
         console.log(item)
@@ -95,7 +100,24 @@ const LoginServiceComponent = ({
         ); 
         
         navigation.navigate('Verification')
+     
+        
     }
+    
+  useEffect(() => {
+    
+  
+    if (validNumber==true) {
+      navigation.navigate('Login')
+      handleError('Your Number not Register', 'mobile');
+    }
+     
+    
+    
+     
+  }, [validNumber])
+    
+    
     
 
     return children({
@@ -108,7 +130,6 @@ const LoginServiceComponent = ({
         setErrors,
         login,
         loading,
-        setLoading,
         inputs,
         setInputs,
         handleOnChange,
