@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import {colors} from '../../globalStyle';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -31,14 +31,13 @@ const CustomHeader = ({
   picture,
   ...props
 }) => {
-  console.log(picture);
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const navigation = useNavigation();
   const defaultImage = require('../../assets/arrow-back.png');
   const customImage = require('../../assets/whiteButton.png');
   const userData = useSelector(state => state.user.getUserResponse);
-  console.log(userData);
+
   const goBaack = () => {
     const back = props.navigation.goBack();
     return back;
@@ -88,17 +87,18 @@ const CustomHeader = ({
                 <Image source={require('../../assets/Bell.png')} />
               </TouchableOpacity>
               <TouchableOpacity style={{marginRight: 10}}>
-                {userData.map(res => {
-                  <Image
-                    key={res.id}
-                    style={{width: 36, height: 36, borderRadius: 100}}
-                    source={
-                      Chatprofile
-                        ? picture
-                        : {uri: `${IMAGE_URL}${res.user_image}`}
-                    }
-                  />;
-                })}
+                {userData.map(
+                  useCallback(res => {
+                    return (
+                      <Image
+                        key={res.id}
+                        style={{width: 36, height: 36, borderRadius: 100}}
+                        source={{uri: `${IMAGE_URL}${res.user_image}`}}
+                      />
+                    );
+                  }),
+                  [],
+                )}
               </TouchableOpacity>
             </View>
           ) : toggleButton ? (

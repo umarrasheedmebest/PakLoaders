@@ -19,11 +19,13 @@ import { eng, Urdu } from '../../Components/Api/Language';
 
  
 const PackageComponent = (props) => {
+
    const [backColor, setBackColor] = useState(true);
    const [pref, setPref] = useState(false);
    const [ultimate, setUltimate] = useState(false);
 
-const data=useSelector.language
+   const data=useSelector((state)=>state.language)
+console.log(data)
     const navigation = useNavigation();
     const essential=()=>{
       if(backColor===false){

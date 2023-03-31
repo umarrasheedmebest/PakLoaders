@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import {
@@ -11,14 +11,23 @@ import {
 import CustomHeader from '../../Components/CustomHeader';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import RideList from '../../Components/RideList';
+import { useDispatch } from 'react-redux';
+import { upcomingRidesRequest } from '../../Redux/slices/RidesSlice';
  
 const RidesComponent = ({
     sideBar
 }) => { 
+    const dispatch=useDispatch();
  const [ongoing, setOngoing] = useState(false)
  const [upcoming, setUpcoming] = useState(false)
  const [complete, setComplete] = useState(false)
  const [cancell, setCancell] = useState(false)
+ useEffect(() => {
+   dispatch(upcomingRidesRequest())
+ 
+   
+ }, [])
+ 
     return (
         
            <CustomHeader

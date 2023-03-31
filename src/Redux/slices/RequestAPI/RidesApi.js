@@ -13,31 +13,22 @@ const getUserId=async()=>{
 }
 //  Request create post
 export const requestAcceptBid=async(bidId)=> {
-  const proj1= new Promise(async(resolve,reject)=>{
+ 
     const {id,userinfoToken}=await getUserId();
     console.log("This is undefine", bidId)
   console.log(userinfoToken);
-console.log(`${BASE_URL}post/add/${id}`)
+console.log(`${BASE_URL}rides/accept-bid/${bidId}`)
   const res = axios.request({
     method: 'post',
     url: `${BASE_URL}rides/accept-bid/${bidId}`,
-    data,
     headers: {
         'Content-Type': 'multipart/form-data;',
         'Authorization':userinfoToken
 
     },
   });
-   resolve(res);
-  //  reject(res);
-  });
-  proj1.then((res)=>{
-    console.log(res)
-    return res
-  }).catch((err)=>{
-    console.log(err.response.data)
-    return err.response.data
-  })
+  return res
+  
   
 }
 export const requestUpcomingRides=async()=> {

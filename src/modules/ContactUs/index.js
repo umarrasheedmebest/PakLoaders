@@ -21,7 +21,7 @@ import { eng, Urdu } from '../../Components/Api/Language';
  
 const ContactComponent = (props) => { 
     const navigation = useNavigation();
- const data=useSelector.language;
+    const data=useSelector((state)=>state.language)
     return (
         
             <SafeAreaView style={styles.container}>

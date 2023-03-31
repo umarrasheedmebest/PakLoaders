@@ -4,7 +4,7 @@ const PostServiceComponent = ({
 }) => {
     console.log('Pakistan Zindabad');
     const sideBar=()=>{
-        navigation.openDrawer()
+        navigation.navigate('Profile')
     }
 
     return children({

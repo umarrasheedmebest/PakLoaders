@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import {colors} from '../../globalStyle';
 import CustomButton from '../../Components/CustomButton/CustomButton';
@@ -36,6 +36,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
+import {IMAGE_URL} from '../../Redux/constent/constent';
 
 const PostComponent = ({
   navigateCompleteProfileOne,
@@ -43,6 +44,7 @@ const PostComponent = ({
 
   sideBar,
 }) => {
+  const userData = useSelector(state => state.user.getUserResponse);
   const [textOne, setTextOne] = useState('');
   // Text Validation
   const [inputs, setInputs] = useState({
@@ -150,7 +152,18 @@ const PostComponent = ({
             <Image source={require('../../assets/Bell.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={sideBar}>
-            <Image source={require('../../assets/profile.png')} />
+            {userData.map(
+              useCallback(res => {
+                return (
+                  <Image
+                    key={res.id}
+                    style={{width: 36, height: 36, borderRadius: 100}}
+                    source={{uri: `${IMAGE_URL}${res.user_image}`}}
+                  />
+                );
+              }),
+              [],
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -315,14 +328,11 @@ const PostComponent = ({
             alignItems: 'center',
             justifyContent: 'center',
             marginHorizontal: 10,
-            paddingHorizontal:10,
-           
-            
+            paddingHorizontal: 10,
           }}>
           {/* Input field user Pickup Location */}
           <CustomInput
             label={mark ? eng.pickupLocation : eng.pickupLocation}
-           
             eye="none"
             placeholder="Clarck pharmacy, 442 Rawalpindi"
             error={errors.pickup_address}
@@ -334,7 +344,6 @@ const PostComponent = ({
           {/* Input field user Drop Location */}
           <CustomInput
             label="Drop off Location"
-           
             eye="none"
             placeholder="Clarck pharmacy, 442 Islamabad"
             error={errors.dropoff_address}
@@ -346,7 +355,6 @@ const PostComponent = ({
           {/* Input field user Luggage weight */}
           <CustomInput
             label="Luggage weight"
-            
             eye="none"
             placeholder="580 kg"
             error={errors.details}
@@ -360,7 +368,6 @@ const PostComponent = ({
             value={textOne}
             showModeOne={showModeOne}
             label="Date of pickup"
-            
             eye="flex"
             calenderr={true}
             placeholder="12-02-2024"
@@ -372,7 +379,6 @@ const PostComponent = ({
           {/* Input field user Time Pickup */}
           <CustomInput
             label="Time of pickup"
-          
             eye="none"
             placeholder="12-02-2024"
             error={errors.pickup_time}
@@ -384,7 +390,6 @@ const PostComponent = ({
           {/* Input field user Vehicle Required */}
           <CustomInput
             label="Loaders"
-            
             eye="none"
             placeholder="Loaders"
             error={errors.loaders}
@@ -429,7 +434,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: '100%',
     height: '100%',
-    
+
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
     backgroundColor: 'white',

@@ -112,8 +112,8 @@ try {
       </View>
       
       {/* Profile button */}
-      {userData.map((res)=>{
-        console.log("Console id",res.id)
+      {userData.map(useCallback((res)=>{
+        
         return <View key={res.id}>
                <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
         <View style={{width:68,height:68,borderWidth:2,borderColor:"#fff",borderRadius:100, justifyContent:"center", alignItems:"center",position:"relative" }}>
@@ -124,7 +124,7 @@ try {
         <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
         <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
         </View>
-      })}
+      },[]))}
      
    
         {/* Scrool navigation button */}
