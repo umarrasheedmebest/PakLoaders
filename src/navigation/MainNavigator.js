@@ -39,7 +39,7 @@ const Drawer = createDrawerNavigator();
 export const MainNavigator = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
@@ -58,8 +58,8 @@ export const MainNavigator = () => {
         },
       }}>
       <Drawer.Screen
-        name="Home"
-        component={MyTabs}
+        name="Homes"
+        component={Home}
         options={{
           drawerIcon: () => (
             <Image source={require('../assets/home_icon_drawer.png')} />

@@ -141,7 +141,7 @@ try {
           source={require('../../assets/home_icon_drawer.png')}
           onPress={()=>{
             setColorspk(true)
-            navigation.navigate('Home')}}
+            navigation.navigate('Homes')}}
           />
           <DrawerButtondemo 
           text={counter?eng.editPost:Urdu.editPost}

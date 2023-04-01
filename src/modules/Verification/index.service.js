@@ -27,11 +27,12 @@ const VerificationServiceComponent = ({children, navigation, route}) => {
   const signupfullName = useSelector(
     state => state.auth.signUpResponse.full_name,
   );
-  
+  console.log(otpMessage)
+  console.log(tokens)
   
 const [invalidOtpLoader, setInvalidOtpLoader] = useState(false)
 const [otpMessagein, setOtpMessagein] = useState(false)
-  console.log(signupfullName);
+  
   const dispatch = useDispatch();
   console.log('Pakistan Zindabad');
 

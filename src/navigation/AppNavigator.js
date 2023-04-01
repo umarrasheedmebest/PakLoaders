@@ -19,12 +19,12 @@ const AppNavigator = () => {
         
       
     }
-    // useEffect(() => {
+    useEffect(() => {
     
-    // requestUserPermission()
-    // notificationListener()
+    requestUserPermission()
+    notificationListener()
       
-    // }, [])
+    }, [])
     
 
     return (
