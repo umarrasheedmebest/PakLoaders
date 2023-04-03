@@ -29,6 +29,7 @@ const AppNavigator = () => {
 
     return (
         <NavigationContainer>
+            {/* <MainNavigator/> */}
             {userToken!==null ? <MainNavigator /> : <Auth />}
             {/* <MyTabs/> */}
         </NavigationContainer>

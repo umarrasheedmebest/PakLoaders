@@ -9,7 +9,6 @@ const DrawerButtondemo  = ({
     source,
     PaymentImage,
    active,
-   Icons,
    viewImage
 }) => {
   
@@ -24,10 +23,9 @@ const DrawerButtondemo  = ({
     }}
     
     >
-      <View style={{marginLeft:10,marginRight:28}}>
-      {Icons}
-      </View>
-    {/* <Image style={{marginLeft:10,marginRight:28,display:viewImage}} source={source}/> */}
+
+      {PaymentImage}
+    <Image style={{marginLeft:10,marginRight:28,display:viewImage}} source={source}/>
     <Text style={{fontSize:16,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A"}}>{text}</Text> 
     </View>
     </TouchableOpacity>

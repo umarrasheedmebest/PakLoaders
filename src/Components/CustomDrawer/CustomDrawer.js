@@ -59,18 +59,13 @@ try {
       console.log("Not fetch from Asynic storge")
     }
   }
- const myapp= useCallback(
-    () => {
-      getData()
-    },
-    [dispatch],
-  )
-  useEffect(() => {
-    myapp()
+ 
+  // useEffect(() => {
+  // getData()
    
   
     
-  }, [])
+  // }, [])
   
   
   const [first, setFirst] = useState(false)
@@ -112,7 +107,7 @@ try {
       </View>
       
       {/* Profile button */}
-      {userData.map(useCallback((res)=>{
+      {/* {userData.map((res)=>{
         
         return <View key={res.id}>
                <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
@@ -124,7 +119,7 @@ try {
         <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
         <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
         </View>
-      },[]))}
+      })} */}
      
    
         {/* Scrool navigation button */}
@@ -156,7 +151,7 @@ try {
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
           />
-        </View>
+        
        
           <DrawerButtondemo 
           text={counter?eng.insuredLuggage:Urdu.insuredLuggage}
@@ -214,7 +209,7 @@ try {
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
           />
-          
+          </View>
         {/* Last Logout portion */}
         <View style={{borderColor:"#CCCCCC",borderTopWidth:2,}}></View>  
           {/* Logout */}

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "247775237292",
-    "project_id": "pakloadercustomerapp",
-    "storage_bucket": "pakloadercustomerapp.appspot.com"
+    "project_number": "798981946680",
+    "project_id": "pakloadercustomer",
+    "storage_bucket": "pakloadercustomer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:247775237292:android:0252619c985ba7b56bbb09",
+        "mobilesdk_app_id": "1:798981946680:android:a59a35feaa392373e595cd",
         "android_client_info": {
           "package_name": "com.pakloaders"
         }
       },
       "oauth_client": [
         {
-          "client_id": "247775237292-1rmshukc1nk7nf4tjt76b6n8hbo1qasd.apps.googleusercontent.com",
+          "client_id": "798981946680-findmk55q935longrnoc79ndom7r0j1m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDfltuSZITs9khZX3SQ9cJL3idrW4ipG54"
+          "current_key": "AIzaSyC0u1VLAcTITLVicrG-Udg0LepfaH-Yols"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "247775237292-1rmshukc1nk7nf4tjt76b6n8hbo1qasd.apps.googleusercontent.com",
+              "client_id": "798981946680-findmk55q935longrnoc79ndom7r0j1m.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

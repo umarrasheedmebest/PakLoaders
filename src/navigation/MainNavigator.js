@@ -32,14 +32,14 @@ import Bank from '../modules/Bank/Bank';
 import BankAccount from '../modules/BankAccount/BankAccount';
 import Maps from '../modules/Maps/Maps';
 import RiderProfile from '../modules/RiderProfile/RiderProfile';
-import { MyTabs } from './BottomNavigation';
+import {MyTabs} from './BottomNavigation';
 
 const Drawer = createDrawerNavigator();
 
 export const MainNavigator = () => {
   return (
     <Drawer.Navigator
-      
+    initialRouteName='Homes'
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
@@ -57,117 +57,16 @@ export const MainNavigator = () => {
           color: '#5A5A5A',
         },
       }}>
-      <Drawer.Screen
-        name="Homes"
-        component={Home}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/home_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Packages"
-        component={Package}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/pkg_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Post"
-        component={Post}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/mypost_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="InsuredLuggage"
-        component={InsuredLuggage}
-        options={{
-          drawerIcon: () => (
-            <Image
-              source={require('../assets/insured_lugage_icon_drawer.png')}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Rides"
-        component={Rides}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/ride_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/chat_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Payment"
-        component={Payment}
-        options={{
-          drawerIcon: () => (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignContent: 'center',
-                position: 'relative',
-              }}>
-              <ImageBackground
-                style={{width: 34, height: 34, resizeMode: 'contain'}}
-                source={require('../assets/payment.png')}>
-                <Image
-                  style={{
-                    justifyContent: 'center',
-                    position: 'absolute',
-                    right: 7,
-                    top: 9,
-                  }}
-                  source={require('../assets/pay.png')}
-                />
-              </ImageBackground>
-            </View>
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Share"
-        component={Share}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/share_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Contact"
-        component={Contact}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/contact_icon_drawer.png')} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Rate"
-        component={Rate}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/rate_icon_drawer.png')} />
-          ),
-        }}
-      />
+      <Drawer.Screen name="Homes" component={MyTabs} />
+      <Drawer.Screen name="Packages" component={Package} />
+      <Drawer.Screen name="Post" component={Post} />
+      <Drawer.Screen name="InsuredLuggage" component={InsuredLuggage} />
+      <Drawer.Screen name="Rides" component={Rides} />
+      <Drawer.Screen name="Chat" component={Chat} />
+      <Drawer.Screen name="Payment" component={Payment} />
+      <Drawer.Screen name="Share" component={Share} />
+      <Drawer.Screen name="Contact" component={Contact} />
+      <Drawer.Screen name="Rate" component={Rate} />
       <Drawer.Screen name={'Vehicle'} component={Vehicle} />
       <Drawer.Screen name={'Profile'} component={Profile} />
       <Drawer.Screen name="Reviews" component={Reviews} />
@@ -186,16 +85,7 @@ export const MainNavigator = () => {
       <Drawer.Screen name="Maps" component={Maps} />
       <Drawer.Screen name="RiderProfile" component={RiderProfile} />
       <Drawer.Screen name="LiveChat" component={LiveChat} />
-
-      <Drawer.Screen
-        name="LogOut"
-        component={LogOut}
-        options={{
-          drawerIcon: () => (
-            <Image source={require('../assets/logout_icon_drawer.png')} />
-          ),
-        }}
-      />
+      <Drawer.Screen name="LogOut" component={LogOut} />
     </Drawer.Navigator>
   );
 };

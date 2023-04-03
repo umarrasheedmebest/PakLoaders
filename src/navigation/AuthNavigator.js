@@ -18,6 +18,7 @@ import Bids from '../modules/Bids/Bids';
 import BlackDtail from '../modules/BlackDetail/BlackDtail';
 import VerificationSignup from '../modules/VerificationSignup/VerificationSignup';
 import VerifiedSignup from '../modules/VerifiedSignup/VerifiedSignup';
+import SplashScreen from '../modules/SplashScreen/SplashScreen';
 
 
 
@@ -27,9 +28,11 @@ const Stack = createNativeStackNavigator();
 
 export const Auth = () => {
     return (
-        <Stack.Navigator initialRouteName="HowItWorks" screenOptions={{
+        <Stack.Navigator initialRouteName="SplashScreen" screenOptions={{
             header: () => null,
         }}>
+            <Stack.Screen name="SplashScreen" component={SplashScreen} />
+
             <Stack.Screen name="HowItWorks" component={HowItWorks} />
             <Stack.Screen name="Login" component={Login} />
 
