@@ -24,7 +24,8 @@ console.log(`${BASE_URL}post/add/${id}`)
     data,
     headers: {
         'Content-Type': 'multipart/form-data;',
-        'Authorization':userinfoToken
+        'Authorization':`${userinfoToken}`
+       
 
     },
   });

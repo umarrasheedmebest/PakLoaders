@@ -48,7 +48,7 @@ const CustomHeader = ({
   };
   return (
     <SafeAreaView
-      style={[styles.container, {width: windowWidth, height: windowHeight}]}>
+      style={[styles.container, {width: "100%", height: "100%"}]}>
       {/* Background Image */}
       <CustomBackground CustomBackground={back} />
       {/* Background Image */}

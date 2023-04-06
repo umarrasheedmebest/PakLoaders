@@ -10,9 +10,8 @@ const VerifiedServiceComponent = ({
     const userInfo=useSelector((state)=>state.auth.signInOtpVarifyResponse)
   const userTokenSuc=useSelector((state)=>state.auth.signInOtpVarifyResponse.accessToken)
 
-  console.log("Otp Data")
-  console.log(userInfo)
-  console.log(userTokenSuc)
+  
+ 
     const {login}=useContext(AuthContext);
     console.log('Pakistan Zindabad')
     const navigateProfileOne=()=>{

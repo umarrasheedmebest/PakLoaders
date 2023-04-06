@@ -60,12 +60,12 @@ try {
     }
   }
  
-  // useEffect(() => {
-  // getData()
+  useEffect(() => {
+  getData()
    
   
     
-  // }, [])
+  }, [])
   
   
   const [first, setFirst] = useState(false)
@@ -107,7 +107,7 @@ try {
       </View>
       
       {/* Profile button */}
-      {/* {userData.map((res)=>{
+      {userData.map((res)=>{
         
         return <View key={res.id}>
                <TouchableOpacity onPress={()=>props.navigation.navigate('Profile')}>
@@ -119,7 +119,7 @@ try {
         <Text style={{fontSize:16,fontWeight:"500", color:"#fff",}}>{res.full_name}</Text>
         <Text style={{fontSize:14,fontWeight:"400", color:"#fff",}}>{res.number}</Text>
         </View>
-      })} */}
+      })}
      
    
         {/* Scrool navigation button */}
@@ -160,7 +160,7 @@ try {
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
           />
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.myRides:Urdu.myRides}
           Icons={<RideIcon width={30} />}
 
@@ -208,7 +208,7 @@ try {
 
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
-          />
+          /> */}
           </View>
         {/* Last Logout portion */}
         <View style={{borderColor:"#CCCCCC",borderTopWidth:2,}}></View>  

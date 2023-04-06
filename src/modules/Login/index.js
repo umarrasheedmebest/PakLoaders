@@ -70,15 +70,19 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth:2
   },
   mainContainer: {
     width: '90%',
     height: '70%',
     minHeight: 500,
     padding: 27,
+    
     borderRadius: 11,
     backgroundColor: 'white',
-    position: 'relative',
+   
+    
+    
     alignItems: 'center',
     shadowColor: '#4448FF',
     elevation: 10,

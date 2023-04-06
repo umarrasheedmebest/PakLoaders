@@ -13,6 +13,7 @@ import {languageReducer} from "./slices/LanguageSlice"
 import { postReducer } from "./slices/PostSlice";
 import { ridesReducer } from "./slices/RidesSlice";
 import { userReducer } from "./slices/UserSlice";
+import logger from "redux-logger";
 
 const sagaMiddleware=createSagaMiddleware();
 const reducer=combineReducers({
@@ -25,7 +26,7 @@ const reducer=combineReducers({
 })
 const store=configureStore({
     reducer,
-middleware:[...getDefaultMiddleware({thunk:false,serializableCheck: false},),sagaMiddleware]
+middleware:[...getDefaultMiddleware({thunk:false,serializableCheck: false},),sagaMiddleware,logger]
 })
 sagaMiddleware.run(watcherSaga);
 export default store;

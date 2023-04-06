@@ -5,11 +5,14 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors} from '../../globalStyle';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const CustomInput = ({
   value,
   setValue,
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     borderRadius: 5,
     
-    width: '100%',
+    width: "100%",
     height: 68,
     minWidth: 287,
     borderColor: '#666666',

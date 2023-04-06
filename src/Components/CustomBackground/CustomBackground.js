@@ -9,7 +9,7 @@ import {
 import React from 'react';
 
 const CustomBackground = ({CustomBackground}) => {
-  const defaultImage = require('../../assets/background.png');
+  const defaultImage = require('../../assets/top.png');
   const bluebackground = require('../../assets/ChangeBack.png');
   const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -19,6 +19,7 @@ const windowHeight = Dimensions.get('window').height;
       style={styles.headerImage}
       source={CustomBackground ? bluebackground : defaultImage}
     />
+    
   );
 };
 
@@ -26,11 +27,14 @@ export default CustomBackground;
 
 const styles = StyleSheet.create({
   headerImage: {
-    width: 491,
+    width: "100%",
     height: 417,
-    position: 'absolute',
-    top: -205,
-    left: -12,
-    rotation: -5,
+    position:'absolute',
+    top:0,
+    
+    // position: 'absolute',
+    // top: -205,
+    // left: -12,
+    
   },
 });

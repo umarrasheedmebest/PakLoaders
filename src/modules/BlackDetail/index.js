@@ -296,7 +296,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
       <View style={[styles.mainContainer, styles.commonStyle]}>
         <SafeAreaView style={styles.carContainer}>
           <View style={styles.wrap}>
-            <ScrollView
+            <View
               onScroll={({nativeEvent}) => onchange(nativeEvent)}
               showsHorizontalScrollIndicator={false}
               pagingEnabled
@@ -310,7 +310,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                   source={e.item}
                 />
               ))}
-            </ScrollView>
+            </View>
             <View style={styles.wrapDot}>
               {images.map((e, index) => (
                 <Text
