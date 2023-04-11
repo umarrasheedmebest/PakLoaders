@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../../AuthProvider';
 import DrawerButtondemo from '../DrawerButtondemo';
 import { color } from 'react-native-reanimated';
-
 import { useDispatch,useSelector } from 'react-redux';
 import { changeLanguage } from '../../services/storage/Actions';
 import { eng, Urdu } from '../Api/Language';
@@ -33,24 +32,14 @@ import Twitter from '../../assets/SVG_Icons/twitter_icon_52.svg';
 import BackArrow from '../../assets/SVG_Icons/arrow-back.svg';
 import EngFlag from '../../assets/SVG_Icons/Eng_lang.svg';
 import PakFlag from '../../assets/SVG_Icons/Urdu_lang.svg';
-
-
-
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
-  const navigation = useNavigation();
-  const {logout} = useContext(AuthContext);
- const [colorspk, setColorspk] = useState(false)
-  const counter=useSelector((state)=>state.language);
-
-
-  const userData= useSelector((state)=>state.user.getUserResponse);
-  
-
-
-  const dispatch=useDispatch();
-  
-  
-  const getData=async()=>{
+const navigation = useNavigation();
+const {logout} = useContext(AuthContext);
+const [colorspk, setColorspk] = useState(false)
+const counter=useSelector((state)=>state.language);
+const userData= useSelector((state)=>state.user.getUserResponse);
+const dispatch=useDispatch();
+const getData=async()=>{
 try {
        dispatch(getAllPostRequest());
        dispatch(getUserRequest());
@@ -160,7 +149,7 @@ try {
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
           />
-          {/* <DrawerButtondemo 
+          <DrawerButtondemo 
           text={counter?eng.myRides:Urdu.myRides}
           Icons={<RideIcon width={30} />}
 
@@ -208,7 +197,7 @@ try {
 
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
-          /> */}
+          />
           </View>
         {/* Last Logout portion */}
         <View style={{borderColor:"#CCCCCC",borderTopWidth:2,}}></View>  
@@ -243,8 +232,5 @@ try {
     
   )
 }
-
-
-
 const styles = StyleSheet.create({});
 export default memo(CustomDrawer);
