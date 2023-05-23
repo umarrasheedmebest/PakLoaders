@@ -9,7 +9,7 @@ import { AuthProvider } from './AuthProvider';
 import store  from './src/Redux/store';
 // import {store} from './src/setup/store';
 import { LogBox, View,Text } from 'react-native';
-
+import LogoutModal from './src/Components/LogoutModal/index'
 const App = () => {
   if (!__DEV__) {
     console.log = () => { };
@@ -27,6 +27,7 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
         <AppNavigator />
       </AuthProvider>
     </Provider>
+    // <LogoutModal/>
   );
 };
 

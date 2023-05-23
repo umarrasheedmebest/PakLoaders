@@ -1,6 +1,23 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
+import Clipboard from '@react-native-community/clipboard';
+import Chat from '../../modules/Chat/Chat';
+import * as React from 'react';
+import { Button,Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+// function MyBackButton() {
+//   const navigation = useNavigation();
+
+//   return (
+//     <Button
+//       title="Back"
+//       onPress={() => {
+//         navigation.navigate('Chat');
+//       }}
+//     />
+//   );
+// }
 export async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
   const enabled =
@@ -14,7 +31,10 @@ export async function requestUserPermission() {
 }
 const getFcmToken = async () => {
   let fcmToken = await AsyncStorage.getItem('fcmToken');
-  
+  Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
+  CopyAlertMessage = async () => {
+    Clipboard.setString(fcmToken)
+}
   console.log(fcmToken, 'the old token');
   
   if (!fcmToken) {
@@ -23,6 +43,10 @@ const getFcmToken = async () => {
       if (fcmToken) {
         console.log(fcmToken, 'the new genrated token');
         await AsyncStorage.setItem('fcmToken', fcmToken);
+        Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
+  CopyAlertMessage = async () => {
+    Clipboard.setString(fcmToken)
+}
       }
     } catch (error) {
       console.log(error, 'error rasied in fcmToken');
@@ -30,6 +54,7 @@ const getFcmToken = async () => {
   }
 };
 export const notificationListener = async () => {
+  
   // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
   messaging().onNotificationOpenedApp(remoteMessage => {
@@ -37,10 +62,24 @@ export const notificationListener = async () => {
       'Notification caused app to open from background state:',
       remoteMessage.notification,remoteMessage.data,
     );
+    if(remoteMessage){
+      console.log("Notification call",remoteMessage.data.type)
+      MyBackButton()
+    }else{
+      console.log("Not call navigation")
+    }
   });
   messaging().onMessage(async remoteMessage => {
+    
     console.log('recived in Foreground', remoteMessage,"Type message",remoteMessage.data.type);
+    if(remoteMessage){
+      console.log("Notification call",remoteMessage.data.type)
+      {MyBackButton()}
+    }else{
+      console.log("Not call navigation")
+    }
   });
+  messaging().s
   
   
   

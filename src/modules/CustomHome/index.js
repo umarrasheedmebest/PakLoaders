@@ -63,7 +63,7 @@ const HomeComponent = (
         <View
           style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <View>
-            <Image source={item.driver_image} />
+            {/* <Image source={item.driver_image} /> */}
           </View>
           <View style={{marginLeft: 10, marginRight: 45}}>
             <Text>{item.full_name}</Text>
