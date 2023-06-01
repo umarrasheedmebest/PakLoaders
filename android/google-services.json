@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "798981946680",
+    "project_id": "pakloadercustomer",
+    "storage_bucket": "pakloadercustomer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798981946680:android:a59a35feaa392373e595cd",
+        "android_client_info": {
+          "package_name": "com.pakloaders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798981946680-findmk55q935longrnoc79ndom7r0j1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0u1VLAcTITLVicrG-Udg0LepfaH-Yols"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798981946680-findmk55q935longrnoc79ndom7r0j1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
