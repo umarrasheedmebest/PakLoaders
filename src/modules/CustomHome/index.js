@@ -128,8 +128,10 @@ const HomeComponent = (
           styles.defaultStyle,
           {justifyContent: 'space-between'},
         ]}>
-        <TouchableOpacity onPress={() => {navigation.openDrawer()
-        console.log("Hello")
+        <TouchableOpacity onPress={() => {
+          // navigation.dispatch(DrawerActions.toggleDrawer());
+          navigation.dispatch(DrawerActions.openDrawer())
+        console.log("Stack")
         }}>
           <Image source={require('../../assets/Button.png')} />
         </TouchableOpacity>
