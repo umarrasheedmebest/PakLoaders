@@ -8,6 +8,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="28"
         tools:ignore="GoogleAppIndexingWarning">
+<<<<<<< HEAD
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false" />
+=======
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     </application>
 </manifest>

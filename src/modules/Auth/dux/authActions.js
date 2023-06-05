@@ -32,6 +32,7 @@ import {createAction} from 'redux-actions';
   export const signInUserResponse = createAction(SIGN_IN_USER_RESPONSE);
 
 /**
+<<<<<<< HEAD
 * All Post Get
  */
 
@@ -42,6 +43,8 @@ import {createAction} from 'redux-actions';
   export const getAllPostResponse = createAction(GET_ALL_POST_RESPONSE);
 
 /**
+=======
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
  * App Auth
  */
 export const AUTH_APP_REQUEST = 'GRANNY/AUTH_APP_REQUEST';

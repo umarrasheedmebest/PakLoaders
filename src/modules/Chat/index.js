@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
+<<<<<<< HEAD
 import allData from '../../Components/Api/Chat';
+=======
+import Chat from '../../Components/Api/Chat';
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 import CustomHeader from '../../Components/CustomHeader';
 
 
@@ -25,6 +29,7 @@ const ChatComponent = ({
   const navigation=useNavigation();
  
   const dataCards=({item})=>{
+<<<<<<< HEAD
         console.log(item)
     return(
         <>
@@ -34,12 +39,23 @@ const ChatComponent = ({
         picture:item.image,
         is_active:item.is_active
       })}>
+=======
+        
+    return(
+        <>
+        
+      <TouchableOpacity onPress={()=>navigation.navigate('LiveChat')}>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
       <View style={styles.dataContainer}>
         {/* First Row user Name */}
         <View style={{display:"flex", flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
           <View style={{flexDirection:"row"}}>
+<<<<<<< HEAD
         <View style={{position:"relative"}}>
           <Image style={{width:38,height:38}} source={item.image}/>
+=======
+        <View style={{position:"relative"}}><Image style={{width:38,height:38}} source={item.image}/>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
         <Image style={{width:8,height:8,position:"absolute",right:0,bottom:2}} source={item.active}/>
         </View>
         <View style={{marginLeft:10,}}>
@@ -75,7 +91,11 @@ const ChatComponent = ({
             
 
             <View style={{alignItems:"center"}}>
+<<<<<<< HEAD
             <FlatList style={{zIndex:1,}}  data={allData}
+=======
+            <FlatList style={{zIndex:1,}}  data={Chat}
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
                     keyExtractor={(item)=>item.id}
                     renderItem={(item)=>dataCards(item)}
                     showsVerticalScrollIndicator={false}

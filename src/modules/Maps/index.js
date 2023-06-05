@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import { useNavigation } from '@react-navigation/native';
+<<<<<<< HEAD
 import Map from '../../Components/Maps/Map';
+=======
+
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 import {
     StyleSheet,
     SafeAreaView,
@@ -82,15 +86,24 @@ const toggle=()=>{
             {/* MainContainer */}
             <View showsVerticalScrollIndicator={false} style={[styles.mainContainer,styles.commonStyle]}>
               {/* Custom ContentView */}
+<<<<<<< HEAD
               {/* <ImageBackground style={{width:"100%",height:"100%",alignItems:"center",justifyContent:"flex-end",}}  source={require('../../assets/mapBack1.png')} resizeMode={'stretch'}> */}
                    <Map>
                    <View style={{marginBottom:10,position:"absolute",top:0}}>
+=======
+              <ImageBackground style={{width:"100%",height:"100%",alignItems:"center",justifyContent:"flex-end",}}  source={require('../../assets/mapBack1.png')} resizeMode={'stretch'}>
+                   <View style={{marginBottom:10}}>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
                     <CustomRides
                     clarck={true}
                     />
                     </View>
+<<<<<<< HEAD
                     </Map>
                 {/* </ImageBackground> */}
+=======
+                </ImageBackground>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
               
                {/* Cutom ContentView */}
                 </View>

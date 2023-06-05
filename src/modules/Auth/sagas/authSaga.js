@@ -1,5 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { request } from '../../../services/client';
+<<<<<<< HEAD
 
 
 import { signInUserResponse, signUpUserResponse, SIGN_IN_USER_REQUEST, SIGN_UP_USER_REQUEST, userOtpVerifyResponse, USER_OTP_VERIFY_REQUEST,getAllPostResponse, GET_ALL_POST_REQUEST } from '../dux/authActions';
@@ -10,6 +11,14 @@ import {
     GET_ALL_POST
 } from '../../../services/api_urls';
 import { requestGetPost } from '../../../services/GetPost';
+=======
+import { signInUserResponse, signUpUserResponse, SIGN_IN_USER_REQUEST, SIGN_UP_USER_REQUEST, userOtpVerifyResponse, USER_OTP_VERIFY_REQUEST } from '../dux/authActions';
+import {
+    OTP_VERIFY_URL,
+    SIGN_IN_URL,
+    SIGN_UP_URL
+} from '../../../services/api_urls';
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 
 export function* sigunUpUser(action) {
     try {
@@ -70,6 +79,7 @@ export function* signInUser(action) {
         console.warn('create account error', e);
     }
 }
+<<<<<<< HEAD
 // Get Post Details
 export function* getAllPost(action) {
     try {
@@ -90,6 +100,8 @@ export function* getAllPost(action) {
         console.warn('create account error', e);
     }
 }
+=======
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 
 /**
  * Watches for the request to authenticate the application with the API
@@ -97,7 +109,10 @@ export function* getAllPost(action) {
  * @returns {Generator<<"FORK", ForkEffectDescriptor>, void, ?>}
  */
 export function* watchAppAuth() {
+<<<<<<< HEAD
     yield takeLatest(GET_ALL_POST_REQUEST,getAllPost);
+=======
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     yield takeLatest(SIGN_UP_USER_REQUEST, sigunUpUser);
     yield takeLatest(USER_OTP_VERIFY_REQUEST, optVerifyUser);
     yield takeLatest(SIGN_IN_USER_REQUEST, signInUser);

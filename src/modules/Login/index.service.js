@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState,useContext,memo,useCallback,useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,11 +6,16 @@ import { signinRequest } from '../../Redux/slices/AuthSlice';
 import { signInUserRequest, signUpUserRequest, userOtpVerfiyRequest } from '../Auth/dux/authActions';
 import {AuthContext} from '../../../AuthProvider';
 import { Keyboard } from 'react-native';
+=======
+import { useDispatch, useSelector } from 'react-redux';
+import { signInUserRequest, signUpUserRequest, userOtpVerfiyRequest } from '../Auth/dux/authActions';
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 
 const LoginServiceComponent = ({
     children,
     navigation,
 }) => {
+<<<<<<< HEAD
   const signinRequestData = useSelector(state => state.auth.signInResponse);
   const signinRequestDa = useSelector(state => state.auth.signInRequest);
 
@@ -25,6 +31,11 @@ const LoginServiceComponent = ({
     const dispatch = useDispatch();
     console.log('Pakistan Zindabad')
     const {login} = useContext(AuthContext);
+=======
+    const dispatch = useDispatch();
+    console.log('Pakistan Zindabad')
+
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     const navigateSignUp = () => {
         navigation.navigate('SignUp');
 
@@ -36,6 +47,7 @@ const LoginServiceComponent = ({
     const navgatoHowItWork = () => {
         navigation.navigate('HowItWorks')
     }
+<<<<<<< HEAD
    const handleOnChange = 
        useCallback((text, input) => {
         setInputs(prevState => ({...prevState, [input]: text}));
@@ -119,12 +131,35 @@ const LoginServiceComponent = ({
     
     
     
+=======
+
+    const signIn = () => {
+        dispatch(
+            signUpUserRequest({
+                number: '+923094162466',
+                full_name: 'Umar Rasheed'
+            })
+        );
+        dispatch(
+            userOtpVerfiyRequest({
+                number: '+923094162466',
+                otp: '669497'
+            })
+        );
+        dispatch(
+            signInUserRequest({
+                number: '+923094162466',
+            })
+        );
+    }
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 
     return children({
         navigation,
         navigateSignUp,
         navgatoHowItWork,
         navigateForgotPassword,
+<<<<<<< HEAD
         signIn,
         errors,
         setErrors,
@@ -140,3 +175,10 @@ const LoginServiceComponent = ({
 };
 
 export default memo(LoginServiceComponent);
+=======
+        signIn
+    });
+};
+
+export default LoginServiceComponent;
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9

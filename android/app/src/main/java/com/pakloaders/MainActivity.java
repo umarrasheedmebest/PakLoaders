@@ -1,10 +1,15 @@
 package com.pakloaders;
+<<<<<<< HEAD
 import android.os.Bundle;
 import org.devio.rn.splashscreen.SplashScreen; // here
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+=======
+
+import com.facebook.react.ReactActivity;
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 
 public class MainActivity extends ReactActivity {
 
@@ -13,6 +18,7 @@ public class MainActivity extends ReactActivity {
    * rendering of the component.
    */
   @Override
+<<<<<<< HEAD
    protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this);  // here
         super.onCreate(savedInstanceState);
@@ -38,4 +44,9 @@ public class MainActivity extends ReactActivity {
         DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
         );
   }
+=======
+  protected String getMainComponentName() {
+    return "pakloaders";
+  }
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 }

@@ -1,14 +1,19 @@
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 
 import DocumentPicker from 'react-native-document-picker';
 
 import { updateUserRequest,getUserRequest,updateUserImageRequest } from "../../Redux/slices/UserSlice";
 import { useEffect, useState } from "react";
+=======
+
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 const EditProfileServiceComponent = ({
     children,
     navigation,
     route,
 }) => {
+<<<<<<< HEAD
     
     const dispatch=useDispatch()
     console.log('Pakistan Zindabad')
@@ -62,6 +67,12 @@ const updateUserImage=async()=>{
         navigation,
         updateUserName,
         updateUserImage
+=======
+    console.log('Pakistan Zindabad')
+
+    return children({
+        navigation,
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     });
 };
 

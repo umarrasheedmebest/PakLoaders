@@ -3,7 +3,6 @@ import CustomBackground from '../../Components/CustomBackground';
 import { colors } from '../../globalStyle';
 import Profile from '../../Components/Api/Profile';
 import { useNavigation } from '@react-navigation/native';
-
 import {
     StyleSheet,
     SafeAreaView,

@@ -74,7 +74,11 @@ const data=useSelector((state)=>state.language)
     }
 
     return (
+<<<<<<< HEAD
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white',width:"100%",height:"100%" }}>
+=======
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white', }}>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
             <ScrollView>
                 <View style={{ marginTop: height / 7 }}>
                     <Carousel

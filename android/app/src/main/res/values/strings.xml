@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Pak Loaders</string>
+=======
+    <string name="app_name">pakloaders</string>
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
 </resources>

@@ -57,7 +57,6 @@ export default Auth = () => {
 
             
         </Stack.Navigator>
-
     );
 };
 

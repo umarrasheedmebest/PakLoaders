@@ -1,6 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+<<<<<<< HEAD
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -44,10 +45,25 @@ target 'pakloaders' do
   )
 
   target 'pakloadersTests' do
+=======
+platform :ios, '11.0'
+
+target 'PakLoadersDriver' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => false
+  )
+
+  target 'PakLoadersDriverTests' do
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     inherit! :complete
     # Pods for testing
   end
 
+<<<<<<< HEAD
   post_install do |installer|
     react_native_post_install(
       installer,
@@ -55,6 +71,16 @@ target 'pakloaders' do
       # necessary for Mac Catalyst builds
       :mac_catalyst_enabled => false
     )
+=======
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable the next line.
+  use_flipper!()
+
+  post_install do |installer|
+    react_native_post_install(installer)
+>>>>>>> b5bd23039389ef39bd49eed3aced5ef074a500d9
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
