@@ -1,4 +1,4 @@
-import React,{useContext,useState,useEffect,useCallback,memo} from 'react';
+import React,{useContext,useState,useEffect,useCallback} from 'react';
 import { ImageBackground, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native';
 import {DrawerContentScrollView,DrawerItemList,DrawerItem} from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
@@ -32,6 +32,9 @@ import Twitter from '../../assets/SVG_Icons/twitter_icon_52.svg';
 import BackArrow from '../../assets/SVG_Icons/arrow-back.svg';
 import EngFlag from '../../assets/SVG_Icons/Eng_lang.svg';
 import PakFlag from '../../assets/SVG_Icons/Urdu_lang.svg';
+import { colors } from '../../globalStyle';
+import Icon from 'react-native-vector-icons/FontAwesome';
+Icon.loadFont();
 const CustomDrawer = (props,{Imagebg,bgImage}) => {
 const navigation = useNavigation();
 const {logout} = useContext(AuthContext);
@@ -121,7 +124,10 @@ try {
           <DrawerButtondemo 
           active={colorspk?'#D9EBFF':'#fff'}
           text={counter?eng.home:Urdu.home}
-          Icons={<HomeIcon width={30} />}
+          Icons={
+          <View style={styles.iconContainer}>
+            <Icon name="home" size={20} color="white" />
+          </View>}
           source={require('../../assets/home_icon_drawer.png')}
           onPress={()=>{
             setColorspk(true)
@@ -232,5 +238,9 @@ try {
     
   )
 }
-const styles = StyleSheet.create({});
-export default memo(CustomDrawer);
+const styles = StyleSheet.create({
+  iconContainer:{
+    width:30,height:30,borderRadius:100,backgroundColor:colors.primary,alignItems:"center",justifyContent:"center"
+  }
+});
+export default CustomDrawer;

@@ -14,6 +14,7 @@ import PlusIcon from '../assets/SVG_Icons/plus_icon_blue.svg';
 import PlusIcons from '../assets/SVG_Icons/plus_icon_bluee.svg';
 
 import HomeIcon from '../assets/SVG_Icons/home_icon_drawer.svg';
+import { MaterialIcon } from '../Components/Icon/Icon';
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
@@ -69,15 +70,22 @@ function MyTabBar({state, descriptors, navigation}) {
             onLongPress={onLongPress}
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             {isFocused && label == 'Home' ? (
-              <HomeIcon width={30} height={30} />
+              // <HomeIcon width={30} height={30} />
+              <MaterialIcon name="home" color={colors.primary} size={'large'} />
             ) : isFocused && label == 'My Request' ? (
-              <Glyph width={25} height={25} />
+              <MaterialIcon name="email-variant" color={colors.primary} size={'large'} />
+              
             ) : isFocused && label == 'Create' ? (
-              <PlusIcons width={25} height={25} />
+              <MaterialIcon name="plus-box" color={colors.primary} size={'large'} />
+             
             ) : !isFocused && label == 'Home' ? (
-              <Image source={require('../assets/home_icon.png')} />
-            ) : !isFocused && label == 'My Request'?<Glyphs width={25}/>: (
-              <PlusIcon width={25} />
+              <MaterialIcon name="home" color={colors.text} size={'large'} />
+              
+            ) : !isFocused && label == 'My Request'?
+            <MaterialIcon name="email-variant" color={colors.text} size={'large'} />
+            : (
+              <MaterialIcon name="plus-box" color={colors.text} size={'large'} />
+              
             )}
 
             <Text
