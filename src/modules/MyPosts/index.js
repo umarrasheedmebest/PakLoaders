@@ -19,6 +19,9 @@ import HavyTruk from '../../assets/SVG_Icons/Icon_8.svg';
 import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
 import DateTime from '../../Components/DateTimePicker/DateTime';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import SearchBox from "@seanhouli/react-mapbox-search";
+import { WebView } from 'react-native-webview';
+
 import {
   StyleSheet,
   SafeAreaView,
@@ -33,17 +36,22 @@ import {
   useWindowDimensions,
   Platform,
   Keyboard,
+  
+  
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
 import {IMAGE_URL} from '../../Redux/constent/constent';
-
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import VehicleSelect from '../../Components/VehicleSelect/VehicleSelect';
 const PostComponent = ({
   navigateCompleteProfileOne,
   navigateVerification,
 
   sideBar,
 }) => {
+  
+const calender = require('../../assets/calender_icon.png');
   const userData = useSelector(state => state.user.getUserResponse);
   const [textOne, setTextOne] = useState('');
   // Text Validation
@@ -105,11 +113,13 @@ const PostComponent = ({
       (tempDate.getMonth() + 1) +
       '/' +
       tempDate.getFullYear();
+      let fTime='Hours: ' +tempDate.getHours()+ '|Minutes: '+ tempDate.getMinutes();
     handleOnChange(fDate, 'pickup_date');
-    setTextOne(fDate);
-    console.log(fDate);
+    setTextOne(fDate,fTime);
+    console.log(fDate,fTime);
   };
   const showModeOne = currentDate => {
+    console.log(currentDate)
     setShow(true);
     setMode(currentDate);
   };
@@ -188,139 +198,10 @@ const PostComponent = ({
               color: '#5A5A5A',
               lineHeight: 18,
             }}>
-            Welcome Jhon Smith!{'\n'}
+            Welcome Rana Farooq!{'\n'}
             Please fill the following form to add a new post.
           </Text>
         </View>
-        {/* CNIC Image
-                      <View style={styles.MainCnic}>
-                      <View style={styles.boxCnic}>
-                      <CustomCNIC defaultImage={defaultImage}  text="Add Luggage Image"/>
-                        </View>
-                        <View style={styles.boxCnic}>
-                        <CustomCNIC defaultImage={defaultImage} text="Add Luggage Image"/>
-                        </View>
-                       </View> */}
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          style={{marginVertical: 10, marginLeft: 20}}>
-          {/* Low-Capacity */}
-          <View style={{marginHorizontal: 5}}>
-            <TouchableOpacity>
-              <View style={styles.MenuContainer}>
-                <View
-                  style={{
-                    width: '100%',
-                    alignItems: 'flex-end',
-                    paddingRight: 5,
-                    paddingTop: 2,
-                  }}>
-                  <Image source={require('../../assets/uncheck.png')} />
-                </View>
-
-                {/* <Image source={require('../../assets/Low.png')}/> */}
-                <Raksha width={100} height={100} />
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontFamily: 'Poppins-Regular',
-                    color: '#5A5A5A',
-                  }}>
-                  Low-Capacity
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          {/* Low-Capacity */}
-          {/* Medium-Capacity */}
-          <View style={{marginHorizontal: 10}}>
-            <TouchableOpacity>
-              <View style={styles.MenuContainer}>
-                <View
-                  style={{
-                    width: '100%',
-                    alignItems: 'flex-end',
-                    paddingRight: 5,
-                    paddingTop: 2,
-                  }}>
-                  <Image source={require('../../assets/uncheck.png')} />
-                </View>
-
-                {/* <Image source={require('../../assets/Medium.png')}/> */}
-                <Pickup width={100} height={100} />
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontFamily: 'Poppins-Regular',
-                    color: '#5A5A5A',
-                  }}>
-                  Medium-Capacity
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          {/* Medium-Capacity */}
-          {/* High-Capacity */}
-          <View>
-            <TouchableOpacity>
-              <View style={styles.MenuContainer}>
-                <View
-                  style={{
-                    width: '100%',
-                    alignItems: 'flex-end',
-                    paddingRight: 5,
-                    paddingTop: 2,
-                  }}>
-                  <Image source={require('../../assets/check.png')} />
-                </View>
-
-                {/* <Image source={require('../../assets/High.png')}/> */}
-                <Truk width={100} height={100} />
-
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontFamily: 'Poppins-Regular',
-                    color: '#5A5A5A',
-                  }}>
-                  Low-Capacity
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          {/* High-Capacity */}
-          {/* Low-Capacity */}
-          <View style={{marginHorizontal: 10}}>
-            <TouchableOpacity>
-              <View style={styles.MenuContainer}>
-                <View
-                  style={{
-                    width: '100%',
-                    alignItems: 'flex-end',
-                    paddingRight: 5,
-                    paddingTop: 2,
-                  }}>
-                  <Image source={require('../../assets/uncheck.png')} />
-                </View>
-
-                {/* <Image source={require('../../assets/Low.png')}/> */}
-                <Tractor width={100} height={100} />
-
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontFamily: 'Poppins-Regular',
-                    color: '#5A5A5A',
-                  }}>
-                  Low-Capacity
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          {/* Low-Capacity */}
-        </ScrollView>
-
         {/* Profile */}
         <View
           style={{
@@ -331,6 +212,7 @@ const PostComponent = ({
             paddingHorizontal: 10,
           }}>
           {/* Input field user Pickup Location */}
+          
           <CustomInput
             label={mark ? eng.pickupLocation : eng.pickupLocation}
             eye="none"
@@ -364,42 +246,45 @@ const PostComponent = ({
             }}
           />
           {/* Input field user date pickup */}
-          <CustomInput
-            value={textOne}
-            showModeOne={showModeOne}
-            label="Date of pickup"
-            eye="flex"
-            calenderr={true}
-            placeholder="12-02-2024"
-            error={errors.pickup_date}
-            onFocus={() => {
-              handleError(null, 'pickup_date');
-            }}
+          <TouchableOpacity style={{width:"100%"}} onPress={()=>showModeOne('date')}>
+            <Text style={{backgroundColor:"#fff",marginBottom:-9,marginLeft:10,zIndex:2,width:100}}>Pickup Date</Text>
+<View style={{borderWidth:1,width:"100%",height:68,borderColor:colors.text,borderRadius:5,flexDirection:"row",alignItems:"center"}}>
+<TextInput style={{width:"90%"}}
+         
+          editable={false}
+          placeholder="12-02-2024"
+          
           />
+          <Image source={calender}/>
+          </View>
+          </TouchableOpacity>
+         
           {/* Input field user Time Pickup */}
-          <CustomInput
-            label="Time of pickup"
-            eye="none"
-            placeholder="12-02-2024"
-            error={errors.pickup_time}
-            setValue={text => handleOnChange(text, 'pickup_time')}
-            onFocus={() => {
-              handleError(null, 'pickup_time');
-            }}
+          <TouchableOpacity style={{width:"100%"}} onPress={()=>showModeOne('time')}>
+            <Text style={{backgroundColor:"#fff",marginBottom:-9,marginLeft:10,zIndex:2,width:100}}>Pickup time</Text>
+<View style={{borderWidth:1,width:"100%",height:68,borderColor:colors.text,borderRadius:5,flexDirection:"row",alignItems:"center"}}>
+<TextInput style={{width:"90%"}}
+         
+          editable={false}
+          placeholder="12:00PM"
+          
           />
+          <Image source={calender}/>
+          </View>
+          </TouchableOpacity>
           {/* Input field user Vehicle Required */}
           <CustomInput
-            label="Loaders"
+            label="Number of Person"
             eye="none"
-            placeholder="Loaders"
+            placeholder="Number of Person"
             error={errors.loaders}
             setValue={text => handleOnChange(text, 'loaders')}
             onFocus={() => {
               handleError(null, 'loaders');
             }}
           />
-          {/* <CustomInput label="No of Vehicle Required" width={'50%'} eye="none" placeholder="02:55 pm"
-                   /> */}
+          {/* Vehicle Button */}
+           <VehicleSelect/>
           {/* Button Next */}
           <CustomButton
             onPress={() => {
