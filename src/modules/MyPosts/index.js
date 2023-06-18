@@ -21,7 +21,7 @@ import DateTime from '../../Components/DateTimePicker/DateTime';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import SearchBox from "@seanhouli/react-mapbox-search";
 import { WebView } from 'react-native-webview';
-
+import SearchLocationInput from '../../Components/MapboxSearchBar/SearchLocationInput';
 import {
   StyleSheet,
   SafeAreaView,
@@ -44,16 +44,23 @@ import {eng, Urdu} from '../../Components/Api/Language';
 import {IMAGE_URL} from '../../Redux/constent/constent';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import VehicleSelect from '../../Components/VehicleSelect/VehicleSelect';
+import  Icon  from 'react-native-vector-icons/AntDesign';
+import CustomLocation from '../../Components/CustomLocation/CustomLocation';
+import PostMessage from '../../Components/PostCreateMessage/PostMessage';
+
 const PostComponent = ({
   navigateCompleteProfileOne,
   navigateVerification,
-
+openCamara,
   sideBar,
+  imageData
 }) => {
   
 const calender = require('../../assets/calender_icon.png');
   const userData = useSelector(state => state.user.getUserResponse);
-  const [textOne, setTextOne] = useState('');
+  const [textDate, setTextDate] = useState('');
+  const [textTime, setTextTime] = useState('');
+
   // Text Validation
   const [inputs, setInputs] = useState({
     pickup_address: '',
@@ -115,7 +122,8 @@ const calender = require('../../assets/calender_icon.png');
       tempDate.getFullYear();
       let fTime='Hours: ' +tempDate.getHours()+ '|Minutes: '+ tempDate.getMinutes();
     handleOnChange(fDate, 'pickup_date');
-    setTextOne(fDate,fTime);
+    setTextDate(fDate);
+    setTextTime(fTime);
     console.log(fDate,fTime);
   };
   const showModeOne = currentDate => {
@@ -128,6 +136,7 @@ const calender = require('../../assets/calender_icon.png');
 
   const [showMode, setshowMode] = useState('date');
   const defaultImage = require('../../assets/icon_image.png');
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       {show && (
@@ -177,9 +186,10 @@ const calender = require('../../assets/calender_icon.png');
           </TouchableOpacity>
         </View>
       </View>
-
+{/* <SearchLocationInput/> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps={'always'}
         style={styles.mainContainer}>
         <View style={{width: '100%', marginVertical: 5, paddingHorizontal: 20}}>
           <Text
@@ -212,28 +222,16 @@ const calender = require('../../assets/calender_icon.png');
             paddingHorizontal: 10,
           }}>
           {/* Input field user Pickup Location */}
+          <CustomLocation
+           placeholder={'Clarck pharmacy,442 Rawalpindi'}
+           label={"Pickup Location"}
+           />
           
-          <CustomInput
-            label={mark ? eng.pickupLocation : eng.pickupLocation}
-            eye="none"
-            placeholder="Clarck pharmacy, 442 Rawalpindi"
-            error={errors.pickup_address}
-            setValue={text => handleOnChange(text, 'pickup_address')}
-            onFocus={() => {
-              handleError(null, 'pickup_address');
-            }}
-          />
           {/* Input field user Drop Location */}
-          <CustomInput
-            label="Drop off Location"
-            eye="none"
-            placeholder="Clarck pharmacy, 442 Islamabad"
-            error={errors.dropoff_address}
-            setValue={text => handleOnChange(text, 'dropoff_address')}
-            onFocus={() => {
-              handleError(null, 'dropoff_address');
-            }}
-          />
+          <CustomLocation
+           placeholder={'Clarck pharmacy,442 Islamabad'}
+           label={"Drop Off Location"}
+           />
           {/* Input field user Luggage weight */}
           <CustomInput
             label="Luggage weight"
@@ -250,7 +248,7 @@ const calender = require('../../assets/calender_icon.png');
             <Text style={{backgroundColor:"#fff",marginBottom:-9,marginLeft:10,zIndex:2,width:100}}>Pickup Date</Text>
 <View style={{borderWidth:1,width:"100%",height:68,borderColor:colors.text,borderRadius:5,flexDirection:"row",alignItems:"center"}}>
 <TextInput style={{width:"90%"}}
-         
+         value={textDate}
           editable={false}
           placeholder="12-02-2024"
           
@@ -264,6 +262,7 @@ const calender = require('../../assets/calender_icon.png');
             <Text style={{backgroundColor:"#fff",marginBottom:-9,marginLeft:10,zIndex:2,width:100}}>Pickup time</Text>
 <View style={{borderWidth:1,width:"100%",height:68,borderColor:colors.text,borderRadius:5,flexDirection:"row",alignItems:"center"}}>
 <TextInput style={{width:"90%"}}
+         value={textTime}
          
           editable={false}
           placeholder="12:00PM"
@@ -283,17 +282,26 @@ const calender = require('../../assets/calender_icon.png');
               handleError(null, 'loaders');
             }}
           />
+          {/* Image Picker */}
+          <SafeAreaView style={styles.imageContainer}>
+          <TouchableOpacity style={styles.imageSlectButton} onPress={openCamara}>
+            
+             <Icon name='plussquare' size={80} color={colors.primary}/>
+            
+          </TouchableOpacity>
+          {imageData.map((item)=><Image key={item.id} source={item.srcImage} style={styles.selectImage}/>)}
+          </SafeAreaView>
           {/* Vehicle Button */}
            <VehicleSelect/>
           {/* Button Next */}
           <CustomButton
-            onPress={() => {
-              valiDate();
-            }}
-            text="Next"
+            onPress={()=>setModalVisible(true)}
+            text="Post"
             type="secondary"
           />
-
+          {/* Post Message Modal */}
+          <PostMessage setModalVisible={setModalVisible} modalVisible={modalVisible}/>
+          {/* Post Message Modal */}
           {/* Button Next */}
           {/* Button Cancel */}
           <CustomButton
@@ -310,6 +318,34 @@ const calender = require('../../assets/calender_icon.png');
 };
 
 const styles = StyleSheet.create({
+  imageContainer:{
+    width:"100%",
+    height:90,
+    flexDirection:"row",
+    flex:1,
+   
+    marginVertical:10,
+    alignItems:"center",
+    
+
+  },
+  selectImage:{
+    width:80,
+    height:80,
+    borderRadius:20,
+    marginRight:10,
+  },
+  imageSlectButton:{
+    width:90,
+    height:"100%",
+    
+    
+   
+   
+  },
+  imageButton:{
+    color:"#fff"
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',

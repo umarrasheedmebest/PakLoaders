@@ -96,11 +96,7 @@ const HomeComponent = (
         {/* 2nd Row user Name */}
         {/* 3rd Row user */}
         <View style={[styles.defaultStyle, {justifyContent: 'center'}]}>
-          <TouchableOpacity
-            onPress={() => onDelete(item.bids_id)}
-            style={styles.container_secondary}>
-            <Text style={styles.text_secondary}>Ignore</Text>
-          </TouchableOpacity>
+          
 
           <TouchableOpacity
             style={styles.container_primary}
