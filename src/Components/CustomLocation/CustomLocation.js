@@ -6,12 +6,14 @@ import {
   TextInput,
   Keyboard,
   Modal,
-  SafeAreaView
+  SafeAreaView,
+  Alert
 } from 'react-native';
 import React,{useState,useEffect,useRef} from 'react';
 import {colors} from '../../globalStyle';
 import {locationPk} from '../Api/LocationApi';
 import filter from 'lodash.filter';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const CustomLocation = ({placeholder,label}) => {
@@ -30,11 +32,13 @@ const CustomLocation = ({placeholder,label}) => {
         }
 
     const handleSearch=(query)=>{
+    
         setSearchQuery(query);
+        const str2 = query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
         const filteredData= filter(locationPk, (user)=>{
             
             
-            if (user.name.includes(query)) {
+            if (user.name.includes(str2||query)) {
                 
                
                 return true
@@ -62,7 +66,9 @@ const CustomLocation = ({placeholder,label}) => {
           value={searchQuery}
           onChangeText={(query)=>handleSearch(query)}
           ref={inputRef} 
-          editable={false} 
+          editable={false}
+          placeholderTextColor={colors.dot} 
+          style={{color:colors.text}}
           />
         </View>
       </TouchableOpacity>
@@ -71,7 +77,6 @@ const CustomLocation = ({placeholder,label}) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
             <SafeAreaView style={styles.modalView}>
@@ -85,13 +90,17 @@ const CustomLocation = ({placeholder,label}) => {
           onChangeText={(query)=>handleSearch(query)}
           ref={inputRef} 
               />
+              <ScrollView style={styles.listScrollContainer} showsVerticalScrollIndicator={false}>
         {data.map(item => (
+
         <TouchableOpacity key={item.lat} style={styles.listContainer} onPress={()=>onSubmit(item)}>
           <View>
             <Text>{item.name}</Text>
           </View>
         </TouchableOpacity>
-      ))}</SafeAreaView>
+      ))}
+      </ScrollView>
+      </SafeAreaView>
       </Modal>
       
     </View>
@@ -122,6 +131,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    minHeight:250,
   },
   textLocation: {
     marginTop: -12,
@@ -141,6 +151,10 @@ const styles = StyleSheet.create({
     height:50,
     borderWidth:1,
     borderRadius:10,
-    borderColor:colors.dot
+    borderColor:colors.dot,
+    color:colors.text
+  },
+  listScrollContainer:{
+width:"100%"
   }
 });

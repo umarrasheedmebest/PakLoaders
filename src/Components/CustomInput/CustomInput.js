@@ -29,6 +29,7 @@ const CustomInput = ({
   error,
   password,
   showModeOne,
+  keyboardType,
   onFocus = () => {},
   ...props
 }) => {
@@ -65,9 +66,11 @@ const CustomInput = ({
           value={value}
           onChangeText={setValue}
           placeholder={placeholder}
+          placeholderTextColor={colors.dot}
           secureTextEntry={show}
           autoCorrect={false}
           maxLength={13}
+          keyboardType={keyboardType}
           onFocus={() => {
             onFocus();
             setIsFocused(true);

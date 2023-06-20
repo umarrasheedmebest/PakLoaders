@@ -108,7 +108,17 @@ const calender = require('../../assets/calender_icon.png');
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-
+  const d = new Date();
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -123,7 +133,7 @@ const calender = require('../../assets/calender_icon.png');
       let fTime='Hours: ' +tempDate.getHours()+ '|Minutes: '+ tempDate.getMinutes();
     handleOnChange(fDate, 'pickup_date');
     setTextDate(fDate);
-    setTextTime(fTime);
+    setTextTime(formatAMPM(d));
     console.log(fDate,fTime);
   };
   const showModeOne = currentDate => {
@@ -137,6 +147,22 @@ const calender = require('../../assets/calender_icon.png');
   const [showMode, setshowMode] = useState('date');
   const defaultImage = require('../../assets/icon_image.png');
   const [modalVisible, setModalVisible] = useState(false);
+  
+   const getyear=d.getFullYear();
+   const getmonth=d.getMonth() + 1;
+  const getDate=d.getDate();
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+  
+  
   return (
     <SafeAreaView style={styles.container}>
       {show && (
@@ -144,9 +170,13 @@ const calender = require('../../assets/calender_icon.png');
           testID="dateTimePicker"
           value={date}
           mode={mode}
-          is24Hour={true}
+          is24Hour={false}
           display="default"
           onChange={onChange}
+          minimumDate={new Date(getyear,getmonth,getDate)}
+          maximumDate={new Date(getyear,getmonth,getDate)}
+          
+          
         />
       )}
       {/* Background Image */}
@@ -237,6 +267,8 @@ const calender = require('../../assets/calender_icon.png');
             label="Luggage weight"
             eye="none"
             placeholder="580 kg"
+            keyboardType={'numeric'}
+            
             error={errors.details}
             setValue={text => handleOnChange(text, 'details')}
             onFocus={() => {
