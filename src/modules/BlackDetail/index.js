@@ -19,18 +19,23 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 
 const images = [
-  {key: 1, item: require('../../assets/image_detailscrn.png')},
-  {key: 2, item: require('../../assets/image_detailscrn.png')},
-  {key: 3, item: require('../../assets/image_detailscrn.png')},
+  require('../../assets/image_detailscrn.png'),
+  require('../../assets/image_detailscrn.png'),
+  require('../../assets/image_detailscrn.png')
 ];
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 import CustomBackground from '../../Components/CustomBackground';
 import {color} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
+import { SliderBox } from 'react-native-image-slider-box';
+import { colors } from '../../globalStyle';
+import { singlePost } from '../../Components/Api/singlePost';
 const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
   const [imgActive, setImgActive] = useState(0);
-  const data = useSelector(state => state.post.singlePostResponse);
+  const data =singlePost;
+  //  useSelector(state => state.post.singlePostResponse);
+  console.log(data)
   const dataCards = item => {
     console.log('check data ');
     console.log(item.item);
@@ -38,7 +43,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
       <View
         style={[
           styles.dataContainer,
-          {height: 211, padding: 10, shadowColor: '#007BFE', margin: 4},
+          {height: 251, padding: 10, shadowColor: '#007BFE', margin: 4},
         ]}>
         <View style={{flexDirection: 'row'}}>
           <Image source={require('../../assets/Waseem.png')} />
@@ -267,7 +272,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
     <SafeAreaView style={styles.container}>
       {/* <Sure profile={false}/> */}
       {/* Background Image */}
-      <CustomBackground />
+      {/* <CustomBackground /> */}
       {/* Background Image */}
       <View
         style={{
@@ -276,6 +281,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
           justifyContent: 'space-between',
           paddingHorizontal: 20,
           paddingVertical: 20,
+          backgroundColor:colors.primary
         }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require('../../assets/arrow-back.png')} />
@@ -294,34 +300,45 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
       </View>
       {/* Carousel Slideer  */}
       <View style={[styles.mainContainer, styles.commonStyle]}>
-        <SafeAreaView style={styles.carContainer}>
-          <View style={styles.wrap}>
-            <View
-              onScroll={({nativeEvent}) => onchange(nativeEvent)}
-              showsHorizontalScrollIndicator={false}
-              pagingEnabled
-              horizontal
-              style={styles.wrap}>
-              {images.map((e, index) => (
-                <Image
-                  key={e.key}
-                  resizeMode="stretch"
-                  style={styles.wrap}
-                  source={e.item}
-                />
-              ))}
-            </View>
-            <View style={styles.wrapDot}>
-              {images.map((e, index) => (
-                <Text
-                  key={e.key}
-                  style={imgActive == index ? styles.dotActive : styles.dot}>
-                  ●
-                </Text>
-              ))}
-            </View>
-          </View>
-        </SafeAreaView>
+      <SliderBox
+  // ImageComponent={1}
+  images={images}
+  sliderBoxHeight={200}
+  // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
+  dotColor={colors.primary}
+  inactiveDotColor={colors.white}
+  paginationBoxVerticalPadding={20}
+  autoplay
+  autoplayInterval={6000}
+  circleLoop
+  resizeMethod={'resize'}
+  resizeMode={'cover'}
+  paginationBoxStyle={{
+    position: "absolute",
+    bottom: 0,
+    padding: 0,
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    paddingVertical: 10
+  }}
+  dotStyle={{
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 0,
+    padding: 0,
+    margin: 0,
+    backgroundColor: "rgba(128, 128, 128, 0.92)"
+  }}
+  ImageComponentStyle={{borderTopRightRadius: 15, width: '100%',borderTopLeftRadius:15 }}
+  imageLoadingColor="#2196F3"
+/>
+{/* <SliderBox
+images={images}
+dotColor='red'
+
+/> */}
         <View style={{height: '58%', alignItems: 'center'}}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.listStyle} showsVerticalScrollIndicator={false}>
@@ -330,6 +347,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                   fontSize: 13,
                   fontFamily: 'Montserrat-Medium',
                   color: '#4448FF',
+                  marginVertical:10,
                 }}>
                 Post Details
               </Text>
@@ -350,7 +368,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                 width: '100%',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginVertical: 50,
+                marginVertical: 20,
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('Post')}>
                 <View
@@ -460,6 +478,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   listStyle: {
+    marginVertical:20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

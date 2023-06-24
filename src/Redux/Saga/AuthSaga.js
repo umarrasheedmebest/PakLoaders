@@ -42,7 +42,7 @@ export function* handleGetUserVarifyOtp(action){
         console.log(data)
         try {
             const response=yield call(requestSignInUser,data);
-            const mainvalue=response.data;
+            const mainvalue=response;
            console.log(mainvalue);
             yield put(signinResponse(mainvalue));
         } catch (error) {
@@ -58,7 +58,7 @@ export function* handleGetUserVarifyOtp(action){
             console.log(data)
             try {
                 const response=yield call(requestSigninOtpVerify,data);
-                const mainvalue=response.data;
+                const mainvalue=response;
                console.log(mainvalue);
                 yield put(signinOtpVerifyResponse(mainvalue));
             } catch (error) {

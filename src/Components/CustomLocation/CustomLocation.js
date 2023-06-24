@@ -137,7 +137,10 @@ const styles = StyleSheet.create({
     marginTop: -12,
     marginLeft: 10,
     backgroundColor: '#fff',
-    width: "26%",
+    width: "30%",
+    color:colors.dot,
+    fontSize:12,
+
   },
   listContainer: {
     width: '100%',

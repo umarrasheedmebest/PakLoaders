@@ -30,6 +30,7 @@ const CustomInput = ({
   password,
   showModeOne,
   keyboardType,
+  maxLength,
   onFocus = () => {},
   ...props
 }) => {
@@ -69,7 +70,7 @@ const CustomInput = ({
           placeholderTextColor={colors.dot}
           secureTextEntry={show}
           autoCorrect={false}
-          maxLength={13}
+          maxLength={maxLength}
           keyboardType={keyboardType}
           onFocus={() => {
             onFocus();
@@ -112,10 +113,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     borderRadius: 5,
-    
     width: "100%",
     height: 68,
-    minWidth: 287,
+    // minWidth: 287,
     borderColor: '#666666',
     borderWidth: 1,
     alignItems: 'center',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     position:"relative"
   },
   labelStyle: {
-    color: '#5A5A5A',
+    color: colors.text,
     fontSize: 14,
     fontWeight: '400',
     backgroundColor: '#ffffff',

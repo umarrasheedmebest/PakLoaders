@@ -34,8 +34,10 @@ const LoginComponent = ({
           <CustomInput
             label={data ? eng.mobileNum : Urdu.mobileNum}
             eye="none"
-            placeholder="92327482937"
+            placeholder="03274829375"
+            keyboardType={'numeric'}
             error={errors.mobile}
+            maxLength={11}
             setValue={text => handleOnChange(text, 'mobile')}
             onFocus={() => {
               handleError(null, 'mobile');

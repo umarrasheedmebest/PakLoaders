@@ -53,12 +53,17 @@ const LoginServiceComponent = ({
           handleError('Please input Mobile Number/Email', 'mobile');
           valid = false;
         }
-        // if (!inputs.password) {
-        //   handleError('Please input password', 'password');
-        // }
+        if (inputs.mobile.length>11) {
+          handleError('Your number is invalid', 'mobile');
+        }
         if (valid) {
+          let text=inputs.mobile;
+          let space= text.trim();
+          let part = space.slice(1,11);
+          let newText = space.replace(space, "+92"+part);
+          console.log("new String"+newText)
           signIn({
-            "number":inputs.mobile
+            "number":newText
           })
         }
       };

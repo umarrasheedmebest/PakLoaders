@@ -83,7 +83,9 @@ const CustomHeader = ({
         <View>
           {Chatprofile ? (
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <TouchableOpacity style={{marginRight: 10}}>
+              <TouchableOpacity style={{marginRight: 10}} onPress={()=>{navigation.navigate('Notification')
+            console.log("Notification")
+            }}>
                 <Image source={require('../../assets/Bell.png')} />
               </TouchableOpacity>
               <TouchableOpacity style={{marginRight: 10}}>

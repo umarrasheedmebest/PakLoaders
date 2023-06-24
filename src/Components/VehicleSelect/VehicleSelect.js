@@ -28,109 +28,116 @@ import Tractor from '../../assets/SVG_Icons/Icon_9.svg';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const VehicleSelect = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const SlectedData=[
+  const [selectedItem, setSelectedItem] = useState(null);
+  const SlectedData = [
     {
-      id:1,
-      name:"Tractor",
-      example:"e.g 400 kg Capacity",
+      id: 1,
+      name: 'Tractor',
+      example: 'e.g 400 kg Capacity',
       Tractor,
-      Icon
-  },
-  {
-    id:2,
-    name:"Raksha",
-    example:"e.g Small-Capacity",
-    Tractor:Raksha,
-    Icon
-},
-{
-  id:3,
-  name:"Pickup",
-  example:"e.g small pickup ",
-  Tractor:Pickup,
-  Icon
-},
-{
-  id:4,
-  name:"Medium-Capacity",
-  example:"e.g Shahzor Truck",
-  Tractor:TrukSmall,
-  Icon
-},
-{
-  id:5,
-  name:"High-Capacity",
-  example:"e.g Shahzor Truck",
-  Tractor:Truk,
-  Icon
-},
-{
-  id:6,
-  name:"Super-Capacity",
-  example:"e.g Reefer Truck",
-  Tractor:HavyTruk,
-  Icon
-},
-{
-  id:7,
-  name:"XL20",
-  example:"e.g 20 feet Truck",
-  Tractor:TrukOne,
-  Icon
-},
-{
-  id:8,
-  name:"XL40",
-  example:"e.g 40 feet Truck",
-  Tractor:LargeTruk,
-  Icon
-},
-  
+      Icon,
+    },
+    {
+      id: 2,
+      name: 'Raksha',
+      example: 'e.g Small-Capacity',
+      Tractor: Raksha,
+      Icon,
+    },
+    {
+      id: 3,
+      name: 'Pickup',
+      example: 'e.g small pickup ',
+      Tractor: Pickup,
+      Icon,
+    },
+    {
+      id: 4,
+      name: 'Medium-Capacity',
+      example: 'e.g Shahzor Truck',
+      Tractor: TrukSmall,
+      Icon,
+    },
+    {
+      id: 5,
+      name: 'High-Capacity',
+      example: 'e.g Shahzor Truck',
+      Tractor: Truk,
+      Icon,
+    },
+    {
+      id: 6,
+      name: 'Super-Capacity',
+      example: 'e.g Reefer Truck',
+      Tractor: HavyTruk,
+      Icon,
+    },
+    {
+      id: 7,
+      name: 'XL20',
+      example: 'e.g 20 feet Truck',
+      Tractor: TrukOne,
+      Icon,
+    },
+    {
+      id: 8,
+      name: 'XL40',
+      example: 'e.g 40 feet Truck',
+      Tractor: LargeTruk,
+      Icon,
+    },
   ];
-  const Item = (item) => {
-    const {id,name,example,Tractor,Icon}=item
-    const [enable, setEnable] = useState(false)
-    return(
-    <View style={{margin:20}}>
-      <View>
-                <TouchableOpacity onPress={()=>{
-                  setEnable(!enable)
+  const Item = item => {
+    const {id, name, example, Tractor, Icon} = item;
+    const [enable, setEnable] = useState(false);
+    return (
+      <View style={{margin: 10}}>
+        <View style={{width: '100%'}}>
+          <TouchableOpacity
+            onPress={() => {
+              setEnable(!enable);
+              setModalVisible(!modalVisible);
+              setSelectedItem(<Tractor width={100} height={100} />);
+            }}>
+            <View style={styles.MenuContainer}>
+              <View
+                style={{
+                  width: '100%',
+                  alignItems: 'flex-end',
+                  paddingRight: 5,
+                  paddingTop: 2,
                 }}>
-                  <View style={styles.MenuContainer}>
-                    <View
-                      style={{
-                        width: '100%',
-                        alignItems: 'flex-end',
-                        paddingRight: 5,
-                        paddingTop: 2,
-                      }}>
-                      <Icon name="check-circle" size={25} color={enable?"#47EA1A":"#D0D3CF"} />
-                    </View>
-                    <Tractor width={100} height={100} />
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontFamily: 'Poppins-Regular',
-                        color: '#5A5A5A',
-                        lineHeight: 32,
-                        
-                      }}>
-                      {name}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: '400',
-                        color: '#5A5A5A',
-                        lineHeight: 32,
-                      }}>
-                      {example}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <Icon
+                  name="check-circle"
+                  size={25}
+                  color={enable ? '#47EA1A' : '#D0D3CF'}
+                />
               </View>
-    </View>
-  )};
+              <Tractor width={100} height={100} />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: 'Poppins-Regular',
+                  color: '#5A5A5A',
+                  lineHeight: 32,
+                }}>
+                {name}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: '400',
+                  color: '#5A5A5A',
+                  lineHeight: 32,
+                }}>
+                {example}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -138,29 +145,22 @@ const VehicleSelect = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
         <SafeAreaView style={styles.modalView}>
           {/* MainContainer */}
           <FlatList
-          key={'#'}
-        data={SlectedData}
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        renderItem={({item}) => <Item {...item} />}
-        keyExtractor={item => item.id}
-      />
-         
-          {/*SlectButton  */}
-          
-          <CustomButton
-        onPress={() => setModalVisible(false)}
-        text="Add"
-        type="secondary"
-      />
+            key={'#'}
+            style={styles.flatlistStyle}
+            data={SlectedData}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            renderItem={({item}) => <Item {...item} />}
+            keyExtractor={item => item.id}
+          />
         </SafeAreaView>
       </Modal>
+      {selectedItem}
       <CustomButton
         onPress={() => setModalVisible(true)}
         text="Slect Vehicle"
@@ -176,11 +176,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-   marginTop:70,
-   marginBottom:50,
+    marginTop: 70,
+    flex: 1,
+    width: '100%',
+    height: '100%',
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 35,
+    justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2 },
+    shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.4,
     shadowRadius: 2,
     elevation: 3,
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginBottom: 12,
     width: '100%',
- 
+
     padding: 20,
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
@@ -221,7 +223,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 31,
     borderColor: '#fff',
     shadowColor: '#4448FF',
-
     width: '101%',
     height: '10%',
     elevation: 4,
@@ -245,7 +246,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#fff',
     marginVertical: 6,
-
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -253,7 +253,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 7,
   },
   listStyle: {
@@ -264,7 +263,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   defaultStyle: {
@@ -292,7 +290,6 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: 'center',
     justifyContent: 'center',
-
     borderRadius: 8,
     marginRight: 10,
   },
@@ -342,6 +339,10 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: colors.dot,
     borderStyle: 'dashed',
+  },
+  flatlistStyle: {
+    width: '100%',
+    height: '100%',
   },
 });
 

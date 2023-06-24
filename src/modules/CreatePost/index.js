@@ -19,8 +19,10 @@ import {
   cancelPostRequest,
   singlePostRequest,
 } from '../../Redux/slices/PostSlice';
+import { PostData } from '../../Components/Api/PostData';
 
-const CreatePostComponent = ({postData}) => {
+const CreatePostComponent = () => {
+  const postData=PostData;
   const navigation = useNavigation();
   const [deletebtn, setDeletebtn] = useState(false);
   const [postId, setPostId] = useState()

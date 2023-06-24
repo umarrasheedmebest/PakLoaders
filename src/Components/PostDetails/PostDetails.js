@@ -2,9 +2,10 @@ import { StyleSheet, Text, View,Image,ImageBackground,TouchableOpacity ,FlatList
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { colors } from '../../globalStyle';
+import { singlePost } from '../Api/singlePost';
 
 const PostDetails = () => {
-    const data =useSelector((state)=>state.post.singlePostData);
+    // const data =useSelector((state)=>state.post.singlePostData);
     const {height,width}=useWindowDimensions();
     const dataCards=(item)=>{
         console.log(item)
@@ -52,7 +53,7 @@ const PostDetails = () => {
     }
   return (
     <View>
-      <FlatList style={{zIndex:2,}}  data={data}
+      <FlatList style={{zIndex:2,}}  data={singlePost}
          keyExtractor={(item)=>item.id}
          renderItem={(item)=>dataCards(item)}
          showsVerticalScrollIndicator={false}

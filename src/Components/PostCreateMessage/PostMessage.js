@@ -10,7 +10,6 @@ const PostMessage = ({setModalVisible,modalVisible}) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>
@@ -18,7 +17,7 @@ const PostMessage = ({setModalVisible,modalVisible}) => {
             <Text style={styles.modalText}>Are you sure to create post!</Text>
             <View style={styles.buttonStyle}>
                 <View style={{marginRight:10}}><Button title='Cancel' onPress={()=>setModalVisible(false)} /></View>
-            
+
             <Button title='Ok' onPress={()=>setModalVisible(false)}/>
             </View>
           </View>
