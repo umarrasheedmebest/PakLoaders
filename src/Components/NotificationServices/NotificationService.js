@@ -31,10 +31,10 @@ export async function requestUserPermission() {
 }
 const getFcmToken = async () => {
   let fcmToken = await AsyncStorage.getItem('fcmToken');
-  Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
-  CopyAlertMessage = async () => {
-    Clipboard.setString(fcmToken)
-}
+//   Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
+//   CopyAlertMessage = async () => {
+//     Clipboard.setString(fcmToken)
+// }
   console.log(fcmToken, 'the old token');
   
   if (!fcmToken) {
@@ -43,10 +43,10 @@ const getFcmToken = async () => {
       if (fcmToken) {
         console.log(fcmToken, 'the new genrated token');
         await AsyncStorage.setItem('fcmToken', fcmToken);
-        Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
-  CopyAlertMessage = async () => {
-    Clipboard.setString(fcmToken)
-}
+//         Alert.alert('Device Token', fcmToken, [ {text: 'Copy message', onPress: () => CopyAlertMessage(), style: 'cancel'} ], { cancelable: true})
+//   CopyAlertMessage = async () => {
+//     Clipboard.setString(fcmToken)
+// }
       }
     } catch (error) {
       console.log(error, 'error rasied in fcmToken');

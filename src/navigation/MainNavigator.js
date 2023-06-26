@@ -33,6 +33,7 @@ import BankAccount from '../modules/BankAccount/BankAccount';
 import Maps from '../modules/Maps/Maps';
 import RiderProfile from '../modules/RiderProfile/RiderProfile';
 import {MyTabs} from './BottomNavigation';
+import { MyTabss } from './TopNavigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -57,7 +58,10 @@ export const MainNavigator = () => {
           color: '#5A5A5A',
         },
       }}>
+        
       <Drawer.Screen name="Homes" component={MyTabs} />
+      <Drawer.Screen name="RidesPk" component={MyTabss} />
+
       <Drawer.Screen name="Packages" component={Package} />
       <Drawer.Screen name="Post" component={Post} />
       <Drawer.Screen name="InsuredLuggage" component={InsuredLuggage} />

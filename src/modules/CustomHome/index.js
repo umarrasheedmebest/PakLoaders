@@ -21,6 +21,7 @@ import {
   Button,
   ScrollView,
   FlatList,
+  StatusBar
 } from 'react-native';
 import Truk from '../../assets/SVG_Icons/Icon_3.svg';
 import allData from '../../Components/Api/Home';
@@ -113,6 +114,7 @@ const HomeComponent = (
   };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden={true}/>
       {/* Background Image */}
       <CustomBackground />
       {/* Background Image */}

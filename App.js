@@ -8,7 +8,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 import { AuthProvider } from './AuthProvider';
 import store  from './src/Redux/store';
 // import {store} from './src/setup/store';
-import { LogBox, View,Text } from 'react-native';
+import { LogBox, View,Text,StatusBar } from 'react-native';
 import LogoutModal from './src/Components/LogoutModal/index';
 import { MaterialIcon } from './src/Components/Icon/Icon';
 const App = () => {
@@ -28,6 +28,7 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
     //     <MaterialIcon size="extraLarge" color="black" name="github" />
     //   </View>
     <Provider store={store}>
+      <StatusBar hidden={true}/>
       <AuthProvider>
         <AppNavigator />
       </AuthProvider>

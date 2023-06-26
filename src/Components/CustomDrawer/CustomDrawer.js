@@ -133,12 +133,12 @@ try {
             setColorspk(true)
             navigation.navigate('Homes')}}
           />
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.editPost:Urdu.editPost}
           Icons={<PostIcon width={30} />}
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>{navigation.navigate('Post')}}
-          />
+          /> */}
           <DrawerButtondemo 
           text={counter?eng.packages:Urdu.packages}
           Icons={<PakageIcon width={30} />}
@@ -160,7 +160,7 @@ try {
           Icons={<RideIcon width={30} />}
 
           source={require('../../assets/ride_icon_drawer.png')}
-          onPress={()=>navigation.navigate("Rides")}
+          onPress={()=>navigation.navigate("RidesPk")}
           />
            <DrawerButtondemo 
           text={counter?eng.myPost:Urdu.myPost}
@@ -183,7 +183,7 @@ try {
           Icons={<PaymentIcon width={30} />}
           onPress={()=>navigation.navigate('Payment')}
           />
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.share:Urdu.share}
           Icons={<ShareIcon width={30} />}
 
@@ -203,7 +203,7 @@ try {
 
           source={require('../../assets/rate_icon_drawer.png')}
           onPress={()=>navigation.navigate('Rate')}
-          />
+          /> */}
           </View>
         {/* Last Logout portion */}
         <View style={{borderColor:"#CCCCCC",borderTopWidth:2,}}></View>  

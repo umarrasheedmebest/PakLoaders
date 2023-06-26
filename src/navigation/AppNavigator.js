@@ -7,6 +7,8 @@ import { AuthContext } from '../../AuthProvider';
 import { ActivityIndicator, SafeAreaView, View,ImageBackground,Image,Text} from 'react-native';
 import {requestUserPermission,notificationListener} from '../Components/NotificationServices/NotificationService';
 import { MyTabs } from './BottomNavigation';
+import { MyTabss } from './TopNavigation';
+
 const AppNavigator = () => {
     const { userToken, login,isLoading,setisLoading } = useContext(AuthContext);
    
@@ -31,6 +33,7 @@ const AppNavigator = () => {
         <NavigationContainer>
             {/* <MainNavigator/> */}
             {userToken!==null ? <MainNavigator /> : <Auth />}
+            {/* <MyTabss/> */}
             {/* <MyTabs/> */}
         </NavigationContainer>
     );
