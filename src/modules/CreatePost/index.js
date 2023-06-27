@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useCallback} from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -7,6 +7,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import PostAPI from '../../Components/Api/PostAPI';
 import CustomHeader from '../../Components/CustomHeader';
@@ -20,23 +21,29 @@ import {
   singlePostRequest,
 } from '../../Redux/slices/PostSlice';
 import { PostData } from '../../Components/Api/PostData';
+import PostDeleteModal from '../../Components/CustomerPostDelete/PostDeleteModal';
+import { IMAGE_URL } from '../../Redux/constent/constent';
+
 
 const CreatePostComponent = () => {
   const postData=PostData;
   const navigation = useNavigation();
   const [deletebtn, setDeletebtn] = useState(false);
   const [postId, setPostId] = useState()
-  
+  const [modalVisible, setModalVisible] = useState(false)
   console.log('Post Data');
   console.log(postData);
   const dispatch = useDispatch();
+  const userData = useSelector(state => state.user.getUserResponse);
+  const deletePost= useSelector(state=>state.post.cancelPostRequest)
+  console.log('post Delete'+deletePost)
   const dataCards = ({item}) => {
     if (postData == null) {
       <Loader visible={true} />;
     }
     console.log(item);
     return (
-      <>
+      <SafeAreaView style={{width:"100%",alignItems:'center'}}>
         <View style={{width: '100%'}}>
           <Text style={{fontSize: 13, fontWeight: '700', color: colors.text}}>
             {item.day}
@@ -54,30 +61,60 @@ const CreatePostComponent = () => {
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
+              justifyContent:'space-around',
+             
             }}>
-            <View>
-              <Image source={item.image} />
+            <View style={{width:'45%',}}>
+              {/* <Image source={item.image} /> */}
+              
+              {userData.map(
+                  res => {
+                    return (
+                      <View style={{flexDirection:'row',alignItems:'center',width:'100%',justifyContent:'space-between'}}>
+                      <Image
+                        key={res.id}
+                        style={{width: 36, height: 36, borderRadius: 100}}
+                        source={{uri: `${IMAGE_URL}${res.user_image}`}}
+                      />
+                      <Text>{res.full_name}</Text></View>
+                    );
+                  })
+                  
+                }
             </View>
             <View style={{marginLeft: 10, marginRight: 45}}>
-              <Text
+              {/* <Text
                 style={{fontSize: 14, color: colors.text, fontWeight: '400'}}>
-                {item.name}
-              </Text>
+                {item.name}Rana Farooq
+              </Text> */}
+              {/* {userData.map(
+                  res => {
+                    console.log(res)
+                    return (
+                      <Text>{res.full_name}</Text>
+                    );
+                  })
+                  
+                } */}
               <View
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center',
+                  
                 }}>
-                <Image source={require('../../assets/Stars.png')} />
-                <Text style={{marginLeft: 10}}>(25 reviews)</Text>
+                  
+                {/* <Image source={require('../../assets/Stars.png')} /> */}
+                {/* <Text style={{marginLeft: 10}}>(25 reviews)</Text> */}
               </View>
             </View>
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
                 alignItems: 'center',
+                width:'18 %',
+                
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('Post')}>
                 <Image source={require('../../assets/edit_btn.png')} />
@@ -87,7 +124,7 @@ const CreatePostComponent = () => {
               onPress={() => {
                 // dispatch(cancelPostRequest(item.id))
                 setPostId(item.id)
-                setDeletebtn(true)
+                setModalVisible(true)
                 }}>
               <Image source={require('../../assets/delete.png')}/>
             </TouchableOpacity>
@@ -141,22 +178,26 @@ const CreatePostComponent = () => {
           </View>
           {/* 3rd Row user */}
         </View>
-      </>
+      </SafeAreaView>
     );
   };
   return (
     <>
-      {deletebtn ? (
-        <>
-          <Sure deleteBlack={true} setDeletebtn={setDeletebtn} postId={postId} />
+      
+          <PostDeleteModal modalVisible={modalVisible} setModalVisible={setModalVisible}
+           postId={postId}
+          />
+          {deletePost ==true&& <Loader visible={true}/>}
           <CustomHeader
             text={'My Posts'}
             postFlat={true}
             ContentView={
               <>
-                <View style={{alignItems: 'center'}}>
+                <View style={{alignItems: 'center',width:'100%'}}>
+                
                   <FlatList
-                    style={{zIndex: 1}}
+                    style={{zIndex: 1,width:"100%"}}
+                    
                     data={postData}
                     keyExtractor={item => item.id}
                     renderItem={item => dataCards(item)}
@@ -167,26 +208,7 @@ const CreatePostComponent = () => {
             }
           />
         </>
-      ) : (
-        <CustomHeader
-          text={'My Posts'}
-          postFlat={true}
-          ContentView={
-            <>
-              <View style={{alignItems: 'center'}}>
-                <FlatList
-                  style={{zIndex: 1}}
-                  data={postData}
-                  keyExtractor={item => item.id}
-                  renderItem={item => dataCards(item)}
-                  showsVerticalScrollIndicator={false}
-                />
-              </View>
-            </>
-          }
-        />
-      )}
-    </>
+     
   );
 };
 
@@ -218,20 +240,21 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     shadowColor: '#4448FF',
 
-    width: '101%',
+    width: '100%',
     height: '10%',
     elevation: 4,
     justifyContent: 'center',
   },
   dataContainer: {
-    width: 329,
-    height: 182,
+    width: "98%",
+    height: 202,
     padding: 10,
+    
     borderRadius: 12,
     backgroundColor: '#fff',
     marginBottom: 12,
     marginTop: 4,
-    marginHorizontal:4,
+    
     shadowColor: '#007BFE',
     shadowOffset: {
       width: 0,

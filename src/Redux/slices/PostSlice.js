@@ -25,7 +25,7 @@ const post = createSlice({
     createPostResponse: (state, action) =>
       update(state, {
         createPostResponse: {$set: action.payload},
-        // createPostRequest: {$set: false},
+        createPostRequest: {$set: false},
       }),
     cancelPostRequest: (state, action) =>
       update(state, {
@@ -34,7 +34,7 @@ const post = createSlice({
     cancelPostResponse: (state, action) =>
       update(state, {
         cancelPostResponse: {$set: action.payload},
-        // signUpOtpVarifyRequest: {$set: false},
+        cancelPostRequest: {$set: false},
       }),
     singlePostRequest: (state, action) =>
       update(state, {
@@ -43,6 +43,7 @@ const post = createSlice({
     singlePostResponse: (state, action) =>
       update(state, {
         singlePostResponse: {$set: action.payload},
+        singlePostRequest:{$set:false}
       }),
     getAllPostRequest: (state, action) =>
       update(state, {
@@ -51,6 +52,7 @@ const post = createSlice({
     getAllPostResponse: (state, action) =>
       update(state, {
         getAllPostResponse: {$set: action.payload},
+        getAllPostRequest: {$set:false}
       }),
   },
 });

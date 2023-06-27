@@ -31,11 +31,13 @@ import {useSelector} from 'react-redux';
 import { SliderBox } from 'react-native-image-slider-box';
 import { colors } from '../../globalStyle';
 import { singlePost } from '../../Components/Api/singlePost';
+import Loader from '../../Components/Loader/Loader';
 const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
   const [imgActive, setImgActive] = useState(0);
-  const data =singlePost;
-  //  useSelector(state => state.post.singlePostResponse);
+  const data =useSelector(state => state.post.singlePostResponse);
+  const singleData=useSelector(state=>state.post.singlePostRequest);
   console.log(data)
+  console.log(singleData)
   const dataCards = item => {
     console.log('check data ');
     console.log(item.item);
@@ -54,7 +56,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                 fontFamily: 'Poppins-Regular',
                 color: '#5A5A5A',
               }}>
-              Muhammad Waseem
+              Rana Farooq
             </Text>
             <View style={{flexDirection: 'row'}}>
               <Image
@@ -274,6 +276,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
       {/* Background Image */}
       {/* <CustomBackground /> */}
       {/* Background Image */}
+      {singleData && <Loader visible={true}/>}
       <View
         style={{
           flexDirection: 'row',
