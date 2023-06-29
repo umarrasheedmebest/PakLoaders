@@ -125,6 +125,7 @@ const CustomHeader = ({
       ) : (
         <ScrollView
           showsVerticalScrollIndicator={false}
+          nestedScrollEnabled={true}
           style={[styles.mainContainer, styles.commonStyle]}>
           {/* Custom ContentView */}
           {ContentView}

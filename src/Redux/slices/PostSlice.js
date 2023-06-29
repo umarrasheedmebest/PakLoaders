@@ -11,10 +11,12 @@ const post = createSlice({
     singlePostResponse: [],
     // Cancel Post
     cancelPostRequest: false,
+    cancelMessageAccess:false,
     cancelPostResponse: [],
     // Get All Post
     getAllPostRequest:false,
     getAllPostResponse: [],
+    
   },
 
   reducers: {
@@ -29,12 +31,21 @@ const post = createSlice({
       }),
     cancelPostRequest: (state, action) =>
       update(state, {
+        cancelPostResponse: {$set: []},
+        cancelMessageAccess:{$set: false},
         cancelPostRequest: {$set: true},
+        
       }),
     cancelPostResponse: (state, action) =>
       update(state, {
         cancelPostResponse: {$set: action.payload},
+        cancelMessageAccess:{$set: true},
         cancelPostRequest: {$set: false},
+        
+      }),
+      cancelMessageAccess: (state, action) =>
+      update(state, {
+        cancelMessageAccess:{$set: false},
       }),
     singlePostRequest: (state, action) =>
       update(state, {
@@ -65,5 +76,6 @@ export const {
   singlePostRequest,
   singlePostResponse,
   cancelPostResponse,
+  cancelMessageAccess,
 } = post.actions;
 export const postReducer = post.reducer;

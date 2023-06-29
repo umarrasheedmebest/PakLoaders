@@ -14,11 +14,12 @@ import {cancelPostRequest} from '../../Redux/slices/PostSlice';
 import {colors} from '../../globalStyle';
 import {useNavigation} from '@react-navigation/native';
 
-const PostDeleteModal = ({postId, modalVisible, setModalVisible}) => {
+const PostDeleteModal = ({postId, modalVisible, setModalVisible,}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   return (
     <View>
+      
       <Modal
         animationType="slide"
         transparent={true}

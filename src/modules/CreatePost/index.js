@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Modal
 } from 'react-native';
 import PostAPI from '../../Components/Api/PostAPI';
 import CustomHeader from '../../Components/CustomHeader';
@@ -17,6 +18,7 @@ import Sure from '../../Components/sure';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../../Components/Loader';
 import {
+  cancelMessageAccess,
   cancelPostRequest,
   singlePostRequest,
 } from '../../Redux/slices/PostSlice';
@@ -25,19 +27,27 @@ import PostDeleteModal from '../../Components/CustomerPostDelete/PostDeleteModal
 import { IMAGE_URL } from '../../Redux/constent/constent';
 
 
-const CreatePostComponent = () => {
-  const postData=PostData;
+const CreatePostComponent = ({postData}) => {
+  const limit = 3; // Set the maximum number of items to be displayed
+
+  // Get the limited subset of the data
+  const limitedData = postData.slice(-4).reverse();
   const navigation = useNavigation();
   const [deletebtn, setDeletebtn] = useState(false);
   const [postId, setPostId] = useState()
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible1] = useState(false);
   console.log('Post Data');
   console.log(postData);
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user.getUserResponse);
-  const deletePost= useSelector(state=>state.post.cancelPostRequest)
-  console.log('post Delete'+deletePost)
-  const dataCards = ({item}) => {
+  const deletePost= useSelector(state=>state.post.cancelPostRequest);
+  const deletePostRes= useSelector(state=>state.post.cancelPostResponse);
+  const deleteMessage= useSelector(state=>state.post.cancelMessageAccess);
+console.log('Pistts dfdsgsfdgsd'+postId)
+
+  console.log('post Delete'+deletePostRes.message)
+  const dataCards = useCallback(({item}) => {
     if (postData == null) {
       <Loader visible={true} />;
     }
@@ -70,9 +80,9 @@ const CreatePostComponent = () => {
               {userData.map(
                   res => {
                     return (
-                      <View style={{flexDirection:'row',alignItems:'center',width:'100%',justifyContent:'space-between'}}>
+                      <View key={res.id} style={{flexDirection:'row',alignItems:'center',width:'100%',justifyContent:'space-between'}}>
                       <Image
-                        key={res.id}
+                        
                         style={{width: 36, height: 36, borderRadius: 100}}
                         source={{uri: `${IMAGE_URL}${res.user_image}`}}
                       />
@@ -180,25 +190,37 @@ const CreatePostComponent = () => {
         </View>
       </SafeAreaView>
     );
-  };
+  },[]);
   return (
     <>
       
-          <PostDeleteModal modalVisible={modalVisible} setModalVisible={setModalVisible}
+          <PostDeleteModal modalVisible={modalVisible} setModalVisible={setModalVisible} 
            postId={postId}
           />
+         
+      
+     
+       
+      
+      {deleteMessage&&Alert.alert('Message',deletePostRes.message,[
+        {text: 'OK', onPress: () => dispatch(cancelMessageAccess())},
+      ])}
+   
           {deletePost ==true&& <Loader visible={true}/>}
           <CustomHeader
             text={'My Posts'}
             postFlat={true}
             ContentView={
               <>
+              
                 <View style={{alignItems: 'center',width:'100%'}}>
                 
                   <FlatList
                     style={{zIndex: 1,width:"100%"}}
-                    
-                    data={postData}
+                    maxToRenderPerBatch={4}
+                    initialNumToRender={4}
+                    windowSize={10}
+                    data={limitedData}
                     keyExtractor={item => item.id}
                     renderItem={item => dataCards(item)}
                     showsVerticalScrollIndicator={false}
@@ -309,6 +331,47 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#5A5A5A',
     fontWeight: '400',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 
