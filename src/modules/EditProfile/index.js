@@ -7,12 +7,16 @@ import CustomButton from '../../Components/CustomButton';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 import {IMAGE_URL} from '../../Redux/constent/constent';
+import Loader from '../../Components/Loader/Loader';
+
 const EditProfileComponent = ({updateUserName, updateUserImage}) => {
   const userData = useSelector(state => state.user.getUserResponse);
   const [editName, setEditName] = useState('');
+const updateUser=useSelector(((state)=>state.user.updateUserRequest));
 
   return (
     <>
+   { updateUser &&<Loader visible={true}/> }
       <CustomHeader
         text={'Edit Profile'}
         ContentView={

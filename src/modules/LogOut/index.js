@@ -8,8 +8,10 @@ import {
     SafeAreaView,
     Text,
     ImageBackground,
+    StatusBar,
     
 } from 'react-native';
+import LogoutModal from '../../Components/LogoutModal/LogoutModal';
 
  
 const LogOutComponent = ({
@@ -21,8 +23,11 @@ const LogOutComponent = ({
         
         
              <SafeAreaView style={{flex:1}}>
+
                 <ImageBackground resizeMode='contain' style={{width:"100%",height:"100%",}} source={require('../../assets/logoutBg.png')}>
                 <Sure logoutBack={true}/>
+               
+                {/* <LogoutModal/> */}
                 </ImageBackground>
              </SafeAreaView>
            

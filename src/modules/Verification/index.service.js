@@ -19,6 +19,9 @@ const VerificationServiceComponent = ({children, navigation, route}) => {
   // Otp message
   const otpMessage = useSelector(state => state.auth.signInResponse.message);
   const signinRequest = useSelector(state => state.auth.signInRequest);
+  const signinOtpVerifyReq = useSelector(state => state.auth.signinOtpVerifyRequest);
+  const signinOtp = useSelector(state => state.auth.otpMessage);
+
   // SignupData
   const signupUserNumber = useSelector(state => state.auth.signUpResponse.data);
   const signinRequestData = useSelector(state => state.auth.signInResponse);
@@ -48,7 +51,7 @@ const [otpMessagein, setOtpMessagein] = useState(false)
           deviceToken: await deviceToken(),
         }),
       );
-      navigation.navigate('Verified');
+    
     } else {
       setInvalidOtpLoader(true);
       setTimeout(() => {
@@ -58,6 +61,13 @@ const [otpMessagein, setOtpMessagein] = useState(false)
       
     }
   };
+  useEffect(() => {
+    if (signinOtp) {
+      navigation.navigate('Verified');
+    }
+    
+  }, [signinOtp])
+  
 
   return children({
     navigation,
@@ -68,7 +78,8 @@ const [otpMessagein, setOtpMessagein] = useState(false)
     setInvalidOtpLoader,
     otpMessagein,
     setOtpMessagein,
-    tokens
+    tokens,
+    signinOtpVerifyReq
   });
 };
 

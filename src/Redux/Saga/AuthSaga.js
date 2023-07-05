@@ -2,6 +2,8 @@ import {call,put} from 'redux-saga/effects';
 import { signUpResponse,signinOtpVerifyResponse,signinResponse,signupOtpResponse } from '../slices/AuthSlice';
 import { requestSignUpUser,requestSignInUser,requestSigninOtpVerify,requestSignupOtpVerify } from '../slices/RequestAPI/AuthApi';
 
+
+
 // Singup funtion
 export function* handleGetUser(action){
     
@@ -18,6 +20,7 @@ try {
 }
 
 };
+
 // SignupVarifyOtp user
 export function* handleGetUserVarifyOtp(action){
     
@@ -44,9 +47,11 @@ export function* handleGetUserVarifyOtp(action){
             const response=yield call(requestSignInUser,data);
             const mainvalue=response.data;
            console.log(mainvalue);
-            yield put(signinResponse(mainvalue));
+            yield put(signinResponse(mainvalue));c
         } catch (error) {
             console.log("Not call api request"+ error)
+            
+
         }
         
         };

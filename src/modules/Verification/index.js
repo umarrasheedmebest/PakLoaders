@@ -16,7 +16,8 @@ const VerificationComponent = ({
   setInvalidOtpLoader,
   otpMessagein,
   setOtpMessagein,
-  tokens
+  tokens,
+  signinOtpVerifyReq
 }) => {
 
  
@@ -30,7 +31,7 @@ const VerificationComponent = ({
       {/* Background Image */}
       <CustomBackground />
       {/* Background Image */}
-      <Loader visible={signinRequest||invalidOtpLoader} />
+      {signinOtpVerifyReq &&<Loader visible={true||invalidOtpLoader} />}
 
       <View style={styles.mainContainer}>
         {/* Front Image  */}

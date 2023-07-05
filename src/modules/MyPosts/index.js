@@ -36,6 +36,7 @@ import {
   useWindowDimensions,
   Platform,
   Keyboard,
+  Alert,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
@@ -369,7 +370,9 @@ const PostComponent = ({
           <VehicleSelect />
           {/* Button Next */}
           <CustomButton
-            onPress={() => setModalVisible(true)}
+            onPress={() => Alert.alert('Success','Post Create Successfully',[{
+              text:'ok',onPress:()=>navigation.navigate('CreatePost')
+            }])}
             text="Post"
             type="secondary"
           />

@@ -8,7 +8,16 @@ const rides = createSlice({
     acceptBidResponse: [],
     // Upcoming Rides
     upcomingRidesRequest:false,
-    upcomingRidesResponse:[]
+    upcomingRidesResponse:[],
+    // ongoing Rides
+    ongoingRidesRequest:false,
+    ongoingRidesResponse:[],
+    // completed Rides
+    completeRidesRequest:false,
+    completeRidesResponse:[],
+    // cancel Rides
+    cancelRidesRequest:false,
+    cancelRidesResponse:[]
 
    
   },
@@ -31,7 +40,38 @@ const rides = createSlice({
         update(state,{
             upcomingRidesResponse:{$set:action.payload},
             upcomingRidesRequest:{$set:false},
-        })
+        }),
+        // ongoing
+        ongoingRidesRequest:(state,action)=>
+        update(state,{
+            ongoingRidesRequest:{$set:true},
+        }),
+       ongoingRidesResponse:(state,action)=>
+        update(state,{
+            ongoingRidesResponse:{$set:action.payload},
+            ongoingRidesRequest:{$set:false},
+        }),
+         // complete
+         completeRidesRequest:(state,action)=>
+         update(state,{
+             completeRidesRequest:{$set:true},
+         }),
+        completeRidesResponse:(state,action)=>
+         update(state,{
+             completeRidesResponse:{$set:action.payload},
+             completeRidesRequest:{$set:false},
+         }),
+          // ongoing
+        cancelRidesRequest:(state,action)=>
+        update(state,{
+            cancelRidesRequest:{$set:true},
+        }),
+       cancelRidesResponse:(state,action)=>
+        update(state,{
+            cancelRidesResponse:{$set:action.payload},
+            cancelRidesRequest:{$set:false},
+        }),
+
       
   
   },
@@ -40,6 +80,12 @@ export const {
   acceptBidRequest,
   acceptBidResponse,
   upcomingRidesRequest,
-  upcomingRidesResponse
+  upcomingRidesResponse,
+  ongoingRidesRequest,
+  ongoingRidesResponse,
+  completeRidesRequest,
+  completeRidesResponse,
+  cancelRidesRequest,
+  cancelRidesResponse
 } = rides.actions;
 export const ridesReducer = rides.reducer;

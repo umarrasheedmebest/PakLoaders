@@ -16,10 +16,12 @@ const LoginComponent = ({
   handleOnChange,
   valiDate,
   data,
+  signinRequestDa,
+  inputs
 }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Loader visible={loading} />
+     {signinRequestDa &&<Loader visible={true} />}
       {/* Background Image */}
       <CustomBackground />
       {/* Background Image */}
@@ -38,6 +40,7 @@ const LoginComponent = ({
             keyboardType={'numeric'}
             error={errors.mobile}
             maxLength={11}
+            value={inputs.mobile}
             setValue={text => handleOnChange(text, 'mobile')}
             onFocus={() => {
               handleError(null, 'mobile');

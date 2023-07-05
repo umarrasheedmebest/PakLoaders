@@ -16,6 +16,7 @@ import CustomInput from '../../Components/CustomInput';
 import {useSelector,useDispatch} from 'react-redux';
 import {FlatList} from 'react-native-gesture-handler';
 import { cancelPostRequest } from '../../Redux/slices/PostSlice';
+import { logoutHandle } from '../../Redux/slices/AuthSlice';
 const Sure = ({
   profile,
   logoutBack,
@@ -366,7 +367,10 @@ const Sure = ({
                 </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => logout()}>
+            <TouchableOpacity onPress={() => {
+              logout()
+              dispatch(logoutHandle())
+              }}>
               <View
                 style={{
                   width: 109,

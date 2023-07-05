@@ -44,6 +44,20 @@ export const requestUpcomingRides=async()=> {
   });
   return res;
 }
+export const requestOngoingRides=async(status)=> {
+  const {id,userinfoToken}=await getUserId();
+  console.log("User Id",id);
+  const res = axios.request({
+    method: 'get',
+    url: `http://ec2-18-221-5-46.us-east-2.compute.amazonaws.com:5002/rides/get-rides-details/10?status=${status}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':userinfoToken
+    },
+  });
+  return res;
+}
+
 
 
 

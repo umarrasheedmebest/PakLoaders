@@ -12,6 +12,9 @@ const LoginServiceComponent = ({
 }) => {
   const signinRequestData = useSelector(state => state.auth.signInResponse);
   const signinRequestDa = useSelector(state => state.auth.signInRequest);
+  const signinRequestMessage = useSelector(state => state.auth.signInMessage);
+  console.log("Message"+signinRequestMessage)
+
 
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -104,7 +107,8 @@ const LoginServiceComponent = ({
             signinRequest(item)
         ); 
         
-        navigation.navigate('Verification')
+        
+        // navigation.navigate('Verification')
      
         
     }
@@ -116,11 +120,15 @@ const LoginServiceComponent = ({
       navigation.navigate('Login')
       handleError('Your Number not Register', 'mobile');
     }
+    if (signinRequestMessage) {
+      navigation.navigate('Verification')
+      handleOnChange('', 'mobile')
+    }
      
     
     
      
-  }, [validNumber])
+  }, [validNumber || signinRequestMessage])
     
     
     
@@ -140,7 +148,9 @@ const LoginServiceComponent = ({
         handleOnChange,
         handleError,
         valiDate,
-        data
+        data,
+        signinRequestDa,
+        inputs
     });
 };
 

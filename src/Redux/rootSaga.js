@@ -12,7 +12,13 @@ import {
   createPostRequestSaga,
   cancelPostRequestSaga,
 } from './Saga/PostSaga';
-import { acceptBidRequestSaga, upcomingRidesRequestSaga } from './Saga/RidesSaga';
+import {
+  acceptBidRequestSaga,
+  cancelledRidesRequestSaga,
+  completedRidesRequestSaga,
+  ongoingRidesRequestSaga,
+  upcomingRidesRequestSaga,
+} from './Saga/RidesSaga';
 import {
   deleteUserRequestSaga,
   getUserRequestSaga,
@@ -33,7 +39,13 @@ import {
   singlePostRequest,
   cancelPostRequest,
 } from './slices/PostSlice';
-import { acceptBidRequest, upcomingRidesRequest } from './slices/RidesSlice';
+import {
+  acceptBidRequest,
+  cancelRidesRequest,
+  completeRidesRequest,
+  ongoingRidesRequest,
+  upcomingRidesRequest,
+} from './slices/RidesSlice';
 import {
   deleteUserRequest,
   getUserRequest,
@@ -60,6 +72,9 @@ export function* watcherSaga() {
   // Bids
   yield takeLatest(getAllBidsRequest.type, getAllBidsRequestSaga);
   // Rides
-  yield takeLatest(acceptBidRequest.type,acceptBidRequestSaga);
-  yield takeLatest(upcomingRidesRequest.type,upcomingRidesRequestSaga);
+  yield takeLatest(acceptBidRequest.type, acceptBidRequestSaga);
+  yield takeLatest(upcomingRidesRequest.type, upcomingRidesRequestSaga);
+  yield takeLatest(ongoingRidesRequest.type, ongoingRidesRequestSaga);
+  yield takeLatest(completeRidesRequest.type, completedRidesRequestSaga);
+  yield takeLatest(cancelRidesRequest.type, cancelledRidesRequestSaga);
 }

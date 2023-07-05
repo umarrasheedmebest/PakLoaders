@@ -11,9 +11,14 @@ const auth = createSlice({
 
     //  Sign In
     signInRequest: false,
+    signInMessage:false,
     signInResponse: [],
     signInOtpVarifyRequest: false,
+    otpMessage:false,
     signInOtpVarifyResponse: [],
+    // Error Handling State
+    errorMessage:''
+    
   },
 
   reducers: {
@@ -38,23 +43,42 @@ const auth = createSlice({
     signinRequest: (state, action) =>
       update(state, {
         signInRequest: {$set: true},
+        signInMessage:{$set :false}
       }),
     signinResponse: (state, action) =>
       update(state, {
         signInResponse: {$set: action.payload},
+        signInMessage:{$set:true},
         signInRequest: {$set: false},
       }),
     signinOtpVerifyRequest: (state, action) =>
       update(state, {
         signInOtpVarifyRequest: {$set: true},
+        otpMessage: {$set: false}
 
       }),
     signinOtpVerifyResponse: (state, action) =>
       update(state, {
         signInOtpVarifyResponse: {$set: action.payload},
         signInOtpVarifyRequest: {$set: false},
+        otpMessage: {$set: true}
 
       }),
+     
+      errorMessage:(state,action)=>
+      update(state,{
+        // errorMessage: {$set: action.payload},
+        signinOtpVerifyRequest: {$set:false},
+        signInMessage:{$set:true},
+
+      }),
+      logoutHandle:(state,action)=>
+      update(state,{
+       
+        signinOtpVerifyRequest: {$set:false},
+        signInMessage:{$set:false},
+        signInRequest: {$set: false},
+      })
   },
 });
 export const {
@@ -66,5 +90,7 @@ export const {
   signinRequest,
   signinResponse,
   signupOtpResponse,
+  errorMessage,
+  logoutHandle
 } = auth.actions;
 export const authReducer = auth.reducer;
