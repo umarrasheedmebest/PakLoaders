@@ -22,7 +22,7 @@ export function* createPostRequestSaga(action){
     console.log(data)
     try {
         const response=yield call(requestCreatePost,data);
-        const mainvalue=response;
+        const mainvalue=response.data;
        console.log(mainvalue);
         // yield put(createPostResponse(mainvalue));
     } catch (error) {

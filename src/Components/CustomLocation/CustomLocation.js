@@ -16,7 +16,7 @@ import filter from 'lodash.filter';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-const CustomLocation = ({placeholder,label}) => {
+const CustomLocation = ({placeholder,label,adress,setParam}) => {
     
     const [searchQuery, setSearchQuery] = useState('')
     const [data, setdata] = useState([])
@@ -25,8 +25,10 @@ const CustomLocation = ({placeholder,label}) => {
       }, []);
       const inputRef=useRef(null);
         const onSubmit=(item)=>{
-            const {name}=item;
+            const {name,lat,lng}=item;
             // console.log(name)
+            setParam(item)
+            adress(name)
             setSearchQuery(name);
            setModalVisible(false) 
         }

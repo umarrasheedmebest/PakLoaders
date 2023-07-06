@@ -27,6 +27,14 @@ const ProfileComponent = ({
     ...props
 }) => { 
   const userData= useSelector((state)=>state.user.getUserResponse);
+  const upcomingRideData=useSelector((state)=>state.rides.upcomingRidesResponse);
+  const ongoingResponseData=useSelector((state)=>state.rides.ongoingRidesResponse);
+  const completeResponseData=useSelector((state)=>state.rides.completeRidesResponse);
+  const cancelledResponseData=useSelector((state)=>state.rides.cancelRidesResponse)
+
+
+
+
 
   const navigation =useNavigation();
   const dataCards=({item})=>{
@@ -76,9 +84,9 @@ const ProfileComponent = ({
                   <TouchableOpacity onPress={()=>navigation.navigate('EidtProfile')}>
                     <Image source={require('../../assets/pencil.png')}/>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>deleteUser()}>
+                  {/* <TouchableOpacity onPress={()=>deleteUser()}>
                   <Image style={{marginLeft:5,}} source={require('../../assets/delete.png')}/>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                     
                 </View>
                 {/* Edit Profile */}
@@ -106,7 +114,7 @@ const ProfileComponent = ({
                 </View>
                 {/* Name */}
                 {/* Reviews */}
-                <View style={{flexDirection:"row",alignItems:"center"}}>
+                {/* <View style={{flexDirection:"row",alignItems:"center"}}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={{width:12,height:12}} source={require('../../assets/Star.png')}/>
                         <Image style={{width:12,height:12}} source={require('../../assets/Star.png')}/>
@@ -117,7 +125,7 @@ const ProfileComponent = ({
                         <Text style={{color:colors.text,fontSize:7,marginLeft:4}}>(4.5)</Text>
                     </View>
                     <View><Text style={{color:colors.primary,fontSize:9, marginLeft:6}}>View all reviews</Text></View>
-                </View>
+                </View> */}
                 {/* Reviews */}
                     </View>
                   })}
@@ -139,7 +147,7 @@ const ProfileComponent = ({
                     <Text style={{color:colors.text,fontSize:12,fontWeight:"500",marginVertical:8,marginBottom:5}}>
                     Trips Completed
                     </Text>
-                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>3663</Text>
+                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>{completeResponseData.length}</Text>
                 </View>
                 {/* 1st */}
                 {/* 2rd */}
@@ -157,7 +165,7 @@ const ProfileComponent = ({
                     <Text style={{color:colors.text,fontSize:12,fontWeight:"500",marginVertical:8,marginBottom:5}}>
                     Trips inprogress
                     </Text>
-                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>35</Text>
+                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>{ongoingResponseData.length}</Text>
                 </View>
                 {/* 3rd */}
                 <View style={{alignItems:"center"}}>
@@ -174,14 +182,14 @@ const ProfileComponent = ({
                     <Text style={{color:colors.text,fontSize:12,fontWeight:"500",marginVertical:8,marginBottom:5}}>
                     Trips Cancelled
                     </Text>
-                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>26</Text>
+                    <Text style={{color:colors.primary,fontSize:12,fontWeight:"500"}}>{cancelledResponseData.length}</Text>
                 </View>
                 </View>
                 {/* Tips */}
                 {/* Clickable button */}
                 <View style={styles.listStyle}>
                   {/* Subscription Button */}
-                  <View style={{alignItems:"center",height:94,justifyContent:"center"}}>
+                  {/* <View style={{alignItems:"center",height:94,justifyContent:"center"}}>
                     <View style={styles.subscriptionDtail}>
                     <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",}}>
                       <Text style={{fontSize:14,fontWeight:"700",color:colors.primary}}>Subscription Details</Text>
@@ -202,12 +210,12 @@ const ProfileComponent = ({
 expired please re-subscribe to get access. </Text>
                     </View>
                   </View>
-                  </View>
+                  </View> */}
                   {/* Subscription Button */}
                 
-                  <View >
-        <TouchableOpacity onPress={()=>navigation.navigate('InsuredLuggage')}>
-           <View style={{width:329,height:52,borderWidth:1,
+                  {/* <View style={{width:'100%'}}>
+        <TouchableOpacity style={{width:'100%'}} onPress={()=>navigation.navigate('InsuredLuggage')}>
+           <View style={{width:'100%',height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
       }}>
@@ -225,9 +233,9 @@ expired please re-subscribe to get access. </Text>
      </View>
         </TouchableOpacity> 
                    </View>
-                   <View >
-        <TouchableOpacity onPress={()=>{navigation.navigate('Packages')}}>
-           <View style={{width:329,height:52,borderWidth:1,
+                   <View style={{width:'100%'}}>
+        <TouchableOpacity style={{width:'100%'}} onPress={()=>{navigation.navigate('Packages')}}>
+           <View style={{width:'100%',height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
       }}>
@@ -243,11 +251,11 @@ expired please re-subscribe to get access. </Text>
         
      </View>
         </TouchableOpacity> 
-                   </View>
+                   </View> */}
                    {/* My Post */}
-                   <View >
-        <TouchableOpacity onPress={()=>{navigation.navigate('CreatePost')}}>
-           <View style={{width:329,height:52,borderWidth:1,
+                   <View style={{width:'100%'}}>
+        <TouchableOpacity style={{width:'100%'}} onPress={()=>{navigation.navigate('CreatePost')}}>
+           <View style={{width:'100%',height:52,borderWidth:1,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10
       }}>
@@ -283,9 +291,9 @@ expired please re-subscribe to get access. </Text>
      </View>
         </TouchableOpacity> 
                    </View> */}
-                   <View >
-        <TouchableOpacity onPress={()=>userLogout()}>
-           <View style={{width:329,height:52,
+                   <View style={{width:'100%'}}>
+        <TouchableOpacity style={{width:'100%'}} onPress={()=>userLogout()}>
+           <View style={{width:'100%',height:52,
       borderColor:"#007BFE",marginTop:10,borderRadius:10,
       flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:10,
       backgroundColor:"#F44336",marginBottom:50,
@@ -351,7 +359,8 @@ const styles = StyleSheet.create({
 
       },
       listStyle:{
-        zIndex:2
+        zIndex:2,
+        width:'100%'
       },
       subscriptionDtail:{
         width:"100%",

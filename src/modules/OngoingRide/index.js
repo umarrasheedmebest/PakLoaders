@@ -28,7 +28,7 @@ const OngoingRideComponent = () => {
         console.log(item)
     return(
 <View style={styles.container}>
-       <Text style={styles.dayStyle}>Today</Text>
+       {/* <Text style={styles.dayStyle}>Today</Text> */}
        
        <View style={styles.pickContainer}>
          <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}} onPress={()=>navigation.navigate('Maps')}>
@@ -69,13 +69,14 @@ const OngoingRideComponent = () => {
     )
     }
     return (
-        <SafeAreaView style={{flex:1,backgroundColor:colors.white}}>
+        <SafeAreaView style={{flex:1,backgroundColor:colors.white,alignItems:'center'}}>
        {  ongoingData  &&<ActivityIndicator  color={colors.primary}/>}
-       <FlatList
+      {ongoingResponseData.length > 0? <FlatList
        data={ongoingResponseData}
        keyExtractor={(item)=>item.id}
        renderItem={({item})=>itemRender(item)}
-       />
+       />:<Text>Not Data Found</Text>
+    }
 
 {/* Today Rides */}
 </SafeAreaView>

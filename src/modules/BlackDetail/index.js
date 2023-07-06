@@ -32,12 +32,15 @@ import { SliderBox } from 'react-native-image-slider-box';
 import { colors } from '../../globalStyle';
 import { singlePost } from '../../Components/Api/singlePost';
 import Loader from '../../Components/Loader/Loader';
+import { BASE_URL, IMAGE_URL } from '../../Redux/constent/constent';
 const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
   const [imgActive, setImgActive] = useState(0);
   const data =useSelector(state => state.post.singlePostResponse);
   const singleData=useSelector(state=>state.post.singlePostRequest);
+  const getUserResponse =useSelector(state=>state.user.getUserResponse)
   console.log(data)
   console.log(singleData)
+  console.log(getUserResponse)
   const dataCards = item => {
     console.log('check data ');
     console.log(item.item);
@@ -47,18 +50,20 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
           styles.dataContainer,
           {height: 251, padding: 10, shadowColor: '#007BFE', margin: 4},
         ]}>
-        <View style={{flexDirection: 'row'}}>
-          <Image source={require('../../assets/Waseem.png')} />
+          {getUserResponse.map((item)=><View style={{flexDirection: 'row'}}>
+          
+          <Image style={{width:40,height:40,borderRadius:100}} source={{uri:`${IMAGE_URL}${item.user_image}`}} />
           <View style={{marginHorizontal: 10}}>
             <Text
               style={{
                 fontSize: 14,
                 fontFamily: 'Poppins-Regular',
                 color: '#5A5A5A',
+               
               }}>
-              Rana Farooq
+              {item.full_name}
             </Text>
-            <View style={{flexDirection: 'row'}}>
+            {/* <View style={{flexDirection: 'row'}}>
               <Image
                 style={styles.starsImage}
                 source={require('../../assets/Star.png')}
@@ -79,7 +84,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                 style={styles.starsImage}
                 source={require('../../assets/Star.png')}
               />
-            </View>
+            </View> */}
           </View>
           <View style={{flexDirection: 'row', marginLeft: 70}}>
             <TouchableOpacity>
@@ -88,14 +93,15 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                 source={require('../../assets/chat_icon.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity >
               <Image
                 style={styles.call_icon}
-                source={require('../../assets/call_icon.png')}
+                source={require('../../assets/call_icon_popup.png')}
               />
             </TouchableOpacity>
           </View>
-        </View>
+        </View>)}
+        
         {/* 2nd row */}
         <View
           style={{flexDirection: 'row', alignItems: 'center', marginTop: 7}}>
@@ -343,7 +349,7 @@ dotColor='red'
 
 /> */}
         <View style={{height: '58%', alignItems: 'center'}}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <SafeAreaView >
             <View style={styles.listStyle} showsVerticalScrollIndicator={false}>
               <Text
                 style={{
@@ -417,7 +423,7 @@ dotColor='red'
                 </View>
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </SafeAreaView>
         </View>
       </View>
     </SafeAreaView>
@@ -552,6 +558,7 @@ const styles = StyleSheet.create({
   call_icon: {
     width: 25.29,
     height: 23.29,
+    borderWidth:1
   },
 });
 

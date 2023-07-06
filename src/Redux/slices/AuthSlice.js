@@ -78,6 +78,7 @@ const auth = createSlice({
         signinOtpVerifyRequest: {$set:false},
         signInMessage:{$set:false},
         signInRequest: {$set: false},
+        otpMessage: {$set: false}
       })
   },
 });

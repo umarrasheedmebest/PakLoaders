@@ -15,8 +15,10 @@ import PlusIcons from '../assets/SVG_Icons/plus_icon_bluee.svg';
 
 import HomeIcon from '../assets/SVG_Icons/home_icon_drawer.svg';
 import { MaterialIcon } from '../Components/Icon/Icon';
+import { useSelector } from 'react-redux';
 
 function MyTabBar({state, descriptors, navigation}) {
+ 
   return (
     <View
       style={{
@@ -105,6 +107,7 @@ function MyTabBar({state, descriptors, navigation}) {
 // ...
 
 export function MyTabs() {
+  const counter=useSelector((state)=>state.language);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -116,7 +119,7 @@ export function MyTabs() {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Create" component={Post} />
 
-      <Tab.Screen name="My Request" component={Payment} />
+      {/* <Tab.Screen name="My Request" component={Payment} /> */}
     </Tab.Navigator>
   );
 }

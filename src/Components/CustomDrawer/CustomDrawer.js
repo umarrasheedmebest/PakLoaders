@@ -139,22 +139,22 @@ try {
           source={require('../../assets/mypost_icon_drawer.png')}
           onPress={()=>{navigation.navigate('Post')}}
           /> */}
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.packages:Urdu.packages}
           Icons={<PakageIcon width={30} />}
 
           source={require('../../assets/pkg_icon_drawer.png')}
           onPress={()=>navigation.navigate('Packages')}
-          />
+          /> */}
         
        
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.insuredLuggage:Urdu.insuredLuggage}
           Icons={<LuggageIcon width={30} />}
 
           source={require('../../assets/insured_lugage_icon_drawer.png')}
           onPress={()=>navigation.navigate('InsuredLuggage')}
-          />
+          /> */}
           <DrawerButtondemo 
           text={counter?eng.myRides:Urdu.myRides}
           Icons={<RideIcon width={30} />}
@@ -178,11 +178,11 @@ try {
           source={require('../../assets/chat_icon_drawer.png')}
           onPress={()=>navigation.navigate('Chat')}
           />
-          <DrawerButtondemo 
+          {/* <DrawerButtondemo 
           text={counter?eng.payment:Urdu.payment}
           Icons={<PaymentIcon width={30} />}
           onPress={()=>navigation.navigate('Payment')}
-          />
+          /> */}
           {/* <DrawerButtondemo 
           text={counter?eng.share:Urdu.share}
           Icons={<ShareIcon width={30} />}
@@ -218,7 +218,7 @@ try {
         </View>
         </TouchableOpacity>
         {/* Logout */}
-        <View style={{marginTop:50,marginBottom:20,alignItems:"center"}}>
+        {/* <View style={{marginTop:50,marginBottom:20,alignItems:"center"}}>
         <View style={{width:128,height:65,justifyContent:"space-between",alignItems:"center"}}>
           <Text style={{fontSize:14,fontWeight:"600",fontFamily:"MontserratAlternates-Medium",color:"#5A5A5A",textTransform:"uppercase"}}>Connect us at</Text>
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
@@ -229,7 +229,7 @@ try {
 
         </View> 
         </View>
-        </View>
+        </View> */}
         
         </DrawerContentScrollView> 
         

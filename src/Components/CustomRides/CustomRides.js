@@ -20,18 +20,22 @@ const CustomRides = ({
         <TouchableOpacity onPress={()=>navigation.navigate('RiderProfile')}>
         <Image style={{width:61,height:61}} source={require('../../assets/HashimProfile.png')}/></TouchableOpacity>
         <View style={{marginLeft:20}} >
-            <Text style={{color:colors.primary,fontSize:16,fontWeight:"400"}}>Asif Ali</Text>
-            <View style={styles.imgContainer}>
+            <Text style={{color:colors.primary,fontSize:16,fontWeight:"400"}}>Rana Farooq</Text>
+            {/* <View style={styles.imgContainer}>
                 <Image source={require('../../assets/Stars.png')}/>
                 <Text style={{fontSize:16,color:colors.dot,marginLeft:5}}>3.8</Text>
-            </View>
+            </View> */}
             
         
      </View>
      </View>
      <View style={styles.imgContainer}>
-                <Image source={require('../../assets/chat_icon_popup.png')}/>
+        <TouchableOpacity onPress={()=>navigation.navigate('Chat')}>
+            <Image source={require('../../assets/chat_icon_popup.png')}/>
+        </TouchableOpacity>
+                <TouchableOpacity>
                 <Image style={{marginLeft:5}} source={require('../../assets/call_icon_popup.png')}/>
+                </TouchableOpacity>
             </View>
     </View>
     <View style={{alignItems:"center",justifyContent:"space-evenly",flexDirection:"row",marginVertical:15}}>

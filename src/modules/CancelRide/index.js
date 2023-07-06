@@ -5,217 +5,76 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
 import { colors } from '../../globalStyle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cancelRidesRequest, ongoingRidesRequest } from '../../Redux/slices/RidesSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const CancelRideComponent = ({ }) => {
+  const navvigation=useNavigation();
+  const completeData=useSelector((state)=>state.rides.cancelRidesRequest)
+  const cancelledResponseData=useSelector((state)=>state.rides.cancelRidesResponse)
+  console.log(cancelledResponseData)
   const dispatch=useDispatch();
     useEffect(() => {
       dispatch(cancelRidesRequest('cancelled'))
     }, [])
-    return (
-        <SafeAreaView style={{flex:1,backgroundColor:colors.white}}>
-
-        {/* Today Rides */}
-        <View style={styles.container}>
-          <Text style={styles.dayStyle}>Today</Text>
-          
-          <View style={styles.pickContainer}>
-            <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
-              <Text style={{fontSize:8,fontWeight:"500",color:"#F44336",}}>cancelled</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.pickContinue}>
-            <View style={styles.smallContainer}>
-                <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
-                <View>
-                    <Text>Trip Id</Text>
-                    <Text>23635</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 2nd number */}
-            <View style={styles.smallContainer}>
-               
-                <View style={{alignItems:"center"}}>
-                    <Text>Pick up</Text>
-                    <Text>Rawalpindi</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 3nd number */}
-            <View style={styles.smallContainer}>
-                
-                <View style={{alignItems:"center"}}>
-                    <Text>Drop off</Text>
-                    <Text>Islamabad</Text>
-                    </View>
-                    </View>
-            </View>
-            
-          </View>
-          
-        </View>
-    {/* Today Rides */}
-    {/* Yesterday Rides */}
-        <View style={styles.container}>
-          <Text style={styles.dayStyle}>Yesterday</Text>
-          
-          <View style={styles.pickContainer}>
-            <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
-              <Text style={{fontSize:8,fontWeight:"500",color:"#F44336",}}>cancelled</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.pickContinue}>
-            <View style={styles.smallContainer}>
-                <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
-                <View>
-                    <Text>Trip Id</Text>
-                    <Text>23635</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 2nd number */}
-            <View style={styles.smallContainer}>
-               
-                <View style={{alignItems:"center"}}>
-                    <Text>Pick up</Text>
-                    <Text>Rawalpindi</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 3nd number */}
-            <View style={styles.smallContainer}>
-                
-                <View style={{alignItems:"center"}}>
-                    <Text>Drop off</Text>
-                    <Text>Islamabad</Text>
-                    </View>
-                    </View>
-            </View>
-            
-          </View>
-          <View style={styles.pickContainer}>
-            <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
-              <Text style={{fontSize:8,fontWeight:"500",color:"#F44336"}}>cancelled</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.pickContinue}>
-            <View style={styles.smallContainer}>
-                <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
-                <View>
-                    <Text>Trip Id</Text>
-                    <Text>23635</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 2nd number */}
-            <View style={styles.smallContainer}>
-               
-                <View style={{alignItems:"center"}}>
-                    <Text>Pick up</Text>
-                    <Text>Rawalpindi</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 3nd number */}
-            <View style={styles.smallContainer}>
-                
-                <View style={{alignItems:"center"}}>
-                    <Text>Drop off</Text>
-                    <Text>Islamabad</Text>
-                    </View>
-                    </View>
-            </View>
-            
-          </View>
-        </View>
-        {/* Yesterday Rides */}
-        {/* Date */}
-        <View style={styles.container}>
-          <Text style={styles.dayStyle}>20/08/2022</Text>
-          
-          <View style={styles.pickContainer}>
-            <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
-              <Text style={{fontSize:8,fontWeight:"500",color:"#F44336"}}>cancelled</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.pickContinue}>
-            <View style={styles.smallContainer}>
-                <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
-                <View>
-                    <Text>Trip Id</Text>
-                    <Text>23635</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 2nd number */}
-            <View style={styles.smallContainer}>
-               
-                <View style={{alignItems:"center"}}>
-                    <Text>Pick up</Text>
-                    <Text>Rawalpindi</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 3nd number */}
-            <View style={styles.smallContainer}>
-                
-                <View style={{alignItems:"center"}}>
-                    <Text>Drop off</Text>
-                    <Text>Islamabad</Text>
-                    </View>
-                    </View>
-            </View>
-            
-          </View>
-          
-        </View>
-    {/* Date */}
-    {/* Date */}
+    const itemRender=(item)=>{
+      console.log(item)
+  return(
     <View style={styles.container}>
-          <Text style={styles.dayStyle}>15/08/2021</Text>
+    <Text style={styles.dayStyle}>Today</Text>
+    
+    <View style={styles.pickContainer}>
+      <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
+        <Text style={{fontSize:8,fontWeight:"500",color:"#F44336",}}>cancelled</Text>
+      </TouchableOpacity>
+      
+      <View style={styles.pickContinue}>
+      <View style={styles.smallContainer}>
+          <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
+          <View>
+              <Text>Trip Id</Text>
+              <Text>23635</Text>
+              </View>
+      </View>
+      <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
+      {/* 2nd number */}
+      <View style={styles.smallContainer}>
+         
+          <View style={{alignItems:"center"}}>
+              <Text>Pick up</Text>
+              <Text>Rawalpindi</Text>
+              </View>
+      </View>
+      <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
+      {/* 3nd number */}
+      <View style={styles.smallContainer}>
           
-          <View style={styles.pickContainer}>
-            <TouchableOpacity style={{alignSelf:"flex-end",paddingHorizontal:15,}}>
-              <Text style={{fontSize:8,fontWeight:"500",color:"#F44336"}}>cancelled</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.pickContinue}>
-            <View style={styles.smallContainer}>
-                <Image style={{width:31.23,height:28,marginRight:15}} source={require('../../assets/inprogress.png')}/>
-                <View>
-                    <Text>Trip Id</Text>
-                    <Text>23635</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 2nd number */}
-            <View style={styles.smallContainer}>
-               
-                <View style={{alignItems:"center"}}>
-                    <Text>Pick up</Text>
-                    <Text>Rawalpindi</Text>
-                    </View>
-            </View>
-            <View style={{borderLeftWidth:1,height:42,borderColor:"#CCCCCC"}}></View>
-            {/* 3nd number */}
-            <View style={styles.smallContainer}>
-                
-                <View style={{alignItems:"center"}}>
-                    <Text>Drop off</Text>
-                    <Text>Islamabad</Text>
-                    </View>
-                    </View>
-            </View>
-            
-          </View>
-          
-        </View>
-    {/* Today Rides */}
+          <View style={{alignItems:"center"}}>
+              <Text>Drop off</Text>
+              <Text>Islamabad</Text>
+              </View>
+              </View>
+      </View>
+      
+    </View>
+    
+  </View>
+  )
+  }
+    return (
+        <SafeAreaView style={{flex:1,backgroundColor:colors.white,alignItems:'center'}}>
+         
+         {cancelledResponseData.length==0?<Text>Not Data found</Text>:  <FlatList
+       data={cancelledResponseData}
+       keyExtractor={(item)=>item.id}
+       renderItem={({item})=>itemRender(item)}
+       />}
+       
         </SafeAreaView>
     );
 };

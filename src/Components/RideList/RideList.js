@@ -206,7 +206,8 @@ const RideList = ({ongoning,upcoming,completed,cancelled}) => {
       
     </View>
 {/* Today Rides */}
-    </View>:
+    </View>
+    :
     completed?
     <View style={{marginVertical:10,}}>
 

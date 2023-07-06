@@ -8,6 +8,8 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {colors} from '../../globalStyle';
 import Loader from '../../Components/Loader';
+import { useSelector } from 'react-redux';
+
 const VerificationComponent = ({
   navigateVerified,
   otpMessage,
@@ -26,10 +28,14 @@ const VerificationComponent = ({
   console.log('sign InRequest' + invalidOtpLoader);
   const [token, setToken] = useState('');
   const [otp, setOtp] = useState('');
+  const signInOtpVarifyRequest=useSelector((state)=>state.auth.signInOtpVarifyRequest)
+
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Background Image */}
       <CustomBackground />
+      <Loader visible={signInOtpVarifyRequest}/>
       {/* Background Image */}
       {signinOtpVerifyReq &&<Loader visible={true||invalidOtpLoader} />}
 

@@ -13,7 +13,8 @@ const getUserId=async()=>{
 }
 //  Request create post
 export const requestCreatePost=async(data)=> {
-  const proj1= new Promise(async(resolve,reject)=>{
+  console.log(data)
+  
     const {id,userinfoToken}=await getUserId();
     console.log("This is undefine", id)
   console.log(userinfoToken);
@@ -29,16 +30,9 @@ console.log(`${BASE_URL}post/add/${id}`)
 
     },
   });
-   resolve(res);
+   return(res);
   //  reject(res);
-  });
-  proj1.then((res)=>{
-    console.log(res)
-    return res
-  }).catch((err)=>{
-    console.log(err.response.data)
-    return err.response.data
-  })
+  
   
 }
 export const requestGetPost=async()=> {

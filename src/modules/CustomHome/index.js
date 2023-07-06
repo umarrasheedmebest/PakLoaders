@@ -171,7 +171,7 @@ const HomeComponent = (
           </Text>
         </View>
 
-        {alData.length =='0'? (
+        {alData.length ==0? (
           <View style={{alignItems:"center",justifyContent:"center"}}>
             <Text>Not found Record</Text>
           </View>

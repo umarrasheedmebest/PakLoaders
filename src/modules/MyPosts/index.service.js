@@ -10,6 +10,7 @@ const PostServiceComponent = ({
     const sideBar=()=>{
         navigation.navigate('Profile')
     }
+    const [images, setImages] = useState(null)
     const openCamara =async()=>{
         const options={
             storageOptions:{
@@ -28,11 +29,24 @@ const PostServiceComponent = ({
             }else if(response.errorMessage){
                 console.log(response.errorMessage)
             }else {
+               
+              
+
+                setImages(formData);
+
                 const source ={uri:'data:image/jpeg;base64,'+ response.assets[0].base64}
                 // const source=786
+                const formData = new FormData();
                 const handleChange=async(sourc)=>{
                        const id= response.assets[0].fileName;
-                       const srcImage=sourc
+                       const srcImage=sourc;
+                      const imgpk=  {
+                         uri: srcImage,
+                         type: 'png',
+                         name: id || 'image.jpg',
+                         fileName:'image'
+                       }
+                       setImages(imgpk)
                         setImageData((item)=>[...item,{id,srcImage}])
                      console.log(id)
                      console.log(imageData)
@@ -49,7 +63,8 @@ const PostServiceComponent = ({
         navigation,
         sideBar,
         openCamara,
-        imageData
+        imageData,
+        images
     });
 };
 

@@ -22,6 +22,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import SearchBox from '@seanhouli/react-mapbox-search';
 import {WebView} from 'react-native-webview';
 import SearchLocationInput from '../../Components/MapboxSearchBar/SearchLocationInput';
+import { createPostRequest } from '../../Redux/slices/PostSlice';
 import {
   StyleSheet,
   SafeAreaView,
@@ -38,7 +39,7 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {eng, Urdu} from '../../Components/Api/Language';
 import {IMAGE_URL} from '../../Redux/constent/constent';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
@@ -46,6 +47,7 @@ import VehicleSelect from '../../Components/VehicleSelect/VehicleSelect';
 import Icon from 'react-native-vector-icons/AntDesign';
 import CustomLocation from '../../Components/CustomLocation/CustomLocation';
 import PostMessage from '../../Components/PostCreateMessage/PostMessage';
+import Loaders from '../../Components/Loader/Loader'
 
 const PostComponent = ({
   navigateCompleteProfileOne,
@@ -53,12 +55,21 @@ const PostComponent = ({
   openCamara,
   sideBar,
   imageData,
+  images,
 }) => {
   const calender = require('../../assets/calender_icon.png');
   const userData = useSelector(state => state.user.getUserResponse);
+  const postActive = useSelector(state => state.user.getUserRequest);
+console.log(postActive)
   const [textDate, setTextDate] = useState('');
   const [textTime, setTextTime] = useState('');
-
+  console.log('Image Data');
+  console.log(images);
+  const [param, setParam] = useState({})
+  const [dropparam, setDropParam] = useState({})
+ const dispatch=useDispatch();
+  console.log(param);
+  console.log(dropparam)
   // Text Validation
   const [inputs, setInputs] = useState({
     pickup_address: '',
@@ -68,6 +79,53 @@ const PostComponent = ({
     details: '',
     loaders: '',
   });
+  const [singleFile, setSingleFile] = useState(null);
+  const [wait, setWait] = useState(false)
+  // Form Data
+  const PostCreate=()=>{
+     var formData = new FormData();
+  formData.append('pickup_address', inputs.pickup_address);
+  formData.append('dropoff_address', inputs.dropoff_address);
+  formData.append('pickup_date', inputs.pickup_date);
+  formData.append('pickup_time', inputs.pickup_time);
+  formData.append('details', inputs.details);
+  formData.append('loaders', inputs.loaders);
+  formData.append('images', images);
+  formData.append('images', images);
+  formData.append('pickup_lat', param.lat);
+  formData.append('pickup_long', param.lng);
+  formData.append('dropoff_lat', dropparam.lat);
+  formData.append('dropoff_long', dropparam.lng);
+console.log(formData);
+const mainData=formData;
+setWait(true)
+setTimeout(() => {
+  Alert.alert('Post',"Successfully post add ",[
+    {text: 'OK', onPress: () => navigation.navigate('CreatePost')},
+  ])
+dispatch(createPostRequest(mainData));
+setWait(false)
+}, 3000);
+
+  }
+ 
+
+  // formData.append('images',{
+  //   uri:imageData[0].uri,
+  //   type:imageData[0].type,
+  //   name:imageData[0].name,
+  //   fileName:'image'
+
+  // });
+  // formData.append('images',{
+  //   uri:imageData[0].uri,
+  //   type:imageData[0].type,
+  //   name:imageData[0].name,
+  //   fileName:'image'
+
+  // });
+ 
+
   const [errors, setErrors] = useState({});
   const valiDate = () => {
     Keyboard.dismiss();
@@ -106,6 +164,7 @@ const PostComponent = ({
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  
   const d = new Date();
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -123,14 +182,16 @@ const PostComponent = ({
     setDate(currentDate);
     let tempDate = new Date(currentDate);
     let fDate =
-      tempDate.getDate() +
+      tempDate.getFullYear() +
       '/' +
       (tempDate.getMonth() + 1) +
       '/' +
-      tempDate.getFullYear();
+      tempDate.getDate();
+
     let fTime =
       'Hours: ' + tempDate.getHours() + '|Minutes: ' + tempDate.getMinutes();
     handleOnChange(fDate, 'pickup_date');
+    handleOnChange(textTime, 'pickup_time');
     setTextDate(fDate);
     setTextTime(formatAMPM(d));
     console.log(fDate, fTime);
@@ -175,6 +236,8 @@ const PostComponent = ({
           maximumDate={new Date(getyear, getmonth, getDate)}
         />
       )}
+      {/* Loeader */}
+      {postActive&&<Loaders visible={true}/>}
       {/* Background Image */}
       <CustomBackground />
       {/* Background Image */}
@@ -193,7 +256,9 @@ const PostComponent = ({
           {mark ? eng.addPost : Urdu.addPost}
         </Text>
         <View style={styles.defaultStyle}>
-          <TouchableOpacity style={{marginRight: 10}} onPress={()=>navigation.navigate('Notification')}>
+          <TouchableOpacity
+            style={{marginRight: 10}}
+            onPress={() => navigation.navigate('Notification')}>
             <Image source={require('../../assets/Bell.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={sideBar}>
@@ -235,7 +300,14 @@ const PostComponent = ({
               color: '#5A5A5A',
               lineHeight: 18,
             }}>
-            Welcome Rana Farooq!{'\n'}
+            Welcome{' '}
+            {userData.map(
+              useCallback(res => {
+                return <Text key={res.id}>res.user_name</Text>;
+              }),
+              [],
+            )}
+            !{'\n'}
             Please fill the following form to add a new post.
           </Text>
         </View>
@@ -252,12 +324,16 @@ const PostComponent = ({
           <CustomLocation
             placeholder={'Clarck pharmacy,442 Rawalpindi'}
             label={'Pickup Location'}
+            adress={item => handleOnChange(item, 'pickup_address')}
+            setParam={setParam}
           />
 
           {/* Input field user Drop Location */}
           <CustomLocation
             placeholder={'Clarck pharmacy,442 Islamabad'}
             label={'Drop Off Location'}
+            adress={item => handleOnChange(item, 'dropoff_address')}
+            setParam={setDropParam}
           />
           {/* Input field user Luggage weight */}
           <CustomInput
@@ -296,10 +372,11 @@ const PostComponent = ({
                 alignItems: 'center',
               }}>
               <TextInput
-                style={{width: '90%',color:colors.text}}
+                style={{width: '90%', color: colors.text}}
                 value={textDate}
                 editable={false}
                 placeholder="12-02-2024"
+                setValue={item => handleOnChange(item, 'pickup_date')}
               />
               <Image source={calender} />
             </View>
@@ -330,10 +407,11 @@ const PostComponent = ({
                 alignItems: 'center',
               }}>
               <TextInput
-                style={{width: '90%',color:colors.text}}
+                style={{width: '90%', color: colors.text}}
                 value={textTime}
                 editable={false}
                 placeholder="12:00PM"
+                setValue={item => handleOnChange(textTime, 'pickup_time')}
               />
               <Image source={calender} />
             </View>
@@ -370,9 +448,7 @@ const PostComponent = ({
           <VehicleSelect />
           {/* Button Next */}
           <CustomButton
-            onPress={() => Alert.alert('Success','Post Create Successfully',[{
-              text:'ok',onPress:()=>navigation.navigate('CreatePost')
-            }])}
+            onPress={() => PostCreate()}
             text="Post"
             type="secondary"
           />
