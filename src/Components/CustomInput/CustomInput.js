@@ -41,11 +41,11 @@ const CustomInput = ({
   const calender = require('../../assets/calender_icon.png');
 
   return (
-    <ScrollView style={{marginVertical: 5,width:"100%"}}>
+    <ScrollView style={{width:"100%"}}>
       <View
         style={{
           zIndex: 1,
-          width: width,
+         
           
           justifyContent: 'center',
           alignItems: 'flex-start',
@@ -56,14 +56,14 @@ const CustomInput = ({
         style={[
           styles.textInput,
           {
-            borderColor: error ? 'red' : isFocused ? '#666666' : 'gray',
+            borderColor: error ? 'red' : isFocused ? colors.text : colors.text,
             borderWidth: isFocused ? 1 : 1,
-            marginVertical: 7,
+            marginVertical: 8,
             flexDirection: 'row',
           },
         ]}>
         <TextInput
-          style={{color: colors.text, flex: 1}}
+          style={{color: colors.text, flex: 1,marginLeft:3}}
           value={value}
           onChangeText={setValue}
           placeholder={placeholder}
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 68,
     // minWidth: 287,
-    borderColor: '#666666',
+    borderColor: colors.text,
     borderWidth: 1,
     alignItems: 'center',
     paddingHorizontal: 5,
@@ -124,13 +124,12 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     color: colors.text,
-    fontSize: 14,
     fontWeight: '400',
     backgroundColor: '#ffffff',
-    paddingHorizontal: 2,
+    paddingHorizontal:2,
+    alignSelf:'flex-start',
     marginLeft: 10,
-    position:"absolute",
-    top:0,
+    marginBottom:-16,
     zIndex:20,
     
   },

@@ -23,8 +23,7 @@ function MyTabBar({state, descriptors, navigation}) {
     <View
       style={{
         flexDirection: 'row',
-
-        height: 76,
+        height: 60,
         borderTopLeftRadius: 28,
         borderTopRightRadius: 28,
         elevation: 2,

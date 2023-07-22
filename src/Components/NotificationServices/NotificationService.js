@@ -5,6 +5,7 @@ import Chat from '../../modules/Chat/Chat';
 import * as React from 'react';
 import { Button,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import NavigationService from '../../navigation/NavigationService';
 
 // function MyBackButton() {
 //   const navigation = useNavigation();
@@ -62,24 +63,61 @@ export const notificationListener = async () => {
       'Notification caused app to open from background state:',
       remoteMessage.notification,remoteMessage.data,
     );
+   setTimeout(() => {
+    NavigationService.navigate("Notification")
+   }, 1200);
+    
+   
+    
     if(remoteMessage){
       console.log("Notification call",remoteMessage.data.type)
-      MyBackButton()
+      // MyBackButton()
     }else{
       console.log("Not call navigation")
     }
   });
   messaging().onMessage(async remoteMessage => {
-    
+    Alert.alert('A new Message Genrated',JSON.stringify(remoteMessage))
     console.log('recived in Foreground', remoteMessage,"Type message",remoteMessage.data.type);
+    NavigationService.navigate("Notification"
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    )
     if(remoteMessage){
       console.log("Notification call",remoteMessage.data.type)
-      {MyBackButton()}
+      // {MyBackButton()}
     }else{
       console.log("Not call navigation")
     }
   });
-  messaging().s
+  
   
   
   
@@ -93,6 +131,10 @@ export const notificationListener = async () => {
           'Notification caused app to open from quit state:',
           remoteMessage.notification,
         );
+        setTimeout(() => {
+          NavigationService.navigate("Notification")
+          console.log("Hekkisdufiahidfhaidhfihaishid")
+         }, 1200);
       }
     });
 };

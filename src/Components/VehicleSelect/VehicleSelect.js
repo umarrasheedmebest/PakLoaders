@@ -39,7 +39,7 @@ const VehicleSelect = () => {
     },
     {
       id: 2,
-      name: 'Raksha',
+      name: 'Rickshaw',
       example: 'e.g Small-Capacity',
       Tractor: Raksha,
       Icon,
@@ -97,7 +97,15 @@ const VehicleSelect = () => {
             onPress={() => {
               setEnable(!enable);
               setModalVisible(!modalVisible);
-              setSelectedItem(<Tractor width={100} height={100} />);
+              setSelectedItem(
+              <View style={{alignItems:'center',justifyContent:'center'}}>
+                <View >
+                  <Tractor width={100} height={100} />
+                </View>
+              
+              <Text>{name}</Text>
+              </View>
+              );
             }}>
             <View style={styles.MenuContainer}>
               <View
@@ -107,11 +115,12 @@ const VehicleSelect = () => {
                   paddingRight: 5,
                   paddingTop: 2,
                 }}>
-                <Icon
+                  {enable&&<Icon
                   name="check-circle"
                   size={25}
                   color={enable ? '#47EA1A' : '#D0D3CF'}
-                />
+                />}
+                
               </View>
               <Tractor width={100} height={100} />
               <Text
@@ -176,7 +185,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    marginTop: 70,
+    marginTop: 30,
     flex: 1,
     width: '100%',
     height: '100%',

@@ -20,8 +20,8 @@ const PostServiceComponent = ({
            
       includeBase64:true,
         }
-
-       await launchCamera(options,response=>{
+if (imageData.length<3) {
+     await launchCamera(options,response=>{
           
             if (response.didCancel) {
                 console.log('User Cancelled image picker');
@@ -47,7 +47,10 @@ const PostServiceComponent = ({
                          fileName:'image'
                        }
                        setImages(imgpk)
+                     
                         setImageData((item)=>[...item,{id,srcImage}])
+                       
+                        
                      console.log(id)
                      console.log(imageData)
                 }
@@ -56,6 +59,11 @@ const PostServiceComponent = ({
             }
             
         })
+}
+else{
+    "Image Not Slected"
+}
+      
         
     }
 

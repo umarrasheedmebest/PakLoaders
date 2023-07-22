@@ -33,6 +33,7 @@ import { colors } from '../../globalStyle';
 import { singlePost } from '../../Components/Api/singlePost';
 import Loader from '../../Components/Loader/Loader';
 import { BASE_URL, IMAGE_URL } from '../../Redux/constent/constent';
+import moment from 'moment/moment';
 const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
   const [imgActive, setImgActive] = useState(0);
   const data =useSelector(state => state.post.singlePostResponse);
@@ -177,7 +178,7 @@ const BlackDtailComponent = ({navigation, navigatebids, ...props}) => {
                 fontFamily: 'Poppins-light',
                 color: '#5A5A5A',
               }}>
-              {item.item.pickup_date}, Monday
+              {moment(item.pickup_date).format('LL')}
             </Text>
           </View>
         </View>

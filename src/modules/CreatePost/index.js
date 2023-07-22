@@ -25,7 +25,7 @@ import {
 import { PostData } from '../../Components/Api/PostData';
 import PostDeleteModal from '../../Components/CustomerPostDelete/PostDeleteModal';
 import { IMAGE_URL } from '../../Redux/constent/constent';
-
+import moment from 'moment/moment';
 
 const CreatePostComponent = ({postData}) => {
   const limit = 3; // Set the maximum number of items to be displayed
@@ -170,7 +170,8 @@ console.log('Pistts dfdsgsfdgsd'+postId)
                 source={require('../../assets/calender_icon.png')}
               />
               <Text style={{marginLeft: 4}}>
-                Date of pick up: {item.pickup_date}
+                Date of pick up: {moment(item.pickup_date).format('LL')}
+
               </Text>
             </View>
           </View>

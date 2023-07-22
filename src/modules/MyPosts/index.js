@@ -7,6 +7,7 @@ import CustomCNIC from '../../Components/CustomCNIC';
 import CustomForground from '../../Components/CustomForground';
 import CustomMenu from '../../Components/CustomMenu';
 import Home from '../../Components/Api/Home';
+
 import {useNavigation} from '@react-navigation/native';
 import Raksha from '../../assets/SVG_Icons/Icon_2.svg';
 import Pickup from '../../assets/SVG_Icons/Icon_1.svg';
@@ -45,6 +46,7 @@ import {IMAGE_URL} from '../../Redux/constent/constent';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import VehicleSelect from '../../Components/VehicleSelect/VehicleSelect';
 import Icon from 'react-native-vector-icons/AntDesign';
+import AsIcon from 'react-native-vector-icons/FontAwesome'
 import CustomLocation from '../../Components/CustomLocation/CustomLocation';
 import PostMessage from '../../Components/PostCreateMessage/PostMessage';
 import Loaders from '../../Components/Loader/Loader'
@@ -92,10 +94,10 @@ console.log(postActive)
   formData.append('loaders', inputs.loaders);
   formData.append('images', images);
   formData.append('images', images);
-  formData.append('pickup_lat', param.lat);
-  formData.append('pickup_long', param.lng);
-  formData.append('dropoff_lat', dropparam.lat);
-  formData.append('dropoff_long', dropparam.lng);
+  formData.append('pickup_lat', param.center[0]);
+  formData.append('pickup_long', param.center[1]);
+  formData.append('dropoff_lat', dropparam.center[0]);
+  formData.append('dropoff_long', dropparam.center[1]);
 console.log(formData);
 const mainData=formData;
 setWait(true)
@@ -193,7 +195,7 @@ setWait(false)
     handleOnChange(fDate, 'pickup_date');
     handleOnChange(textTime, 'pickup_time');
     setTextDate(fDate);
-    setTextTime(formatAMPM(d));
+    setTextTime(formatAMPM(tempDate));
     console.log(fDate, fTime);
   };
   const showModeOne = currentDate => {
@@ -233,7 +235,7 @@ setWait(false)
           display="default"
           onChange={onChange}
           minimumDate={new Date(getyear, getmonth, getDate)}
-          maximumDate={new Date(getyear, getmonth, getDate)}
+          // maximumDate={new Date(getyear, getmonth, getDate)}
         />
       )}
       {/* Loeader */}
@@ -292,22 +294,15 @@ setWait(false)
               fontFamily: 'Poppins-Medium',
             }}>
             {mark ? eng.createPost : Urdu.createPost}
-          </Text>
-          <Text
-            style={{
-              fontSize: 12,
-              fontFamily: 'Poppins-Regular',
-              color: '#5A5A5A',
-              lineHeight: 18,
-            }}>
-            Welcome{' '}
+          </Text>            
             {userData.map(
               useCallback(res => {
-                return <Text key={res.id}>res.user_name</Text>;
+                return <View key={res.id}><Text style={styles.welcomeStyle}  key={res.id}>Welcome {res.full_name}!</Text></View>;
               }),
-              [],
+              [], 
             )}
-            !{'\n'}
+            <Text
+            style={styles.welcomeStyle}>
             Please fill the following form to add a new post.
           </Text>
         </View>
@@ -321,9 +316,11 @@ setWait(false)
             paddingHorizontal: 10,
           }}>
           {/* Input field user Pickup Location */}
+          
           <CustomLocation
             placeholder={'Clarck pharmacy,442 Rawalpindi'}
             label={'Pickup Location'}
+            searchLocation={'Pickup Location'}
             adress={item => handleOnChange(item, 'pickup_address')}
             setParam={setParam}
           />
@@ -333,6 +330,7 @@ setWait(false)
             placeholder={'Clarck pharmacy,442 Islamabad'}
             label={'Drop Off Location'}
             adress={item => handleOnChange(item, 'dropoff_address')}
+            searchLocation={'Drop off Location'}
             setParam={setDropParam}
           />
           {/* Input field user Luggage weight */}
@@ -352,27 +350,13 @@ setWait(false)
             style={{width: '100%'}}
             onPress={() => showModeOne('date')}>
             <Text
-              style={{
-                backgroundColor: '#fff',
-                marginBottom: -9,
-                marginLeft: 10,
-                zIndex: 2,
-                width: 100,
-              }}>
+              style={styles.dateTimeLabel}>
               Pickup Date
             </Text>
             <View
-              style={{
-                borderWidth: 1,
-                width: '100%',
-                height: 68,
-                borderColor: colors.text,
-                borderRadius: 5,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
+              style={styles.dateTimeButton}>
               <TextInput
-                style={{width: '90%', color: colors.text}}
+                style={{width: '90%', color: colors.text,marginLeft:6}}
                 value={textDate}
                 editable={false}
                 placeholder="12-02-2024"
@@ -387,27 +371,13 @@ setWait(false)
             style={{width: '100%'}}
             onPress={() => showModeOne('time')}>
             <Text
-              style={{
-                backgroundColor: '#fff',
-                marginBottom: -9,
-                marginLeft: 10,
-                zIndex: 2,
-                width: 100,
-              }}>
+              style={styles.dateTimeLabel}>
               Pickup time
             </Text>
             <View
-              style={{
-                borderWidth: 1,
-                width: '100%',
-                height: 68,
-                borderColor: colors.text,
-                borderRadius: 5,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
+              style={styles.dateTimeButton}>
               <TextInput
-                style={{width: '90%', color: colors.text}}
+                style={{width:'90%', color: colors.text,marginLeft:6}}
                 value={textTime}
                 editable={false}
                 placeholder="12:00PM"
@@ -474,6 +444,33 @@ setWait(false)
 };
 
 const styles = StyleSheet.create({
+  welcomeStyle:{
+    fontSize: 12,
+    fontFamily: 'Poppins-Regular',
+    color: '#5A5A5A',
+    lineHeight: 18,
+  },
+  dateTimeButton:{
+    borderWidth: 1,
+    width: '100%',
+    height: 68,
+    borderColor: colors.text,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical:8
+   
+    
+  },
+  dateTimeLabel:{
+    backgroundColor: '#fff',
+    marginBottom: -16,
+    marginLeft: 10,
+    paddingHorizontal:2,
+    zIndex: 2,
+    alignSelf:'flex-start',
+    color:colors.text
+  },
   imageContainer: {
     width: '100%',
     height: 90,
@@ -643,6 +640,7 @@ const styles = StyleSheet.create({
     borderColor: colors.dot,
     borderStyle: 'dashed',
   },
+
 });
 
 export default PostComponent;

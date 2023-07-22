@@ -40,7 +40,7 @@ const Drawer = createDrawerNavigator();
 export const MainNavigator = () => {
   return (
     <Drawer.Navigator
-    initialRouteName='Homes'
+    // initialRouteName='Homes'
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,

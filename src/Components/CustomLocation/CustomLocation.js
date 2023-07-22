@@ -14,9 +14,9 @@ import {colors} from '../../globalStyle';
 import {locationPk} from '../Api/LocationApi';
 import filter from 'lodash.filter';
 import { ScrollView } from 'react-native-gesture-handler';
+import Location from '../../assets/SVG_Icons/location-crosshairs-solid.svg'
 
-
-const CustomLocation = ({placeholder,label,adress,setParam}) => {
+const CustomLocation = ({placeholder,label,adress,setParam,searchLocation}) => {
     
     const [searchQuery, setSearchQuery] = useState('')
     const [data, setdata] = useState([])
@@ -25,14 +25,30 @@ const CustomLocation = ({placeholder,label,adress,setParam}) => {
       }, []);
       const inputRef=useRef(null);
         const onSubmit=(item)=>{
-            const {name,lat,lng}=item;
+            const {place_name,lat,lng}=item;
             // console.log(name)
             setParam(item)
-            adress(name)
-            setSearchQuery(name);
+            adress(place_name)
+            setSearchQuery(item.place_name);
            setModalVisible(false) 
         }
-
+        const [locationData, setLocationData] = useState([])
+        
+        const handleChange = async (item) => {
+          setSearchQuery(item)
+          try {
+            const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?proximity=69.3451,30.3753&country=PK&access_token=pk.eyJ1IjoidW1hcnJhc2hlZWQiLCJhIjoiY2xneGZkeW8yMDFleTNnbXNhbXE2ZXUzaCJ9.bg4UxxXQM4o-H3e2S3elQQ&autocomplete=true`;
+      
+            const response = await fetch(endpoint);
+            const results = await response.json();
+            console.log(results.features);
+            setLocationData(results?.features)
+          //   setSuggestions(results?.features);
+          //   console.log(suggestions);
+          } catch (error) {
+            console.log('Error fetching data: ' + error.message);
+          }
+        };
     const handleSearch=(query)=>{
     
         setSearchQuery(query);
@@ -56,7 +72,7 @@ const CustomLocation = ({placeholder,label,adress,setParam}) => {
     
     const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={{width: '100%',marginVertical:10}}>
+    <View style={{width: '100%',marginVertical:8,}}>
       <TouchableOpacity style={styles.container} onPress={()=>setModalVisible(true)}>
         <View>
           <Text style={styles.textLocation}>{label}</Text>
@@ -70,7 +86,7 @@ const CustomLocation = ({placeholder,label,adress,setParam}) => {
           ref={inputRef} 
           editable={false}
           placeholderTextColor={colors.dot} 
-          style={{color:colors.text}}
+          style={{color:colors.text,marginLeft:7,}}
           />
         </View>
       </TouchableOpacity>
@@ -82,22 +98,26 @@ const CustomLocation = ({placeholder,label,adress,setParam}) => {
           setModalVisible(!modalVisible);
         }}>
             <SafeAreaView style={styles.modalView}>
+              <View style={{flexDirection:'row',alignItems:'center',marginLeft:10}}>
+              <Location width={20} height={20} color='#fff'/>
               <TextInput 
               style={styles.ModeSearch}
-              placeholder='Search'
+              placeholder={searchLocation}
+              autoFocus
                clearButtonMode='always'
           autoCapitalize='none'
           autoCorrect={false}
           value={searchQuery}
-          onChangeText={(query)=>handleSearch(query)}
+          onChangeText={(query)=>handleChange(query)}
           ref={inputRef} 
-              />
+              /></View>
               <ScrollView style={styles.listScrollContainer} showsVerticalScrollIndicator={false}>
-        {data.map(item => (
+        {locationData.map(item => (
 
-        <TouchableOpacity key={item.lat} style={styles.listContainer} onPress={()=>onSubmit(item)}>
+        <TouchableOpacity key={item.id} style={styles.listContainer} onPress={()=>onSubmit(item)}>
           <View>
-            <Text>{item.name}</Text>
+            <Text style={styles.listHeading}>{item.place_name}</Text>
+            {/* <Text style={styles.listParagraph}>{item.place_name}</Text> */}
           </View>
         </TouchableOpacity>
       ))}
@@ -106,7 +126,7 @@ const CustomLocation = ({placeholder,label,adress,setParam}) => {
       </Modal>
       
     </View>
-  );
+  ); 
 };
 
 export default CustomLocation;
@@ -114,16 +134,17 @@ export default CustomLocation;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 65,
+    height: 68,
     borderWidth: 1,
-    borderColor: colors.dot,
+    borderColor: colors.text,
     borderRadius: 5,
   },
   modalView: {
-    marginTop:70,
+    flex:1,
+   marginTop:30,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -133,33 +154,45 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    minHeight:250,
+   
   },
   textLocation: {
     marginTop: -12,
     marginLeft: 10,
+    paddingHorizontal:2,
     backgroundColor: '#fff',
-    width: "30%",
-    color:colors.dot,
-    fontSize:12,
+    alignSelf:'flex-start',
+    color:colors.text,
+    
 
   },
   listContainer: {
     width: '100%',
     height: 40,
-    borderBottomWidth: 1,
+  
     borderColor: colors.dot,
     marginTop: 10,
   },
   ModeSearch:{
     width:"100%",
     height:50,
-    borderWidth:1,
+    marginLeft:10,
     borderRadius:10,
     borderColor:colors.dot,
-    color:colors.text
+    color:colors.text,
+    borderBottomWidth:1
   },
   listScrollContainer:{
 width:"100%"
+  },
+  listHeading:{
+    fontSize:14,
+    fontWeight:'bold',
+    color:colors.text
+  },
+  listParagraph:{
+    fontSize:12,
+    fontWeight:'400',
+    color:colors.dot
   }
 });
