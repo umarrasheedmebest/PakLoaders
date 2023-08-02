@@ -8,11 +8,13 @@ const CreatePostServiceComponent = ({
     route,
 }) => {
     const postData = useSelector(state => state.post.getAllPostResponse);
+    const postRequest = useSelector(state => state.post.getAllPostRequest);
     console.log('Pakistan Zindabad')
 
     return children({
         navigation,
-        postData
+        postData,
+        postRequest
     });
 };
 

@@ -8,7 +8,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 import { AuthProvider } from './AuthProvider';
 import store  from './src/Redux/store';
 // import {store} from './src/setup/store';
-import { LogBox, View,Text,StatusBar } from 'react-native';
+import { LogBox, View,Text,StatusBar, Button, TouchableOpacity } from 'react-native';
 import LogoutModal from './src/Components/LogoutModal/index';
 import { MaterialIcon } from './src/Components/Icon/Icon';
 import { WebView } from 'react-native-webview';
@@ -16,7 +16,8 @@ import { PermissionsAndroid, Platform,Alert } from 'react-native';
 import IntentLauncher from 'react-native-intent-launcher';
 import DeviceInfo from 'react-native-device-info';
 import { notificationListener, requestUserPermission } from './src/Components/NotificationServices/NotificationService';
-
+import { io } from 'socket.io-client';
+import axios from 'axios';
 
 const App = () => {
   if (!__DEV__) {
@@ -53,10 +54,20 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
       // Handle iOS permissions using the Permissions module or other libraries
     }
   };
+console.log('Hello Umer')
+  const socket=io("http://ec2-18-221-5-46.us-east-2.compute.amazonaws.com:5002");
+socket.on("newLocation",(data)=>{  
+   console.log(">>>>>>>>>>>>",data)
+   })
+   console.log(socket.id)
+
+
   useEffect(() => {
     requestLocationPermission()
     requestUserPermission();
   notificationListener();
+  
+  
    }, []);
   const handleLocationPermissionDenied = () => {
     Alert.alert(
@@ -110,7 +121,18 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
       }
     );
   };
-  
+  const umer=async()=>{
+    console.log("hello")
+    const socketId= socket.id;
+    const rideId=25;
+    const latitude=67.4553;
+    const longitude=28.4564;
+   const res= await  axios.post(`http://ec2-18-221-5-46.us-east-2.compute.amazonaws.com:5002/rides/start/${rideId}`);
+   console.log(res)
+    socket.emit('locationUpdate',{longitude,latitude,socketId,rideId});
+    console.log('Event Emit',socketId);
+    socket.emit('disconnectSocket',rideId);
+  }
 
   return (
     // <View>
@@ -118,8 +140,11 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
     //   <MaterialIcon size="large" color="purple" name="home" />
     //     <MaterialIcon size="extraLarge" color="black" name="github" />
     //   </View>
-    
-    // <WebView ref={webViewRef} source={{ html: `<!DOCTYPE html>
+    // <View>
+    //   {/* <TouchableOpacity onPress={()=>umer()}>
+    //     <Text>Click</Text>
+    //   </TouchableOpacity> */}
+    // {/* <WebView ref={webViewRef} source={{ html: `<!DOCTYPE html>
     // <html>
     // <head>
     // <meta charset="utf-8">
@@ -164,7 +189,8 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
     // </body>
     // </html>` }} style={{ flex: 1 }}
     // geolocationEnabled={true}
-    // />
+    // /> */}
+    // </View>
     <Provider store={store}>
       <StatusBar hidden={true}/>
       <AuthProvider>

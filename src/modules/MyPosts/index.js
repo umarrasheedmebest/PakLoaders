@@ -100,14 +100,10 @@ console.log(postActive)
   formData.append('dropoff_long', dropparam.center[1]);
 console.log(formData);
 const mainData=formData;
-setWait(true)
-setTimeout(() => {
-  Alert.alert('Post',"Successfully post add ",[
-    {text: 'OK', onPress: () => navigation.navigate('CreatePost')},
-  ])
+// setWait(true)
+
 dispatch(createPostRequest(mainData));
-setWait(false)
-}, 3000);
+
 
   }
  

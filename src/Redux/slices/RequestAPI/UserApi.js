@@ -55,11 +55,13 @@ export const requestupdateUser= async(data)=> {
 }
 // update User Image
 export const requestUpdateUserImage =async (userImage)=> {
+  console.log(userImage)
   const {id,userinfoToken}=await getUserToken();
   console.log("Image Update user Id",id);
   const res = axios.request({
     method: 'put',
     url: `${BASE_URL}images/upload/${id}`,
+    // withCredentials:false,
     data:userImage,
     headers: {
         'Content-Type': 'multipart/form-data;',

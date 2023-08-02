@@ -57,8 +57,8 @@ const AppNavigator = () => {
   return (
     <NavigationContainer
       ref={ref => NavigationService.setTopLevelNavigator(ref)}>
-      <MainNavigator/>
-      {/* {userToken !== null ? <MainNavigator /> : <Auth />} */}
+      {/* <MainNavigator/> */}
+      {userToken !== null ? <MainNavigator /> : <Auth />}
       {/* <MyTabss/> */}
       {/* <MyTabs/> */}
     </NavigationContainer>

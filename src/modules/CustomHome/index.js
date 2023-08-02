@@ -1,4 +1,4 @@
-import React, {useState, memo, useCallback} from 'react';
+import React, {useState, memo, useCallback,useEffect} from 'react';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import CustomBackground from '../../Components/CustomBackground';
@@ -31,6 +31,7 @@ import {requestGetBids} from '../../Redux/slices/RequestAPI/BidsApi';
 import {getAllBidsRequest} from '../../Redux/slices/BidsSlice';
 import {IMAGE_URL} from '../../Redux/constent/constent';
 import {acceptBidRequest} from '../../Redux/slices/RidesSlice';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 const HomeComponent = (
   props,
@@ -40,15 +41,24 @@ const HomeComponent = (
     text,
     sideBar,
     navigateBids,
+    
   },
 ) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  useEffect(() => {
+   navigation.addListener('focus', async()=>{
+    dispatch(getAllBidsRequest())
+   })
+  })
+  
   const alData = useSelector(state => state.bids.getAllBidsResponse);
   const userData = useSelector(state => state.user.getUserResponse);
   console.log('Bids Response');
 
   console.log(alData.length=='0');
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
+ 
+  
   const mark = useSelector(state => state.language);
   // const [data, setData] = useState(alData);
   // const onDelete=(id)=>{
@@ -59,6 +69,7 @@ const HomeComponent = (
   const dataCards = ({item}) => {
     console.log(item);
     return (
+      
       <View style={styles.dataContainer}>
         {/* First Row user Name */}
         <View
@@ -112,6 +123,13 @@ const HomeComponent = (
       </View>
     );
   };
+  const [refresh, setRefresh] = useState(false);
+  const pullMe=()=>{
+    setRefresh(true)
+    setTimeout(() => {
+      setRefresh(false)
+    }, 4000);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true}/>
@@ -171,14 +189,19 @@ const HomeComponent = (
           </Text>
         </View>
 
-        {alData.length ==0? (
+        
+          <View style={styles.listStyle}>
+            {alData.length ==0&& 
           <View style={{alignItems:"center",justifyContent:"center"}}>
             <Text>Not found Record</Text>
-          </View>
-        ) 
-         :(
-          <View style={styles.listStyle}>
+          </View>}
             <FlatList
+            refreshControl={
+              <RefreshControl
+              refreshing={refresh}
+              onRefresh={()=>pullMe()}
+              />
+            }
               style={{zIndex: 1}}
               data={alData}
               keyExtractor={item => item.bids_id}
@@ -186,8 +209,7 @@ const HomeComponent = (
               showsVerticalScrollIndicator={false}
             />
           </View>
-        )
-        }
+        
       </View>
       {/* <View style={styles.MenuContainer}>
                   <View style={styles.MenuLine}></View>

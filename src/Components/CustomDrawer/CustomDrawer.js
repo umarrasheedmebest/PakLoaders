@@ -44,7 +44,7 @@ const userData= useSelector((state)=>state.user.getUserResponse);
 const dispatch=useDispatch();
 const getData=async()=>{
 try {
-       dispatch(getAllPostRequest());
+      //  dispatch(getAllPostRequest());
        dispatch(getUserRequest());
        dispatch(getAllBidsRequest())
     } catch (error) {

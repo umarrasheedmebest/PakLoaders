@@ -1,4 +1,4 @@
-import React, {useState,useCallback} from 'react';
+import React, {useState,useCallback,useEffect} from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,7 +8,8 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  Modal
+  Modal,
+  RefreshControl
 } from 'react-native';
 import PostAPI from '../../Components/Api/PostAPI';
 import CustomHeader from '../../Components/CustomHeader';
@@ -20,6 +21,7 @@ import Loader from '../../Components/Loader';
 import {
   cancelMessageAccess,
   cancelPostRequest,
+  getAllPostRequest,
   singlePostRequest,
 } from '../../Redux/slices/PostSlice';
 import { PostData } from '../../Components/Api/PostData';
@@ -27,7 +29,7 @@ import PostDeleteModal from '../../Components/CustomerPostDelete/PostDeleteModal
 import { IMAGE_URL } from '../../Redux/constent/constent';
 import moment from 'moment/moment';
 
-const CreatePostComponent = ({postData}) => {
+const CreatePostComponent = ({postData,PostRequest}) => {
   const limit = 3; // Set the maximum number of items to be displayed
 
   // Get the limited subset of the data
@@ -45,10 +47,23 @@ const CreatePostComponent = ({postData}) => {
   const deletePostRes= useSelector(state=>state.post.cancelPostResponse);
   const deleteMessage= useSelector(state=>state.post.cancelMessageAccess);
 console.log('Pistts dfdsgsfdgsd'+postId)
-
+const [refresh, setRefresh] = useState(false)
+const pullMe=()=>{
+  setRefresh(true)
+  setTimeout(() => {
+    setRefresh(false)
+  }, 4000);
+}
   console.log('post Delete'+deletePostRes.message)
+  useEffect(() => {
+    navigation.addListener('focus',async()=>{
+       dispatch(getAllPostRequest())
+    })
+   
+  })
+  
   const dataCards = useCallback(({item}) => {
-    if (postData == null) {
+    if (postData == null || PostRequest) {
       <Loader visible={true} />;
     }
     console.log(item);
@@ -217,6 +232,12 @@ console.log('Pistts dfdsgsfdgsd'+postId)
                 <View style={{alignItems: 'center',width:'100%'}}>
                 
                   <FlatList
+                    refreshControl={
+                      <RefreshControl
+                      refreshing={refresh}
+                      onRefresh={()=>pullMe()}
+                      />
+                    }
                     style={{zIndex: 1,width:"100%"}}
                     maxToRenderPerBatch={4}
                     initialNumToRender={4}

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {
     StyleSheet,
     SafeAreaView,
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ongoingRidesRequest } from '../../Redux/slices/RidesSlice';
 import Loader from '../../Components/Loader/Loader';
 import { useNavigation } from '@react-navigation/native';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 const OngoingRideComponent = () => {
     const ongoingData=useSelector((state)=>state.rides.ongoingRidesRequest)
@@ -22,7 +23,10 @@ const OngoingRideComponent = () => {
     console.log(ongoingData+ongoingResponseData)
     const dispatch=useDispatch();
     useEffect(() => {
-      dispatch(ongoingRidesRequest('ongoing'))
+        navigation.addListener('focus', async()=>{
+            dispatch( ongoingRidesRequest('ongoing'))
+        })
+      
     }, [])
     const itemRender=(item)=>{
         console.log(item)
@@ -68,16 +72,30 @@ const OngoingRideComponent = () => {
        </View>
     )
     }
+    const [refresh, setRefresh] = useState(false);
+    const pullMe=()=>{
+        setRefresh(true)
+        setTimeout(() => {
+            setRefresh(false)
+        }, 4000);
+    }
     return (
         <SafeAreaView style={{flex:1,backgroundColor:colors.white,alignItems:'center'}}>
        {  ongoingData  &&<ActivityIndicator  color={colors.primary}/>}
-      {ongoingResponseData.length > 0? <FlatList
+       {ongoingResponseData.length == 0 &&<Text>Not Data Found</Text>}
+     
+      <FlatList
+      refreshControl={
+        <RefreshControl
+        refreshing={refresh}
+        onRefresh={()=>pullMe()}
+        />
+      }
        data={ongoingResponseData}
        keyExtractor={(item)=>item.id}
        renderItem={({item})=>itemRender(item)}
-       />:<Text>Not Data Found</Text>
-    }
-
+       />
+      
 {/* Today Rides */}
 </SafeAreaView>
     );

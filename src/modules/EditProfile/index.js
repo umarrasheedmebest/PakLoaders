@@ -1,18 +1,27 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState,useEffect} from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image} from 'react-native';
 import CustomHeader from '../../Components/CustomHeader';
 import CustomInput from '../../Components/CustomInput';
 import {colors} from '../../globalStyle';
 import CustomButton from '../../Components/CustomButton';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {IMAGE_URL} from '../../Redux/constent/constent';
 import Loader from '../../Components/Loader/Loader';
+import { useNavigation } from '@react-navigation/native';
+import { getUserRequest } from '../../Redux/slices/UserSlice';
 
-const EditProfileComponent = ({updateUserName, updateUserImage}) => {
+const EditProfileComponent = ({updateUserName, updateUserImage,}) => {
+  const navigation=useNavigation();
   const userData = useSelector(state => state.user.getUserResponse);
   const [editName, setEditName] = useState('');
 const updateUser=useSelector(((state)=>state.user.updateUserRequest));
+const dispatch =useDispatch();
+useEffect(() => {
+  navigation.addListener('focus', async()=>{
+    dispatch(getUserRequest())
+  })
+},)
 
   return (
     <>
